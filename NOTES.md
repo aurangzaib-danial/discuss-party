@@ -34,3 +34,9 @@ Category model
 
 ## Todo
 - [x] Disable webpacker and start using sprockets
+- [x] Add a menubar
+- [ ] Setup Devise
+- [ ] Setup topic model
+- [ ] Users can create topics
+- [ ] Display latest topics on root
+
