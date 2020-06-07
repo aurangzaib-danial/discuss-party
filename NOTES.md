@@ -36,7 +36,9 @@ Category model
 - [x] Disable webpacker and start using sprockets
 - [x] Add a menubar
 - [x] Setup Devise
-- [ ] Setup topic model
+- [x] Setup topic model
+- [ ] Print topics on root page
+- [ ] Use Faker gem for making some topics
 - [ ] Users can create topics
 - [ ] Display latest topics on root
 
