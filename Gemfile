@@ -11,6 +11,12 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
+gem 'sprockets', '~> 4'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'bootstrap'
+# Javascripts
+gem 'turbolinks'
+gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
