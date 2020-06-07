@@ -1,4 +1,7 @@
-<div class="container">
-  <h1>Site#home</h1>
-  <p>Find me in app/views/site/home.html.erb</p>
-</div>
+<h2>Latest Public Topics</h2>
+
+<ul>
+  <% @topics.each do |topic| %>
+    <li><%= link_to topic.title, topic %></li>
+  <% end %>
+</ul>

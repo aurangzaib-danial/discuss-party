@@ -37,8 +37,8 @@ Category model
 - [x] Add a menubar
 - [x] Setup Devise
 - [x] Setup topic model
-- [ ] Print topics on root page
-- [ ] Use Faker gem for making some topics
+- [x] Print topics on root page
+- [x] Use Faker gem for making some topics
 - [ ] Users can create topics
 - [ ] Display latest topics on root
 
