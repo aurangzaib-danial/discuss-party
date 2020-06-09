@@ -3,6 +3,5 @@ Rails.application.routes.draw do
   get 'about', to: 'site#about'
   devise_for :users
   
-
-  resources :topics
+  resources :topics, only: %i[new show create]
 end
