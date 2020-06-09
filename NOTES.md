@@ -13,13 +13,14 @@ Topic model
 - belongs_to user
 - status (public or private)
 - belongs_to category
+- has_many tags through topic_tags
 
 Comment model
 - belongs_to User
 
-Category model
+Tag model
 - name
-- has_many topics
+- has_many topics through topic_tags
 
 ## Permissions
 ### Public
