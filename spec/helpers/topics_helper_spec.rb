@@ -10,6 +10,11 @@ require 'rails_helper'
 #     end
 #   ends
 # end
-# RSpec.describe TopicsHelper, type: :helper do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
+RSpec.describe TopicsHelper, type: :helper do
+  describe 'print tags' do
+    it "concats, capitalizes the tag names and also wrap each name with mark tag" do
+      tags = Tag.create!([{name: 'fiction'}, {name: 'fun'}])
+      expect(helper.print_tags(tags)).to eq("<mark>Fiction</mark>, <mark>Fun</mark>")
+    end
+  end
+end

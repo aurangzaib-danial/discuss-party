@@ -12,7 +12,6 @@ Topic model
 - description
 - belongs_to user
 - status (public or private)
-- belongs_to category
 - has_many tags through topic_tags
 
 Comment model
@@ -41,8 +40,10 @@ Tag model
 - [x] Print topics on root page
 - [x] Use Faker gem for making some topics
 - [ ] Users can create topics
+    - [ ] Slugs for topic titles
 - [ ] Display latest topics on root
 
 ## Todo Maybe
 - [ ] Highlight current page
+- [ ] User should have a name as well
 

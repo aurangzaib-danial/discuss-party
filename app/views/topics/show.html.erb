@@ -1,0 +1,4 @@
+<h2><%= @topic.title %></h2>
+<p><strong>Created by: <mark><%= @topic.user.email %></mark> | Tags: <%= print_tags(@topic.tags) %></strong></p>
+
+<p class="lead"><%= @topic.description %></p>
