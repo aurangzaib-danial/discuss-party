@@ -1,0 +1,5 @@
+<% flash.each do |name, message| %>
+  <div class="flash-box">
+    <%= content_tag :div, message, class: alert_class(name), role: 'alert' %>
+  </div>
+<% end %>
