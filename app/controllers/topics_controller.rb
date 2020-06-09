@@ -4,6 +4,7 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    @tags = Tag.all
   end
 
   def show
