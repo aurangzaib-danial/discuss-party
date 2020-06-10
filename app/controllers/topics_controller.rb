@@ -10,6 +10,10 @@ class TopicsController < ApplicationController
   def show
   end
 
+  def create
+    raise params.inspect
+  end
+
   private
   def set_topic
     @topic = Topic.find(params[:id])

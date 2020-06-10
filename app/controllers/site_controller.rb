@@ -1,5 +1,5 @@
 class SiteController < ApplicationController
   def home
-  @topics = Topic.all
+    @topics = Topic.all
   end
 end

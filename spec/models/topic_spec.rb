@@ -12,4 +12,10 @@ RSpec.describe Topic, type: :model do
       with_values(public: 0, private: 1).
       with_prefix(:visibility)
   end
+
+  describe 'validations' do
+    # title between 5 - 70
+    # only numbers, letters and spaces in the middle, strip trailing spaces
+    it { should strip_attribute :title }
+  end 
 end

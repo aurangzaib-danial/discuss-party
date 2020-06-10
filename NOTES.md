@@ -41,7 +41,7 @@ Tag model
 - [x] Use Faker gem for making some topics
 - [ ] Users can create topics
     - [ ] Slugs for topic titles
-- [ ] Display latest topics on root
+- [x] Display latest topics on root
 
 ## Todo Maybe
 - [ ] Highlight current page
