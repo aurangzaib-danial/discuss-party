@@ -39,11 +39,11 @@ Tag model
 - [x] Setup topic model
 - [x] Print topics on root page
 - [x] Use Faker gem for making some topics
-- [ ] Users can create topics
-    - [ ] Slugs for topic titles
+- [x] Users can create topics
+    - [x] Slugs for topic titles
 - [x] Display latest topics on root
 
 ## Todo Maybe
 - [ ] Highlight current page
-- [ ] User should have a name as well
+- [x] User should have a name as well
 

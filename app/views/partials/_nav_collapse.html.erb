@@ -1,10 +1,6 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <%= link_to root_path, class: 'nav-link' do %>
-        Home <span class="sr-only">(current)</span>
-      <% end %>
-    </li>
+    <%= nav_li 'Home', root_path %>
     <%= nav_li 'About', about_path %>
     <% if user_signed_in? %>
       <%= nav_li 'Sign out', destroy_user_session_path, method: :delete %>
@@ -12,7 +8,6 @@
       <%= nav_li 'Sign in', new_user_session_path %>
       <%= nav_li 'Sign up', new_user_registration_path %>
     <% end %>
-    
   </ul>
 
   <ul class="navbar-nav ml-auto right-nav-ul">
