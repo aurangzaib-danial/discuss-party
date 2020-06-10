@@ -7,4 +7,10 @@ class User < ApplicationRecord
   validates_format_of :name, without: /[^A-Za-z\s]/
   validates_length_of :name, maximum: 50
   strip_attributes only: :name
+
+  before_save :downcase_name
+
+  def downcase_name
+    name.downcase!
+  end
 end
