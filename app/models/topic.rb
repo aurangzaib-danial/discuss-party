@@ -12,7 +12,7 @@ class Topic < ApplicationRecord
   validate :has_at_least_one_tag
 
   def has_at_least_one_tag
-    if tags.count < 1
+    if topic_tags.size < 1
       errors.add(:tags, 'Must have at least one tag.')
     end
   end

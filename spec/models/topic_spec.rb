@@ -26,6 +26,7 @@ RSpec.describe Topic, type: :model do
     
     it 'should have atleast one tag associated with it' do
       topic = build(:topic)
+      topic.topic_tags = []
       expect(topic).not_to be_valid
     end
   end 
