@@ -15,4 +15,8 @@ class Topic < ApplicationRecord
       errors.add(:tags, 'must be at least one.')
     end
   end
+
+  def slug
+    title.parameterize
+  end
 end

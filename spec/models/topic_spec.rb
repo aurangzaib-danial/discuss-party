@@ -23,5 +23,13 @@ RSpec.describe Topic, type: :model do
       topic.topic_tags = []
       expect(topic).not_to be_valid
     end
-  end 
+  end
+
+  describe '#slug' do
+    it 'should return the slugified version of topic' do
+      topic = build(:topic)
+      topic.title = "This is good. So$is this."
+      expect(topic.slug).to eq('this-is-good-so-is-this')
+    end
+  end
 end
