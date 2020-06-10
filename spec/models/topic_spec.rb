@@ -23,5 +23,10 @@ RSpec.describe Topic, type: :model do
     end
     
     it { should validate_length_of(:description).is_at_least(20)}
+    
+    it 'should have atleast one tag associated with it' do
+      topic = build(:topic)
+      expect(topic).not_to be_valid
+    end
   end 
 end
