@@ -1,6 +1,6 @@
 <h2>Create Topic</h2>
-
-<%= form_with model: @topic do |form| %>
+<%= render 'errors' if @topic.errors.any? %>
+<%= form_with model: @topic, local: true do |form| %>
   <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control',  "aria-describedby": "titleHelp"%>
@@ -19,11 +19,9 @@
   </div>
 
   <p style="margin: 10px 0;">Tags</p>
-  <%= form.collection_check_boxes :tag_ids, @tags, :id, :name do |builder| %>
+  <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |builder| %>
     <div class="form-check form-check-inline">
-      <!-- input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> -->
       <%= builder.check_box class: 'form-check-input' %>
-      <!-- <label class="form-check-label" for="inlineCheckbox1">1</label> -->
       <%= builder.label class: 'form-check-label text-capitalize' %>
     </div>
   <% end %>

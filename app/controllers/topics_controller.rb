@@ -4,18 +4,26 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
-    @tags = Tag.all
   end
 
   def show
   end
 
   def create
-    raise params.inspect
+    @topic = Topic.new(topic_params)
+    @topic.user = current_user
+    if @topic.save
+      redirect_to @topic
+    else
+      render :new
+    end
   end
 
   private
   def set_topic
     @topic = Topic.find(params[:id])
+  end
+  def topic_params
+    params.require(:topic).permit(:title, :description, :visibility, tag_ids: [])
   end
 end

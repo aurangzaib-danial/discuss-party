@@ -16,15 +16,9 @@ RSpec.describe Topic, type: :model do
   describe 'validations' do
     it { should strip_attribute :title }
     it { should validate_length_of(:title).is_at_least(5).is_at_most(70)}
-    
-    describe 'title can only have letters, numbers and spaces' do
-      it { should allow_value('The trees around us are our saviours 123').for(:title)}
-      it { should_not allow_value('##This is a title!!! With bad characters!').for(:title)}
-    end
-    
     it { should validate_length_of(:description).is_at_least(20)}
     
-    it 'should have atleast one tag associated with it' do
+    it 'should have at least one tag associated with it' do
       topic = build(:topic)
       topic.topic_tags = []
       expect(topic).not_to be_valid

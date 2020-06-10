@@ -6,14 +6,13 @@ class Topic < ApplicationRecord
   strip_attributes only: :title
 
   validates_length_of :title, in: 5..70
-  validates_format_of :title, without: /[^a-zA-Z\d\s]/
   validates_length_of :description, minimum: 20
 
   validate :has_at_least_one_tag
 
   def has_at_least_one_tag
     if topic_tags.size < 1
-      errors.add(:tags, 'Must have at least one tag.')
+      errors.add(:tags, 'must be at least one.')
     end
   end
 end
