@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :topics, only: %i[new create]
-  get ':slug/:id', to: 'topics#show', as: :topic
+  get ':slug/:id', to: 'topics#show', as: :topic_slug
 end

@@ -44,6 +44,6 @@ Tag model
 - [x] Display latest topics on root
 
 ## Todo Maybe
-- [ ] Highlight current page
+- [x] Highlight current page
 - [x] User should have a name as well
 

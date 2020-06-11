@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user = current_user
     if @topic.save
-      redirect_to @topic
+      redirect_to topic_slug_path(@topic.slug, @topic.id)
     else
       render :new
     end
