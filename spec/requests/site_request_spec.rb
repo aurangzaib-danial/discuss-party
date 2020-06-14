@@ -12,12 +12,12 @@ RSpec.describe 'Site', type: :request do
       expect(response.body).to include(topic_1.title)
       expect(response.body).to include(topic_1.user.name)
       expect(response.body).to include(topic_1.tags.first.name)
-      expect(response.body).to include(topic_1.description[0..19] + '...')
+      expect(response.body).to include(topic_1.description.strip[0..100] + '...')
 
       expect(response.body).to include(topic_2.title)
       expect(response.body).to include(topic_2.user.name)
       expect(response.body).to include(topic_2.tags.first.name)
-      expect(response.body).to include(topic_2.description[0..19] + '...')
+      expect(response.body).to include(topic_2.description.strip[0..100] + '...')
 
     end
   end

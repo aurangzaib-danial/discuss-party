@@ -1,4 +1,29 @@
 <h2><%= @topic.title %></h2>
 <p><strong><%= topic_information(@topic) %></strong></p>
 
-<p class="lead"><%= @topic.description %></p>
+<p class="lead" style="margin-bottom: 2rem;"><%= @topic.description %></p>
+
+<p>Comment as <mark class="text-capitalize"><%= current_user.name %></mark></span></p>
+
+<form>
+  <div class="form-group">
+    <textarea rows="4" placeholder="What are your thoughts?" class="form-control"></textarea>
+  </div>
+
+  <div class="text-right">
+    <button class="btn btn-primary">Comment</button>
+  </div>
+</form>
+
+<h5>Discussion</h5>
+
+<% 3.times do %>
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted"><mark class="text-capitalize">Aurangzaib Danial</mark></h6>
+      <p class="card-text">This is awesome. Let's do something about this...</p>
+  <!--     <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a> -->
+    </div>
+  </div>
+<% end %>

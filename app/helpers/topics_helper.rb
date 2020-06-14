@@ -1,6 +1,6 @@
 module TopicsHelper
   def short_description(topic)
-    topic.description[0..19] + '...'
+    topic.description[0..100].strip + '...'
   end
 
   def topic_user_name(topic)
