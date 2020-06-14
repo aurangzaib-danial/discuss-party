@@ -7,7 +7,7 @@ other_tag = Tag.create(name: 'interesting')
  
   3.times do
     title = Faker.const_get(category).unique.title
-    description = Faker::Lorem.paragraph(sentence_count: 10)
+    description = Faker::Lorem.paragraph(sentence_count: 20)
     topic = Topic.new(title: title, user: user, description: description)
     topic.topic_tags.build(tag: tags[index])
     topic.topic_tags.build(tag: other_tag)

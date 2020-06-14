@@ -1,7 +1,11 @@
-<h2>Latest Public Topics</h2>
+<h2 style="margin: 1.5rem 0;">Latest Public Topics</h2>
 
-<ul>
-  <% @topics.each do |topic| %>
-    <li><%= link_to topic.title, topic_slug_path(topic.slug, topic.id) %></li>
-  <% end %>
-</ul>
+<% @topics.each do |topic| %>
+  <div class="card" style="margin-bottom: 1rem;">
+    <div class="card-body">
+      <h5 class="card-title"> <%= link_to topic.title, topic_slug_path(topic.slug, topic.id) %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= topic_information(topic) %></h6>
+      <p class="card-text"><%= short_description(topic) %></p>
+    </div>
+  </div>
+<% end %>

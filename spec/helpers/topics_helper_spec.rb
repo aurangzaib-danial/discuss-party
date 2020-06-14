@@ -1,20 +1,23 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the TopicsHelper. For example:
-#
-# describe TopicsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   ends
-# end
 RSpec.describe TopicsHelper, type: :helper do
-  describe 'print tags' do
-    it "concats, capitalizes the tag names and also wrap each name with mark tag" do
-      tags = Tag.create!([{name: 'fiction'}, {name: 'fun'}])
-      expect(helper.print_tags(tags)).to eq("<mark>Fiction</mark>, <mark>Fun</mark>")
-    end
+  let(:topic) { create(:topic) }
+
+  xit '#short description returns only 20 characters of description and adds three periods at the end' do
+    expect(helper.short_description(topic)[-3..-1]).to eq("...")
+    expect(helper.short_description(topic).length).to eq(23) # 3 chars of dots
+  end
+
+  it '#topic_user_name and marks the string html_safe' do
+    expect(helper.topic_user_name(topic)).to eq("<mark class=\"text-capitalize\">#{topic.user.name}</mark>")
+    expect(helper.topic_user_name(topic)).to be_html_safe
+  end
+
+  it '#topic_information returns topic user\'s name and tag names and marks the string html_safe' do
+    
+    expected_result = "Created by #{helper.topic_user_name(topic)} | Tags: #{helper.print_tags(topic.tags)}"
+    
+    expect(helper.topic_information(topic)).to eq(expected_result)
+    expect(helper.topic_information(topic)).to be_html_safe
   end
 end

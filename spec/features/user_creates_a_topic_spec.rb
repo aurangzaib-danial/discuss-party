@@ -20,8 +20,8 @@ RSpec.feature 'User creates a topic', :type => :feature do
 
       expect(page).to have_text(topic.title)
       expect(page).to have_text(topic.description)
-      expect(page).to have_text(Tag.second.name.capitalize)
-      expect(page).to have_text(Tag.third.name.capitalize)
+      expect(page).to have_text(Tag.second.name)
+      expect(page).to have_text(Tag.third.name)
     end
 
     scenario 'sees errors on wrong input' do
