@@ -7,6 +7,7 @@ RSpec.describe Topic, type: :model do
   it { should belong_to(:user)}
   it { should have_many(:topic_tags) }
   it { should have_many(:tags).through(:topic_tags) }
+  it { should have_many(:comments) }
   it do 
     should define_enum_for(:visibility).
       with_values(public: 0, private: 1).
