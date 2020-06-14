@@ -5,25 +5,8 @@
 
 <p>Comment as <mark class="text-capitalize"><%= current_user.name %></mark></span></p>
 
-<form>
-  <div class="form-group">
-    <textarea rows="4" placeholder="What are your thoughts?" class="form-control"></textarea>
-  </div>
-
-  <div class="text-right">
-    <button class="btn btn-primary">Comment</button>
-  </div>
-</form>
+<%= render 'comments/form', topic: @topic %>
 
 <h5>Discussion</h5>
 
-<% 3.times do %>
-  <div class="card">
-    <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted"><mark class="text-capitalize">Aurangzaib Danial</mark></h6>
-      <p class="card-text">This is awesome. Let's do something about this...</p>
-  <!--     <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a> -->
-    </div>
-  </div>
-<% end %>
+<%= render @topic.comments %>

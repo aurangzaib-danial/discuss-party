@@ -47,3 +47,8 @@ Tag model
 - [x] Highlight current page
 - [x] User should have a name as well
 
+## Comment Feature
+- Setup backend (done)
+- Write a form based based on comment model and use nested resource for topics
+- List all the comments by latest
+
