@@ -7,6 +7,7 @@ RSpec.feature 'User comments on a topic', type: :feature do
   before do
     sign_in user
     visit topic_slug_path(topic.slug, topic.id)
+
   end
 
   scenario 'visits a topic and creates a comment' do
@@ -34,5 +35,15 @@ RSpec.feature 'User comments on a topic', type: :feature do
     expect(page).not_to have_content('Comment as')
     expect(page).not_to have_field('#comment_content')
     expect(page).to have_content('Please sign in for joining the discussion.')
+  end
+
+  scenario 'comments are listed by updated_at in descending order' do
+    topic.comments.create(user: user, content: 'One')
+    topic.comments.create(user: user, content: 'Two')
+
+    visit topic_slug_path(topic.slug, topic.id)
+    comments = page.all('p.card-text').map { |result| result.text }
+
+    expect(comments).to eq %w(Two One)
   end
 end

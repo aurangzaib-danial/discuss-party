@@ -52,4 +52,3 @@ Tag model
 - Write a form based based on comment model and use nested resource for topics
 - Only allow signed_in users to launch a post request to comments create
 - List all the comments by latest
-

@@ -21,4 +21,8 @@ class Topic < ApplicationRecord
   def slug
     title.parameterize
   end
+
+  def comments_by_updated_at
+    comments.order(updated_at: :desc)
+  end
 end
