@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"> 
+      <%= link_to topic.title, topic_slug_path(topic.slug, topic.id) %>
+    </h5>
+    
+    <h6 class="card-subtitle mb-2 text-muted">
+      <%= topic_information(topic) %>
+    </h6>
+    
+    <p class="card-text">
+      <%= short_description(topic) %>    
+    </p>
+
+    <%= link_to 'View Discussion', topic_slug_path(topic.slug, topic.id), class: 'card-link' %>
+  </div>
+</div>
