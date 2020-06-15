@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new if user_signed_in?
   end
 
   def create

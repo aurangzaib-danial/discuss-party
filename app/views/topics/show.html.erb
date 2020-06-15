@@ -3,10 +3,16 @@
 
 <p class="lead" style="margin-bottom: 2rem;"><%= @topic.description %></p>
 
-<p>Comment as <mark class="text-capitalize"><%= current_user.name %></mark></span></p>
-
-<%= render 'comments/form', topic: @topic %>
+<% if user_signed_in? %>
+  <p>
+    Comment as <mark class="text-capitalize"><%= current_user.name %></mark>
+  </p>
+  <%= render 'comments/form', topic: @topic, comment: @comment %>
+<% else %>
+  <div style="margin-bottom: 2rem;">
+    <%= link_to 'Please sign in for joining the discussion.', new_user_session_path %>
+  </div>
+<% end %>
 
 <h5>Discussion</h5>
-
-<%= render @topic.comments %>
+<%= render(@topic.comments) || no_comment_message %>

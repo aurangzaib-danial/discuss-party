@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.topic = @topic
     @comment.user = current_user
+    
     if @comment.save
       redirect_to topic_slug_path(@topic.slug, @topic.id)
     else
