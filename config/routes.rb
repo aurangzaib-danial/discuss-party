@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :topics, only: %i[new create] do
     resource :comments, only: :create
   end
+  
   get ':slug/:id', to: 'topics#show', as: :topic_slug
 end
