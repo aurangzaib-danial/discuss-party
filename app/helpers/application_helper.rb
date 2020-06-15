@@ -24,8 +24,10 @@ module ApplicationHelper
     "alert alert-#{class_name} flash-alert"
   end
 
-  def no_content_message(message)
-    content_tag :p, message, class: 'lead'
+  def no_content_message(message, path = nil)
+    result = content_tag :p, message, class: 'lead'
+    result = link_to result, path, class: 'text-info' if path
+    result
   end
 
 end

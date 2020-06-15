@@ -22,4 +22,10 @@ RSpec.describe 'Tags', type: :request do
     expect_statements_for_topics
 
   end
+
+  it 'shows no content message if no topic available for the tag' do
+    get tag_slug_path(tag.slug)
+    message = 'No topic available for this tag, be the first to create one.'
+    expect(response.body).to include(message)
+  end
 end
