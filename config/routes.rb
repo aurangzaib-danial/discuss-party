@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
   
   get ':slug/:id', to: 'topics#show', as: :topic_slug
+  get ':slug', to: 'tags#show', as: :tag_slug
 end

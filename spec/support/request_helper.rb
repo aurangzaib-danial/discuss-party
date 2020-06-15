@@ -1,5 +1,5 @@
 module RequestHelper
-  def expect_statments_for_topics
+  def expect_statements_for_topics
     expect(response.body).to include(@topic_1.title)
     expect(response.body).to include(@topic_1.user.name)
     expect(response.body).to include(@topic_1.tags.first.name)

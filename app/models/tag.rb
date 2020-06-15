@@ -8,7 +8,16 @@ class Tag < ApplicationRecord
 
   before_validation :parameterize_name
 
+  def self.find_by_slug(slug)
+    find_by_name(slug)
+  end
+
   def parameterize_name
     self.name = name.parameterize if name
   end
+
+  def slug
+    name
+  end
+
 end

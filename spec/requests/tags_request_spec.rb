@@ -5,7 +5,7 @@ RSpec.describe 'Tags', type: :request do
 
   it 'shows tag name' do
     get tag_slug_path(tag.slug)
-    expect(page).to include(tag.name)
+    expect(response.body).to include(tag.name)
   end
 
   it 'lists all the topics' do
@@ -18,7 +18,8 @@ RSpec.describe 'Tags', type: :request do
     @topic_2.save
 
     get tag_slug_path(tag.slug)
-    visit_tag
+
+    expect_statements_for_topics
 
   end
 end

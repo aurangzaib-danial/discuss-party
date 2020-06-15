@@ -9,7 +9,7 @@ RSpec.describe 'Site', type: :request do
 
       get root_path
     
-      expect_statments_for_topics
+      expect_statements_for_topics
     end
   end
 end

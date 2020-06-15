@@ -20,4 +20,10 @@ RSpec.describe Tag, type: :model do
     end
     it { should have_db_index(:name).unique }
   end
+
+  it '.find_by_slug' do
+    tag = create(:tag)
+
+    expect(Tag.find_by_slug(tag.slug)).to eq(tag)
+  end
 end
