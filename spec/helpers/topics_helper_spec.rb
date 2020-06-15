@@ -10,7 +10,7 @@ RSpec.describe TopicsHelper, type: :helper do
   end
 
   it '#topic_user_name and marks the string html_safe' do
-    expect(helper.topic_user_name(topic)).to eq("<mark class=\"text-capitalize\">#{topic.user.name}</mark>")
+    expect(helper.topic_user_name(topic)).to include(topic.user.name)
     expect(helper.topic_user_name(topic)).to be_html_safe
   end
 

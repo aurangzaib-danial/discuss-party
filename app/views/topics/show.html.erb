@@ -15,4 +15,5 @@
 <% end %>
 
 <h5>Discussion</h5>
-<%= render(@topic.comments_by_updated_at) || no_comment_message %>
+<%= render(@topic.comments_by_updated_at) || 
+  no_content_message('No one has commented yet. Be the first to start the discussion!') %>

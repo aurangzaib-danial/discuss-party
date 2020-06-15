@@ -24,4 +24,8 @@ module ApplicationHelper
     "alert alert-#{class_name} flash-alert"
   end
 
+  def no_content_message(message)
+    content_tag :p, message, class: 'lead'
+  end
+
 end
