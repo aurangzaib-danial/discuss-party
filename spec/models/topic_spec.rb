@@ -48,5 +48,10 @@ RSpec.describe Topic, type: :model do
 
       expect(Topic.search('topic full of')).to include(topic_1, topic_2)
     end
+
+    it 'returns an empty array if the query is empty string or nil' do
+      expect(Topic.search(nil)).to eq([])
+      expect(Topic.search('')).to eq([])
+    end
   end
 end

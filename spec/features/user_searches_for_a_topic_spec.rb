@@ -9,8 +9,10 @@ RSpec.feature 'User searches for a topic', type: 'feature' do
     fill_in :navbar_search, with: 'beautiful'
     click_button 'Search'
 
-    expect(page).body.to have_content('Found 2 topics')
+    expect(page.body).to have_content('Found 2 topics')
     expect(page.body).to have_content(topic_1.title)
     expect(page.body).to have_content(topic_2.title)
   end
+
+  
 end

@@ -15,8 +15,14 @@ class Topic < ApplicationRecord
   scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
 
   def self.search(query)
-    where('title ILIKE ?', "%#{query}%")
+    query.present? ? where(case_insensitive_clause(query)) : []
   end
+  
+  def self.case_insensitive_clause(query)
+    arel_table[:title].lower.matches("%#{query.downcase}%")
+  end
+
+  private_class_method :case_insensitive_clause
 
   def has_at_least_one_tag
     if topic_tags.size < 1
@@ -31,4 +37,5 @@ class Topic < ApplicationRecord
   def comments_by_updated_at
     comments.order(updated_at: :desc)
   end
+ 
 end

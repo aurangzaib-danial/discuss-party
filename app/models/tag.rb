@@ -9,7 +9,9 @@ class Tag < ApplicationRecord
   before_validation :parameterize_name
 
   def self.find_by_slug(slug)
-    find_by_name(slug)
+    find_by_name(slug) || 
+    raise(ActiveRecord::RecordNotFound, 
+      "Couldn't find Tag with 'slug'=#{slug}")
   end
 
   def parameterize_name

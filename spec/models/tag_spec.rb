@@ -21,9 +21,15 @@ RSpec.describe Tag, type: :model do
     it { should have_db_index(:name).unique }
   end
 
-  it '.find_by_slug' do
-    tag = create(:tag)
+  describe '.find_by_slug' do
+    it 'can find a tag based on a slug' do
+      tag = create(:tag)
+      expect(Tag.find_by_slug(tag.slug)).to eq(tag)
+    end
 
-    expect(Tag.find_by_slug(tag.slug)).to eq(tag)
+    it 'raises ActiveRecord::RecordNotFound error if tag is not found' do
+      expect{Tag.find_by_slug('Fake tag')}.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
+
 end
