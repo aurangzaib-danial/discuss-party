@@ -8,6 +8,11 @@ module TopicsHelper
   end
 
   def topic_information(topic)
-    "Created by #{topic_user_name(topic)} | Tags: #{print_tags(topic.tags)}".html_safe
+    "Created by #{topic_user_name(topic) } #{topic_created_at_in_words(topic)}
+    | Tags: #{print_tags(topic.tags)}".html_safe
+  end
+
+  def topic_created_at_in_words(topic)
+    distance_of_time_in_words_to_now(topic.created_at) + ' ago'
   end
 end

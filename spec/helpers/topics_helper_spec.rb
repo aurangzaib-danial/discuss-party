@@ -10,15 +10,25 @@ RSpec.describe TopicsHelper, type: :helper do
   end
 
   it '#topic_user_name and marks the string html_safe' do
+    topic.user.name = 'sunny'
     expect(helper.topic_user_name(topic)).to include(topic.user.name)
     expect(helper.topic_user_name(topic)).to be_html_safe
   end
 
   it '#topic_information returns topic user\'s name and tag names and marks the string html_safe' do
-    
-    expected_result = "Created by #{helper.topic_user_name(topic)} | Tags: #{helper.print_tags(topic.tags)}"
-    
-    expect(helper.topic_information(topic)).to eq(expected_result)
+    topic.created_at = 1.day.ago
+    topic.updated_at = 1.day.ago
+
+    expect(helper.topic_information(topic)).to include(topic.user.name)
+    expect(helper.topic_information(topic)).to include(topic.tags.first.name)
+    expect(helper.topic_information(topic)).to include('1 day ago')
+
     expect(helper.topic_information(topic)).to be_html_safe
+  end
+
+  it '#topic_created_at_in_words' do
+    topic = build(:topic, created_at: 1.day.ago, updated_at: 1.day.ago)
+
+    expect(topic_created_at_in_words(topic)).to eq('1 day ago')
   end
 end
