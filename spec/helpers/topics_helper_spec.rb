@@ -18,6 +18,7 @@ RSpec.describe TopicsHelper, type: :helper do
   it '#topic_information returns topic user\'s name and tag names and marks the string html_safe' do
     topic.created_at = 1.day.ago
     topic.updated_at = 1.day.ago
+    topic.user.name = 'sunny'
 
     expect(helper.topic_information(topic)).to include(topic.user.name)
     expect(helper.topic_information(topic)).to include(topic.tags.first.name)

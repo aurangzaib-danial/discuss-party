@@ -4,6 +4,7 @@ class SiteController < ApplicationController
   end
 
   def search
-    @topics = Topic.search(params[:q])
+    @query = params[:q]
+    @topics = Topic.search(@query)
   end
 end
