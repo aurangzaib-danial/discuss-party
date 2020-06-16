@@ -40,4 +40,13 @@ RSpec.describe Topic, type: :model do
       expect(Topic.by_created_at(:desc)).to eq([topics.second, topics.first])
     end
   end
+
+  describe '.search' do
+    it 'returns topics when give a simple query' do
+      topic_1 = create(:topic, title: 'this is a Topic full of awesomeness')
+      topic_2 = create(:topic, title: 'this is another topic full of pakistan')
+
+      expect(Topic.search('topic full of')).to include(topic_1, topic_2)
+    end
+  end
 end

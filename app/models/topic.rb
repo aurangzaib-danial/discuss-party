@@ -14,6 +14,10 @@ class Topic < ApplicationRecord
 
   scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
 
+  def self.search(query)
+    where('title ILIKE ?', "%#{query}%")
+  end
+
   def has_at_least_one_tag
     if topic_tags.size < 1
       errors.add(:tags, 'must be at least one.')
