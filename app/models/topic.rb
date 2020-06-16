@@ -12,6 +12,8 @@ class Topic < ApplicationRecord
   validates_length_of :description, minimum: 20
   validate :has_at_least_one_tag
 
+  scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
+
   def has_at_least_one_tag
     if topic_tags.size < 1
       errors.add(:tags, 'must be at least one.')

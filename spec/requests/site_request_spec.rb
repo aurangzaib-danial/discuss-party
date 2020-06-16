@@ -17,5 +17,6 @@ RSpec.describe 'Site', type: :request do
       get root_path
       expect(response.body).to include(message)
     end
+
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory(:topic) do
-    title { 'This is a superb topic for discussion'}
+    sequence(:title) { |n| "The topic is #{n}" }
     description { Faker::Lorem.paragraph }
     user { build(:user) }
     topic_tags do

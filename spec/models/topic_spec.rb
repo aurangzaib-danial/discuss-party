@@ -33,4 +33,11 @@ RSpec.describe Topic, type: :model do
       expect(topic.slug).to eq('this-is-good-so-is-this')
     end
   end
+
+  describe '.by_created_at' do
+    it 'takes in the order name and returns the right order' do
+      topics = 2.times.collect { create(:topic) }
+      expect(Topic.by_created_at(:desc)).to eq([topics.second, topics.first])
+    end
+  end
 end
