@@ -17,7 +17,7 @@ class Topic < ApplicationRecord
   scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
 
   def self.search(query)
-    query.present? ? where(case_insensitive_clause(query)) : []
+    query.present? ? where(case_insensitive_clause(query)).by_created_at(:desc) : []
   end
   
   def self.case_insensitive_clause(query)

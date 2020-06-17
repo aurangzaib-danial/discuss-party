@@ -12,7 +12,6 @@ RSpec.feature 'User searches for a topic', type: 'feature' do
     @topic_2 = create(:topic, title: 'The land was so much beautiful')
   end
   
-
   scenario 'using the navbar search' do
 
     visit root_path
