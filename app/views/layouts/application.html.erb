@@ -16,7 +16,7 @@
     <%= render 'partials/flash' %>
     <main class="container">
       <% if user_signed_in? %>
-        <p class="text-center">Signed in as: <a href="#" class="text-dark text-capitalize"><%= current_user.name %></a></p>
+        <p class="text-center">Signed in as: <a href="<%= user_slug_path(current_user.id, 'name') %>" class="text-dark text-capitalize"><%= current_user.name %></a></p>
       <% end %>
       
       <%= yield %>
