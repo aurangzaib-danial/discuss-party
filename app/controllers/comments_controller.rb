@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     
     if @comment.save
-      redirect_to topic_slug_path(@topic.slug, @topic.id)
+      redirect_to topic_slug_path(@topic.id, @topic.slug)
     else
       render 'topics/show'
     end

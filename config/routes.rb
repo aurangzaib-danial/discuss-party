@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   get 'search', to: 'site#search'
   
-  get ':slug/:id', to: 'topics#show', as: :topic_slug
+  get ':id/:slug', to: 'topics#show', as: :topic_slug
   get ':slug', to: 'tags#show', as: :tag_slug
 
+  # get 'users/:id'
 end

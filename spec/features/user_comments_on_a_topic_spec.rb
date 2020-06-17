@@ -6,7 +6,7 @@ RSpec.feature 'User comments on a topic', type: :feature do
 
   before do
     sign_in user
-    visit topic_slug_path(topic.slug, topic.id)
+    visit topic_slug_path(topic.id, topic.slug)
 
   end
 
@@ -30,7 +30,7 @@ RSpec.feature 'User comments on a topic', type: :feature do
 
   scenario 'comment box is hidden when no user is logged in' do
     sign_out user
-    visit topic_slug_path(topic.slug, topic.id)
+    visit topic_slug_path(topic.id, topic.slug)
 
     expect(page).not_to have_content('Comment as')
     expect(page).not_to have_field('#comment_content')
@@ -41,7 +41,7 @@ RSpec.feature 'User comments on a topic', type: :feature do
     topic.comments.create(user: user, content: 'One')
     topic.comments.create(user: user, content: 'Two')
 
-    visit topic_slug_path(topic.slug, topic.id)
+    visit topic_slug_path(topic.id, topic.slug)
     comments = page.all('p.card-text').map { |result| result.text }
 
     expect(comments).to eq %w(Two One)
