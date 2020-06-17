@@ -37,3 +37,7 @@ main.container {
 .topic_information {
   line-height: 2rem;
 }
+
+.topic_information a {
+  @extend .text-dark;
+}

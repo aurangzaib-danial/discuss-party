@@ -4,7 +4,9 @@ module TopicsHelper
   end
 
   def topic_user_name(topic)
-    content_tag :mark, topic.user.name, class: 'text-capitalize'
+    content_tag :mark, class: 'text-capitalize' do
+      link_to topic.user.name, user_slug_path(topic.user.id, topic.user.slug)
+    end
   end
 
   def topic_information(topic)
