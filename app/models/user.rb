@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def downcase_name
     name.downcase!
   end
+
+  def slug
+    name.parameterize
+  end
 end

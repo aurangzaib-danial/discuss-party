@@ -16,4 +16,12 @@ RSpec.describe User, type: :model do
     user.save
     expect(user.name).to eq('sunny')
   end
+
+  describe '#slug' do
+    it "should return the slugified version of user's name" do
+      user = build(:user)
+      user.name = "Sunny Khan"
+      expect(user.slug).to eq('sunny-khan')
+    end
+  end
 end
