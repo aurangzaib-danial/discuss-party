@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :topics
   has_many :comments
 
+  slug_for :name
+
   validates_presence_of :name
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   validates_length_of :name, maximum: 50
@@ -16,7 +18,4 @@ class User < ApplicationRecord
     name.downcase!
   end
 
-  def slug
-    name.parameterize
-  end
 end

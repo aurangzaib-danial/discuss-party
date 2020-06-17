@@ -12,6 +12,8 @@ class Topic < ApplicationRecord
   validates_length_of :description, minimum: 20
   validate :has_at_least_one_tag
 
+  slug_for :title
+
   scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
 
   def self.search(query)
@@ -28,10 +30,6 @@ class Topic < ApplicationRecord
     if topic_tags.size < 1
       errors.add(:tags, 'must be at least one.')
     end
-  end
-
-  def slug
-    title.parameterize
   end
 
   def comments_by_updated_at
