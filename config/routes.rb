@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   get ':id/:slug', to: 'topics#show', as: :topic_slug
   get ':slug', to: 'tags#show', as: :tag_slug
 
-  # get 'users/:id'
+  get 'users/:id/:slug', to: 'users#profile', as: :user_slug
 end
