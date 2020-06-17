@@ -2,13 +2,6 @@
   <ul class="navbar-nav mr-auto">
     <%= nav_li 'Home', root_path %>
     <%= nav_li 'About', about_path %>
-    <% if user_signed_in? %>
-      <%= nav_li 'Sign out', destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= nav_li 'Sign in', new_user_session_path %>
-      <%= nav_li 'Sign up', new_user_registration_path %>
-    <% end %>
-
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Tags
@@ -19,6 +12,16 @@
         <% end %>
       </div>
     </li>
+
+    <% if user_signed_in? %>
+      <%= nav_li short_user_name(current_user), 
+        user_slug_path(current_user.id, current_user.slug), 
+        class: 'nav-link text-capitalize' %>
+      <%= nav_li 'Sign out', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= nav_li 'Sign in', new_user_session_path %>
+      <%= nav_li 'Sign up', new_user_registration_path %>
+    <% end %>
   </ul>
 
   <ul class="navbar-nav ml-auto right-nav-ul">
