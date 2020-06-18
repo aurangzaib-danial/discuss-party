@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { should have_many :topics }
-    it { should have_many :comments }
+    it { should have_many(:topics).dependent(:delete_all) }
+    it { should have_many(:comments).dependent(:delete_all) }
   end
   it { should have_db_column :name }
   it { should validate_presence_of :name }
