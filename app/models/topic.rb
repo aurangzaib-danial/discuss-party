@@ -1,8 +1,8 @@
 class Topic < ApplicationRecord
   belongs_to :user
-  has_many :topic_tags
+  has_many :topic_tags, dependent: :delete_all
   has_many :tags, through: :topic_tags
-  has_many :comments
+  has_many :comments, dependent: :delete_all
 
   enum visibility: { public: 0, private: 1 }, _prefix: true
 

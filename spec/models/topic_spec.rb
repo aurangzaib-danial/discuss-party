@@ -5,9 +5,9 @@ RSpec.describe Topic, type: :model do
   it { should have_db_column(:description) }
   it { should have_db_column(:visibility) }
   it { should belong_to(:user)}
-  it { should have_many(:topic_tags) }
+  it { should have_many(:topic_tags).dependent(:delete_all) }
   it { should have_many(:tags).through(:topic_tags) }
-  it { should have_many(:comments) }
+  it { should have_many(:comments).dependent(:delete_all) }
   it do 
     should define_enum_for(:visibility).
       with_values(public: 0, private: 1).

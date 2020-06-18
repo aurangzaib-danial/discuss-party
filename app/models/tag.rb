@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  has_many :topic_tags
+  has_many :topic_tags, dependent: :delete_all
   has_many :topics, through: :topic_tags
 
   validates_presence_of :name
