@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :topic_vote do
-    vote { 1 }
-    topic { nil }
-    user { nil }
+    vote { 0 }
+    topic { create(:topic) }
+    user { create(:user) }
   end
 end

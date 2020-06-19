@@ -14,6 +14,16 @@ topic_vote = TopicVote.new(topic: topic, user: user, vote: 'like')
 topic.like(user) #=> expects a user object only
 topic.dislike(user) #=> expects a user object only
 
+.like
+  removes dislike
+  removes like if already liked
+
+.dislike
+  removes like
+  remove dislike if already disliked
+
+AssociationTypeMismatch
+
 topic.likes
 topic.dislikes
 

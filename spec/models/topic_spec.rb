@@ -54,4 +54,14 @@ RSpec.describe Topic, type: :model do
       expect(Topic.search('')).to eq([])
     end
   end
+
+  describe 'Voting' do
+    it '#like(user)' do
+      user = create(:user)
+      topic = create(:topic)
+      topic.like(user)
+      topic_vote = TopicVote.find_by(user: user, topic: topic)
+      # expect()
+    end
+  end
 end
