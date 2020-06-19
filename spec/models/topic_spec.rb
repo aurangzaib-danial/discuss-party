@@ -8,6 +8,8 @@ RSpec.describe Topic, type: :model do
   it { should have_many(:topic_tags).dependent(:delete_all) }
   it { should have_many(:tags).through(:topic_tags) }
   it { should have_many(:comments).dependent(:delete_all) }
+  it { should have_many(:topic_votes).dependent(:delete_all) }
+
   it do 
     should define_enum_for(:visibility).
       with_values(public: 0, private: 1).
@@ -55,13 +57,62 @@ RSpec.describe Topic, type: :model do
     end
   end
 
-  describe 'Voting' do
-    it '#like(user)' do
-      user = create(:user)
-      topic = create(:topic)
-      topic.like(user)
-      topic_vote = TopicVote.find_by(user: user, topic: topic)
-      # expect()
+  describe '#vote' do
+    let(:user) { create(:user) }
+    let(:topic) { create(:topic) }
+
+    context 'vote(:like)' do
+      it 'creates a like for the topic' do
+        topic.vote(user, :like)
+        topic_vote = TopicVote.find_by(user: user, topic: topic)
+        expect(topic_vote).to be_like
+      end
+
+      it 'liking again a topic that is already liked removes vote' do
+        TopicVote.create(user: user, topic: topic, vote: :like)
+        topic.vote(user, :like)
+        topic_vote = TopicVote.find_by(user: user, topic: topic)
+        expect(topic_vote).to be_nil
+      end
+
+      it 'if vote is dislike previously then its updated to like' do
+        TopicVote.create(user: user, topic: topic, vote: :dislike)
+        topic.vote(user, :like)
+        topic_vote = TopicVote.find_by(user: user, topic: topic)
+        expect(topic_vote).to be_like
+      end
     end
+
+    context 'vote(:dislike)' do
+      it 'creates a dislike for the topic' do
+        topic.vote(user, :dislike)
+        topic_vote = TopicVote.find_by(user: user, topic: topic)
+        expect(topic_vote).to be_dislike
+      end
+
+      it 'disliking again a topic that is already liked removes vote' do
+        TopicVote.create(user: user, topic: topic, vote: :dislike)
+        topic.vote(user, :dislike)
+        topic_vote = TopicVote.find_by(user: user, topic: topic)
+        expect(topic_vote).to be_nil
+      end
+
+      it 'if vote is like previously then its updated to dislike' do
+        TopicVote.create(user: user, topic: topic, vote: :like)
+        topic.vote(user, :dislike)
+        topic_vote = TopicVote.find_by(user: user, topic: topic)
+        expect(topic_vote).to be_dislike
+      end
+    end
+
+    context 'vote errors' do
+      it 'raises error if the user argument is of wrong class' do
+        expect{topic.vote('User', :like)}.to raise_error(ActiveRecord::AssociationTypeMismatch)
+      end
+    end
+
   end
 end
+
+
+

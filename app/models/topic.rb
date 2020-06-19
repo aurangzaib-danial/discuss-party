@@ -3,6 +3,7 @@ class Topic < ApplicationRecord
   has_many :topic_tags, dependent: :delete_all
   has_many :tags, through: :topic_tags
   has_many :comments, dependent: :delete_all
+  has_many :topic_votes, dependent: :delete_all
 
   enum visibility: { public: 0, private: 1 }, _prefix: true
 
@@ -35,5 +36,25 @@ class Topic < ApplicationRecord
   def comments_by_updated_at
     comments.order(updated_at: :desc)
   end
- 
+
+  def vote(current_user, vote_type)
+    raise ActiveRecord::AssociationTypeMismatch, "expected instance of #{User} got instance of #{current_user.class}" unless current_user.class == User
+
+    topic_vote = topic_votes.find_by(user: current_user)
+    
+    if topic_vote
+      update_vote(topic_vote, vote_type)
+    else
+      topic_votes.create(user: current_user, vote: vote_type)
+    end
+  end
+
+  private
+  def update_vote(topic_vote, vote_type)
+    if topic_vote.vote == vote_type.to_s
+      topic_vote.delete
+    else
+      topic_vote.update(vote: vote_type)
+    end
+  end
 end
