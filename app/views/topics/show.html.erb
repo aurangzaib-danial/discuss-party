@@ -1,6 +1,8 @@
 <h2 id="top-heading"><%= @topic.title %></h2>
 <p class="topic_information"><%= topic_information(@topic) %></p>
 
+<%= render 'topics/voting' %>
+
 <p class="lead" style="margin-bottom: 2rem;"><%= @topic.description %></p>
 
 <% if user_signed_in? %>

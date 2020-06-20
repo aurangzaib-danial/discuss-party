@@ -17,4 +17,26 @@ module TopicsHelper
   def topic_created_at_in_words(topic)
     distance_of_time_in_words_to_now(topic.created_at) + ' ago'
   end
+
+  def vote_button(type, marked)
+    button_tag type: 'submit', id: type, class: vote_button_class(marked) do
+      vote_icon(type, marked)
+    end
+  end
+
+  def vote_icon(type, marked)
+    mark_class = marked ? 'fas' : 'far'
+
+    content_tag :i, nil,
+      class: "#{mark_class} fa-thumbs-up #{icon_rotate_class(type)}"
+  end
+
+  private
+  def vote_button_class(marked)
+    "btn #{'thumb-marked' if marked}"
+  end
+
+  def icon_rotate_class(type)
+    'fa-rotate-180' if type == :dislike
+  end
 end

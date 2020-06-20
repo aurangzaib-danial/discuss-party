@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user!, only: :new
-  before_action :set_topic, only: :show
+  before_action :authenticate_user!, except: :show
+  before_action :set_topic, only: [:show, :vote]
 
   def new
     @topic = Topic.new
@@ -18,6 +18,11 @@ class TopicsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def vote
+    @topic.vote(current_user, params[:vote])
+    redirect_to topic_slug_path(@topic.id, @topic.slug)
   end
 
   private

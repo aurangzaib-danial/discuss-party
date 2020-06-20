@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :topics, only: %i[new create] do
-    resource :comments, only: :create
+    resources :comments, only: :create
+    patch 'vote', on: :member
   end
 
   get 'search', to: 'site#search'

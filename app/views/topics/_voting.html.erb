@@ -1,0 +1,10 @@
+<div class="voting">   
+  <%= form_with url: vote_topic_path(@topic), method: :patch do |form| %>
+    <%= form.hidden_field :vote, value: 'like' %>
+    <%= vote_button :like, true %>
+  <% end %>
+</div>
+
+TODO
+  1. topic.liked?(user) and topic.disliked?(user)
+  2. add topic likes count
