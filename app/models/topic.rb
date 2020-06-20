@@ -10,12 +10,14 @@ class Topic < ApplicationRecord
   strip_attributes only: :title
 
   validates_length_of :title, in: 5..70
+
   validates_length_of :description, minimum: 20
   validate :has_at_least_one_tag
-
   slug_for :title
 
   scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
+
+  attr_accessor :current_user_vote
 
   def self.search(query)
     query.present? ? where(case_insensitive_clause(query)).by_created_at(:desc) : []
@@ -39,22 +41,33 @@ class Topic < ApplicationRecord
 
   def vote(current_user, vote_type)
     raise ActiveRecord::AssociationTypeMismatch, "expected instance of #{User} got instance of #{current_user.class}" unless current_user.class == User
-
-    topic_vote = topic_votes.find_by(user: current_user)
     
-    if topic_vote
-      update_vote(topic_vote, vote_type)
+    if has_voted?(current_user)
+      update_vote(vote_type)
     else
       topic_votes.create(user: current_user, vote: vote_type)
     end
   end
 
+  def liked?(current_user)
+    has_voted?(current_user) && current_user_vote.like?
+  end
+
+  def disliked?(current_user)
+    has_voted?(current_user) && current_user_vote.dislike?
+  end
+
   private
-  def update_vote(topic_vote, vote_type)
-    if topic_vote.vote == vote_type.to_s
-      topic_vote.delete
+  def update_vote(vote_type)
+    if current_user_vote.vote == vote_type.to_s
+      current_user_vote.delete
     else
-      topic_vote.update(vote: vote_type)
+      current_user_vote.update(vote: vote_type)
     end
+  end
+
+  def has_voted?(current_user)
+    topic_vote = topic_votes.find_by(user: current_user)
+    self.current_user_vote = topic_vote if topic_vote
   end
 end

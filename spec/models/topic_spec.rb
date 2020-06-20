@@ -110,6 +110,43 @@ RSpec.describe Topic, type: :model do
         expect{topic.vote('User', :like)}.to raise_error(ActiveRecord::AssociationTypeMismatch)
       end
     end
+  end
+
+  describe '#liked and #disliked' do
+    let(:user) { create(:user) }
+    let(:topic) { create(:topic)}
+
+    describe '#liked' do
+      it '#liked returns true if the user likes a topic' do
+        topic.vote(user, :like)
+        expect(topic.liked?(user)).to be_truthy
+      end
+
+      it '#liked returns false if the user dislikes a topic' do
+        topic.vote(user, :dislike)
+        expect(topic.liked?(user)).to be_falsey
+      end
+
+      it '#liked returns false if the user has not liked' do
+        expect(topic.liked?(user)).to be_falsey
+      end
+    end
+
+    describe '#disliked' do
+      it '#disliked returns true if the user dislikes a topic' do
+        topic.vote(user, :dislike)
+        expect(topic.disliked?(user)).to be_truthy
+      end
+
+      it '#disliked returns false if the user likes a topic' do
+        topic.vote(user, :like)
+        expect(topic.disliked?(user)).to be_falsey
+      end
+
+      it '#disliked returns false if the user has not disliked' do
+        expect(topic.disliked?(user)).to be_falsey
+      end
+    end
 
   end
 end

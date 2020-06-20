@@ -31,6 +31,13 @@ module TopicsHelper
       class: "#{mark_class} fa-thumbs-up #{icon_rotate_class(type)}"
   end
 
+  def vote_form(topic, vote_type)
+    form_with url: vote_topic_path(topic), method: :patch, local: true do |form|
+      (form.hidden_field :vote, value: vote_type) <<
+      (vote_button vote_type, topic.send("#{vote_type}d?", current_user))
+    end
+  end
+
   private
   def vote_button_class(marked)
     "btn #{'thumb-marked' if marked}"

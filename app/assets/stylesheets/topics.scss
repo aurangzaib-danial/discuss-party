@@ -2,6 +2,10 @@
   margin-bottom: 1rem;
 }
 
-.thumb-marked {
+.voting form {
+  display: inline-block;
+}
+
+.thumb-marked, .thumb-marked:hover {
   color: teal;
 }
