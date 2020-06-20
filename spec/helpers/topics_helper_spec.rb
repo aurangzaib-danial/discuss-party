@@ -33,15 +33,16 @@ RSpec.describe TopicsHelper, type: :helper do
     expect(topic_created_at_in_words(topic)).to eq('1 day ago')
   end
 
-  describe 'vote_button accepts vote_type and marked boolean argument' do
+  describe 'vote_button accepts topic, vote_type' do
     it 'like and marked' do
-        result = helper.vote_button(:like, true)
+        topic.vote(topic.user, :like)
+        result = helper.vote_button(topic, topic.user, :like)
         expect(result).to include('like')
         expect(result).to include('thumb-marked')
     end
 
     it 'dislike but not marked' do
-        result = helper.vote_button(:dislike, false)
+        result = helper.vote_button(topic, topic.user, :dislike)
         expect(result).to include('dislike')
         expect(result).not_to include('thumb-marked')
     end

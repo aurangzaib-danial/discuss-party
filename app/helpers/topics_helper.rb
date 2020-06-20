@@ -18,9 +18,9 @@ module TopicsHelper
     distance_of_time_in_words_to_now(topic.created_at) + ' ago'
   end
 
-  def vote_button(type, marked)
-    button_tag type: 'submit', id: type, class: vote_button_class(marked) do
-      vote_icon(type, marked)
+  def vote_button(topic, user, type)
+    button_tag type: 'submit', id: type, class: vote_button_class(topic_marked?(topic, user, type)) do
+      vote_icon(type, topic_marked?(topic, user, type)) + ' ' + vote_count(topic, type)
     end
   end
 
@@ -31,10 +31,10 @@ module TopicsHelper
       class: "#{mark_class} fa-thumbs-up #{icon_rotate_class(type)}"
   end
 
-  def vote_form(topic, vote_type)
+  def vote_form(topic, current_user, vote_type)
     form_with url: vote_topic_path(topic), method: :patch, local: true do |form|
       (form.hidden_field :vote, value: vote_type) <<
-      (vote_button vote_type, topic.send("#{vote_type}d?", current_user))
+      (vote_button topic, current_user, vote_type)
     end
   end
 
@@ -45,5 +45,13 @@ module TopicsHelper
 
   def icon_rotate_class(type)
     'fa-rotate-180' if type == :dislike
+  end
+
+  def topic_marked?(topic, user, type)
+    topic.send("#{type}d?", user)
+  end
+
+  def vote_count(topic, type)
+    topic.send("#{type}s").to_s
   end
 end

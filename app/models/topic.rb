@@ -50,11 +50,19 @@ class Topic < ApplicationRecord
   end
 
   def liked?(current_user)
-    has_voted?(current_user) && current_user_vote.like?
+    has_voted?(current_user) && current_user_vote.like? if current_user
   end
 
   def disliked?(current_user)
-    has_voted?(current_user) && current_user_vote.dislike?
+    has_voted?(current_user) && current_user_vote.dislike? if current_user
+  end
+
+  def likes
+    vote_count(:like)
+  end
+
+  def dislikes
+    vote_count(:dislike)
   end
 
   private
@@ -69,5 +77,9 @@ class Topic < ApplicationRecord
   def has_voted?(current_user)
     topic_vote = topic_votes.find_by(user: current_user)
     self.current_user_vote = topic_vote if topic_vote
+  end
+
+  def vote_count(type)
+    topic_votes.where(vote: type).count
   end
 end
