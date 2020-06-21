@@ -1,24 +1,21 @@
-# README
+# Discuss Party
+Dicuss pary is an application where people can have discussion on topics they love.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+>This is my portfolio project that I have built after completing my Ruby on Rails module on Flatiron school.
 
-Things you may want to cover:
+## Languages and Frameworks used
+1. Ruby
+2. HTML
+3. CSS
+4. Ruby on Rails
 
-* Ruby version
+This project is built in pure Ruby on Rails code, Javascript is not used.
 
-* System dependencies
+## Features
+1. Users can register accounts.
+2. Topics can be created with relevant tags and also it's visibility can be made limited to either general public or private.
+4. Like/dislike voting feature for topics.
+5. Sort topics by either latest, oldest or popularity.
+6. Users can easily comment on topics.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Write more features ....
