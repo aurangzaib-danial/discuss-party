@@ -13,7 +13,7 @@ This project is built in pure Ruby on Rails code, Javascript is not used.
 
 ## Features
 1. Users can register accounts.
-2. Topics can be created with relevant tags and also it's visibility can be made limited to either general public or private.
+2. Topics can be created with relevant tags and also their visibility can be made limited to either general public or private.
 4. Like/dislike voting feature for topics.
 5. Sort topics by either latest, oldest or popularity.
 6. Users can easily comment on topics.
