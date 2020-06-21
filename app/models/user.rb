@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates_presence_of :name
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   validates_length_of :name, maximum: 50
-  strip_attributes only: :name
+  strip_attributes only: :name, collapse_spaces: true
 
   before_save :downcase_name
 
