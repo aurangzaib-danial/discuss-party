@@ -1,5 +1,5 @@
 <h2 id="top-heading" ><span class="text-capitalize"><%= @user.name %></span></h2>
 <h4>Latest</h4>
 
-<%= render(@user.topics.by_created_at(:desc)) || 
+<%= render(@user.topics) || 
   no_content_message('This user has not created a topic yet.', new_topic_path) %>

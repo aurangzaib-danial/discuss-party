@@ -36,15 +36,8 @@ RSpec.describe Topic, type: :model do
     end
   end
 
-  describe '.by_created_at' do
-    it 'takes in the order name and returns the right order' do
-      topics = 2.times.collect { create(:topic) }
-      expect(Topic.by_created_at(:desc)).to eq([topics.second, topics.first])
-    end
-  end
-
   describe '.search' do
-    it 'returns topics when give a simple query' do
+    it 'returns topics when given a simple query' do
       topic_1 = create(:topic, title: 'this is a Topic full of awesomeness')
       topic_2 = create(:topic, title: 'this is another topic full of pakistan')
 
