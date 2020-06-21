@@ -17,8 +17,6 @@ class Topic < ApplicationRecord
 
   scope :by_created_at, ->(type = 'asc') { order(created_at: type) }
 
-  attr_accessor :current_user_vote
-
   def self.search(query)
     query.present? ? where(case_insensitive_clause(query)).by_created_at(:desc) : []
   end
@@ -50,11 +48,11 @@ class Topic < ApplicationRecord
   end
 
   def liked?(current_user)
-    has_voted?(current_user) && current_user_vote.like? if current_user
+    has_voted?(current_user) && @current_user_vote.like? if current_user
   end
 
   def disliked?(current_user)
-    has_voted?(current_user) && current_user_vote.dislike? if current_user
+    has_voted?(current_user) && @current_user_vote.dislike? if current_user
   end
 
   def likes
@@ -67,16 +65,16 @@ class Topic < ApplicationRecord
 
   private
   def update_vote(vote_type)
-    if current_user_vote.vote == vote_type.to_s
-      current_user_vote.delete
+    if @current_user_vote.vote == vote_type.to_s
+      @current_user_vote.delete
     else
-      current_user_vote.update(vote: vote_type)
+      @current_user_vote.update(vote: vote_type)
     end
   end
 
   def has_voted?(current_user)
     topic_vote = topic_votes.find_by(user: current_user)
-    self.current_user_vote = topic_vote if topic_vote
+    @current_user_vote = topic_vote if topic_vote
   end
 
   def vote_count(type)
