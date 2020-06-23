@@ -161,8 +161,17 @@ RSpec.describe Topic, type: :model do
 
   describe 'Class Scopes' do
     it '.latest returns latest topics' do
-      topics = 3.times.collect { create(:topic) }
-      expect(Topic.latest).to eq(topics.reverse)
+      topic_1 = create(:topic, created_at: 2.day.ago)
+      topic_2 = create(:topic, created_at: 1.day.ago)
+
+      expect(Topic.latest).to eq([topic_2, topic_1])
+    end
+
+    it '.oldest returns oldest topics' do
+      topic_1 = create(:topic, created_at: 1.day.ago)
+      topic_2 = create(:topic, created_at: 2.day.ago)
+
+      expect(Topic.oldest).to eq([topic_2, topic_1])
     end
   end
 end

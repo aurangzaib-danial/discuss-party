@@ -15,7 +15,9 @@ class Topic < ApplicationRecord
   validate :has_at_least_one_tag
   slug_for :title
 
-  scope :latest, -> { order(created_at: :desc) }
+  scope :by_created_at, ->(order_type) { order(created_at: order_type) }
+  scope :latest, -> { by_created_at(:desc) }
+  scope :oldest, -> { by_created_at(:asc) }
 
   class << self
     def search(query)
