@@ -173,6 +173,15 @@ RSpec.describe Topic, type: :model do
 
       expect(Topic.oldest).to eq([topic_2, topic_1])
     end
+
+    it '.popular returns topics by popularity' do
+      topics = 3.times.collect { create(:topic) }
+      topics.each.with_index(1) do |topic, index|
+        topic.vote(topic.user, :like) if index == 2 || index == 3
+        topic.vote(create(:user), :like) if index == 2
+      end
+      expect(Topic.popular).to eq([topics.second, topics.third, topics.first])
+    end
   end
 end
 

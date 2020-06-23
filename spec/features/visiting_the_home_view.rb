@@ -39,7 +39,7 @@ RSpec.feature 'Visiting the home view', type: 'feature' do
     @topics << create(:topic)
     @topics.each.with_index(1) do |topic, index|
       topic.vote(topic.user, :like) if index == 2 || index == 3
-      topic.vote(topic.user, :like) if index == 2
+      topic.vote(create(:user), :like) if index == 2
     end
 
     click_link :popular

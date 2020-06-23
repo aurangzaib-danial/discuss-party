@@ -23,6 +23,16 @@ class Topic < ApplicationRecord
     def search(query)
       query.present? ? where(case_insensitive_clause(query)) : []
     end
+
+    def popular
+      joins(<<-SQL).
+        LEFT JOIN topic_votes
+        ON topics.id = topic_votes.topic_id
+        AND topic_votes.vote = 0
+      SQL
+      group(:id).
+      order(Arel.sql('COUNT(topic_votes.vote) DESC'))
+    end
   
     private
     def case_insensitive_clause(query)
