@@ -30,4 +30,28 @@ module ApplicationHelper
     result
   end
 
+  def sort_link(sort_type)
+    link_to sort_type, root_path(query_parameter(sort_type)),
+      class: "nav-item nav-link text-capitalize #{current_sort_class?(sort_type)}" 
+  end
+
+  def current_sort_class?(sort_type)
+    explicits = %w(popular oldest)
+    
+    if params[:view].in?(explicits) && params[:view] == sort_type.to_s
+      'active'
+    elsif explicits_not_present?(explicits) && sort_type == :latest
+      'active'
+    end
+  end
+
+  private
+  def query_parameter(sort_type)
+    {view: sort_type} unless sort_type == :latest
+  end
+
+  def explicits_not_present?(explicits)
+    params[:view].nil? || !params[:view].in?(explicits)
+  end
+
 end
