@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
   def home
-    @topics = Topic.includes(:user, :tags)
+    @topics = Topic.latest.includes(:user, :tags)
   end
 
   def search

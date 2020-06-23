@@ -158,6 +158,13 @@ RSpec.describe Topic, type: :model do
       expect(topic.dislikes).to eq(3)
     end
   end
+
+  describe 'Class Scopes' do
+    it '.latest returns latest topics' do
+      topics = 3.times.collect { create(:topic) }
+      expect(Topic.latest).to eq(topics.reverse)
+    end
+  end
 end
 
 

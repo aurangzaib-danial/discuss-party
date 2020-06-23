@@ -15,15 +15,18 @@ class Topic < ApplicationRecord
   validate :has_at_least_one_tag
   slug_for :title
 
-  def self.search(query)
-    query.present? ? where(case_insensitive_clause(query)) : []
-  end
-  
-  def self.case_insensitive_clause(query)
-    arel_table[:title].lower.matches("%#{query.downcase}%")
-  end
+  scope :latest, -> { order(created_at: :desc) }
 
-  private_class_method :case_insensitive_clause
+  class << self
+    def search(query)
+      query.present? ? where(case_insensitive_clause(query)) : []
+    end
+  
+    private
+    def case_insensitive_clause(query)
+      arel_table[:title].lower.matches("%#{query.downcase}%")
+    end
+  end
 
   def has_at_least_one_tag
     if topic_tags.size < 1

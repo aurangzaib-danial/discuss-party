@@ -8,10 +8,18 @@ RSpec.feature 'Visiting the home view', type: 'feature' do
     expect(page).to have_content(message)
   end
 
-  scenario 'lists all the available topics' do
+  scenario 'lists available topics' do
     topics = 2.times.collect { create(:topic) }
     visit root_path 
     run_expectations_for_topics(topics)
   end
+
+  scenario 'lists latest topics by default' do
+    topics = 2.times.collect { create(:topic) }
+    visit root_path
+    topic_titles = page.all('h5.card-title').map { |result| result.text }
+    expect(topic_titles).to eq([topics.second.title, topics.first.title])
+  end
+
 
 end
