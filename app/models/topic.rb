@@ -33,7 +33,7 @@ class Topic < ApplicationRecord
       # group(:id).
       # order(topic_votes[:vote].count.desc)
 
-      joins(topics_and_topic_votes).
+      left_joins_topic_votes_by_likes.
       group(:id).
       order(topic_votes[:vote].count.desc)
     end
@@ -51,13 +51,14 @@ class Topic < ApplicationRecord
       arel_table
     end
 
-    def topics_and_topic_votes
-      topics.join(topic_votes, Arel::Nodes::OuterJoin).
+    def left_joins_topic_votes_by_likes
+      topic_and_votes = topics.join(topic_votes, Arel::Nodes::OuterJoin).
              on(
-              topics[:id].eq(topic_votes[:topic_id]).
-              and(topic_votes[:vote].eq(:like))
+                topics[:id].eq(topic_votes[:topic_id]).
+                and(topic_votes[:vote].eq(:like))
               ).
              join_sources
+      joins(topic_and_votes)
     end
   end
 
