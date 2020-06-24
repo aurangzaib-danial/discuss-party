@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
 
   def vote
     @topic.vote(current_user, params[:vote])
-    redirect_to topic_slug_path(@topic.id, @topic.slug)
+    redirect_to request.referer
   end
 
   private

@@ -3,6 +3,8 @@ class SiteController < ApplicationController
     @topics = Topic.includes(:user, :tags)
     if params[:view] == 'oldest'
       @topics = @topics.oldest
+    elsif params[:view] == 'popular'
+      @topics = @topics.popular
     else
       @topics = @topics.latest
     end

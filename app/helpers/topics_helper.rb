@@ -10,8 +10,10 @@ module TopicsHelper
   end
 
   def topic_information(topic)
-    "Created by #{topic_user_name(topic) } #{topic_created_at_in_words(topic)}
-    | Tags: #{print_tags(topic.tags)}".html_safe
+    <<-HTML.html_safe
+    Created by #{topic_user_name(topic) } #{topic_created_at_in_words(topic)}
+    | Tags: #{print_tags(topic.tags)}
+    HTML
   end
 
   def topic_created_at_in_words(topic)

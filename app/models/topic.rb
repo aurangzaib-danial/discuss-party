@@ -33,7 +33,7 @@ class Topic < ApplicationRecord
       group(:id).
       order(Arel.sql('COUNT(topic_votes.vote) DESC'))
     end
-  
+
     private
     def case_insensitive_clause(query)
       arel_table[:title].lower.matches("%#{query.downcase}%")

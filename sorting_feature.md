@@ -18,8 +18,10 @@ tags_request
 - [x] Remove request tests for testing topics information on root_path, tag_path, search_path, user_profile and test these using feature tests(done)
 - [x] Create a menu bar for latest, popular, oldest (done)
 - [x] Add active states for sort nav
-- [] Setup tests for latest view
-- [] Setup tests for oldest view
-- [] Setup tests for popular view
+- [x] Setup tests for latest view
+- [x] Setup tests for oldest view
+- [x] Setup tests for popular view
+- [x] Add likes and dislikes for topic card
+- [ ] Start working for tag view
 
  
