@@ -39,13 +39,10 @@ class Topic < ApplicationRecord
     end
 
     def includes_vote_count
-      sql = <<-SQL.strip
-    sum(case when topic_votes.vote = 0 then 1 else 0 end) AS like_count,
-    sum(case when topic_votes.vote = 1 then 1 else 0 end) AS dislike_count
-    SQL
       left_joins(:topic_votes).
       select(topics[Arel.star]).
-      select(sql).
+      select(count_likes).
+      select(count_dislikes).
       group(:id)
     end
 
@@ -70,6 +67,22 @@ class Topic < ApplicationRecord
               ).
              join_sources
       joins(topic_and_votes)
+    end
+
+    def count_likes
+      count_with_case(:like)
+    end
+
+    def count_dislikes
+      count_with_case(:dislike)
+    end
+
+    def count_with_case(type)
+      Arel::Nodes::Case.new.
+      when(topic_votes[:vote].eq(type)).then(1).
+      else(0).
+      sum.
+      as("#{type}_count")
     end
   end
 
