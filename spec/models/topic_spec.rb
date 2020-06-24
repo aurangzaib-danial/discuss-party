@@ -142,22 +142,42 @@ RSpec.describe Topic, type: :model do
     end
   end
 
-  describe 'vote count' do
-    let(:topic) { create(:topic) }
-    it '#likes' do
-      5.times do
-        topic.vote(create(:user), :like)
-      end
-      expect(topic.likes).to eq(5)
+  it '.includes_vote_count returns all the topics with their vote counts' do
+    user_1 = create(:user)
+    user_2 = create(:user)
+    3.times do |index|
+      topic = create(:topic)
+      topic.vote(topic.user, :like)
+      topic.vote(user_1, :dislike)
+      topic.vote(user_2, :dislike) if index == 1
+      topic.vote(user_2, :like) if index == 2
     end
 
-    it '#dislikes' do
-      3.times do
-        topic.vote(create(:user), :dislike)
-      end
-      expect(topic.dislikes).to eq(3)
-    end
+    last_topic = create(:topic)
+
+    topics = Topic.includes_vote_count
+    expect(topics.first.likes).to eq(1)
+    expect(topics.second.dislikes).to eq(2)
+    expect(topics.third.likes).to eq(2)
+    expect(topics.last).to eq(last_topic)
   end
+
+  # describe 'vote count' do
+  #   let(:topic) { create(:topic) }
+  #   it '#likes' do
+  #     5.times do
+  #       topic.vote(create(:user), :like)
+  #     end
+  #     expect(topic.likes).to eq(5)
+  #   end
+
+  #   it '#dislikes' do
+  #     3.times do
+  #       topic.vote(create(:user), :dislike)
+  #     end
+  #     expect(topic.dislikes).to eq(3)
+  #   end
+  # end
 
   describe 'Class Scopes' do
     it '.latest returns latest topics' do
@@ -183,6 +203,7 @@ RSpec.describe Topic, type: :model do
       expect(Topic.popular).to eq([topics.second, topics.third, topics.first])
     end
   end
+
 end
 
 

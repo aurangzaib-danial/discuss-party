@@ -2,7 +2,7 @@ sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: '5w9u6jGs#i
 avi = User.create!(email: 'avi@fs.com', password: 'khan1234', name: 'Avi Flombaum')
 
 
-tags = Tag.create!([{name: 'appliances'}, {name: 'reading'}])
+tags = Tag.create!([{name: 'games'}, {name: 'reading'}])
 other_tag = Tag.create(name: 'interesting')
 %w[Game Book].each.with_index do |category, index|
   user = User.create!(email: Faker::Internet.email, password: Devise.friendly_token[0..20], name: Faker::Name.name)
@@ -22,6 +22,7 @@ end
 second = Topic.second
 second.vote(sunny, :like)
 second.vote(avi, :like)
+second.vote(User.last, :dislike)
 
 third = Topic.fourth
 third.vote(avi, :like)

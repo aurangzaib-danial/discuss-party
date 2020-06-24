@@ -38,6 +38,17 @@ class Topic < ApplicationRecord
       order(topic_votes[:vote].count.desc)
     end
 
+    def includes_vote_count
+      sql = <<-SQL.strip
+    sum(case when topic_votes.vote = 0 then 1 else 0 end) AS like_count,
+    sum(case when topic_votes.vote = 1 then 1 else 0 end) AS dislike_count
+    SQL
+      left_joins(:topic_votes).
+      select(topics[Arel.star]).
+      select(sql).
+      group(:id)
+    end
+
     private
     def case_insensitive_clause(query)
       arel_table[:title].lower.matches("%#{query.downcase}%")
@@ -91,11 +102,15 @@ class Topic < ApplicationRecord
   end
 
   def likes
-    vote_count(:like)
+    # vote_count if @likes.nil?
+    # @likes
+    try(:like_count)
   end
 
   def dislikes
-    vote_count(:dislike)
+    # vote_count if @dislikes.nil?
+    # @dislikes
+    try(:dislike_count)
   end
 
   private
@@ -112,7 +127,11 @@ class Topic < ApplicationRecord
     @current_user_vote = topic_vote if topic_vote
   end
 
-  def vote_count(type)
-    topic_votes.where(vote: type).count
-  end
+  # def vote_count
+  #   sql = <<-SQL.strip
+  #   sum(case when topic_votes.vote = 0 then 1 else 0 end) AS like_count,
+  #   sum(case when topic_votes.vote = 1 then 1 else 0 end) AS dislike_count
+  #   SQL
+  #   @likes, @dislikes = topic_votes.pluck(sql).flatten
+  # end
 end
