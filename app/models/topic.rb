@@ -25,18 +25,39 @@ class Topic < ApplicationRecord
     end
 
     def popular
-      joins(<<-SQL).
-        LEFT JOIN topic_votes
-        ON topics.id = topic_votes.topic_id
-        AND topic_votes.vote = 0
-      SQL
+      # joins(<<-SQL).
+      #   LEFT JOIN topic_votes
+      #   ON topics.id = topic_votes.topic_id
+      #   AND topic_votes.vote = 0
+      # SQL
+      # group(:id).
+      # order(topic_votes[:vote].count.desc)
+
+      joins(topics_and_topic_votes).
       group(:id).
-      order(Arel.sql('COUNT(topic_votes.vote) DESC'))
+      order(topic_votes[:vote].count.desc)
     end
 
     private
     def case_insensitive_clause(query)
       arel_table[:title].lower.matches("%#{query.downcase}%")
+    end
+
+    def topic_votes
+      TopicVote.arel_table
+    end
+
+    def topics
+      arel_table
+    end
+
+    def topics_and_topic_votes
+      topics.join(topic_votes, Arel::Nodes::OuterJoin).
+             on(
+              topics[:id].eq(topic_votes[:topic_id]).
+              and(topic_votes[:vote].eq(:like))
+              ).
+             join_sources
     end
   end
 
