@@ -6,6 +6,7 @@ RSpec.describe TopicVote, type: :model do
   it { should belong_to(:topic) }
   it { should belong_to(:user) }
   it { should have_db_index([:topic_id, :user_id]).unique }
+  it { should validate_presence_of(:vote) }
   it do
     expect(subject).to define_enum_for(:vote).
       with_values(like: 0, dislike: 1)

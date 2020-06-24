@@ -22,6 +22,7 @@ tags_request
 - [x] Setup tests for oldest view
 - [x] Setup tests for popular view
 - [x] Add likes and dislikes for topic card
+- [ ] Like count solve problem of N queries
 - [ ] Start working for tag view
 
  
