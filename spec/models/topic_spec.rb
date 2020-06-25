@@ -177,6 +177,11 @@ RSpec.describe Topic, type: :model do
       end
       expect(topic.dislikes).to eq(3)
     end
+
+    it '#likes and #dislikes return 0 if no vote' do
+      expect(topic.likes).to eq(0)
+      expect(topic.dislikes).to eq(0)
+    end
   end
 
   describe 'Class Scopes' do

@@ -113,24 +113,29 @@ class Topic < ApplicationRecord
   def disliked?(current_user)
     has_voted?(current_user) && @current_user_vote.dislike? if current_user
   end
-  # like_count is set through temporary fields feteched through SQL
+  
   def likes
-    if try(:like_count)
-      @likes = like_count 
-
-    elsif @likes.nil?
-      vote_count
-    end
+    @likes = try(:like_count)
+    vote_count if @likes.nil?
     @likes
   end
-
+  # like_count and dislike_count 
+  # are set by temporary fields feteched through SQL
   def dislikes
-    if try(:like_count)
-      @dislikes = dislike_count
-    elsif @dislikes.nil?
-      vote_count
-    end
+    @dislikes = try(:dislike_count)
+    vote_count if @dislikes.nil?
     @dislikes
+  end
+
+  def vote_count
+    counts = topic_votes.pluck(
+        self.class.count_likes,
+        self.class.count_dislikes
+      ).flatten
+    
+    result = (counts == [nil, nil] ? [0, 0] : counts)
+
+    @likes, @dislikes = result
   end
 
   private
@@ -147,11 +152,4 @@ class Topic < ApplicationRecord
     @current_user_vote = topic_vote if topic_vote
   end
 
-  def vote_count
-    counts = topic_votes.pluck(
-        self.class.count_likes,
-        self.class.count_dislikes
-      )
-    @likes, @dislikes = counts.flatten
-  end
 end
