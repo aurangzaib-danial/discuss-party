@@ -1,6 +1,7 @@
 class SiteController < ApplicationController
   def home
-    @topics = Topic.includes(:user, :tags)
+    @topics = Topic.for_list_view
+
     if params[:view] == 'oldest'
       @topics = @topics.oldest
     elsif params[:view] == 'popular'

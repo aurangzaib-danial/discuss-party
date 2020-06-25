@@ -1,4 +1,8 @@
 module Voting::ClassMethods
+  def for_list_view
+    includes_vote_count.includes(:user, :tags)
+  end
+
   def popular
     includes_vote_count.order('like_count DESC')
   end

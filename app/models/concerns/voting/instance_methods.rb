@@ -25,7 +25,7 @@ module Voting::InstanceMethods
   # like_count and dislike_count 
   # are set by temporary fields feteched through SQL
   def dislikes
-    @dislikes = try(:dislike_count) if @likes.nil?
+    @dislikes = try(:dislike_count) if @dislikes.nil?
     vote_count if @dislikes.nil?
     @dislikes
   end

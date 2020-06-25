@@ -10,9 +10,9 @@ class Topic < ApplicationRecord
   strip_attributes only: :title
 
   validates_length_of :title, in: 5..70
-
   validates_length_of :description, minimum: 20
   validate :has_at_least_one_tag
+  
   slug_for :title
 
   scope :by_created_at, ->(order_type) { order(created_at: order_type) }

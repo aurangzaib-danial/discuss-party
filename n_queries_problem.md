@@ -8,5 +8,5 @@ topic_id 1 and user_id 1
 
 topic.current_user_vote
 
-2. We have to count likes and dislikes for every topic one by one.
+2. We have to count likes and dislikes for every topic one by one. (Done)
 
