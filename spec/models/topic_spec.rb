@@ -162,22 +162,22 @@ RSpec.describe Topic, type: :model do
     expect(topics.last).to eq(last_topic)
   end
 
-  # describe 'vote count' do
-  #   let(:topic) { create(:topic) }
-  #   it '#likes' do
-  #     5.times do
-  #       topic.vote(create(:user), :like)
-  #     end
-  #     expect(topic.likes).to eq(5)
-  #   end
+  describe 'vote count' do
+    let(:topic) { create(:topic) }
+    it '#likes' do
+      5.times do
+        topic.vote(create(:user), :like)
+      end
+      expect(topic.likes).to eq(5)
+    end
 
-  #   it '#dislikes' do
-  #     3.times do
-  #       topic.vote(create(:user), :dislike)
-  #     end
-  #     expect(topic.dislikes).to eq(3)
-  #   end
-  # end
+    it '#dislikes' do
+      3.times do
+        topic.vote(create(:user), :dislike)
+      end
+      expect(topic.dislikes).to eq(3)
+    end
+  end
 
   describe 'Class Scopes' do
     it '.latest returns latest topics' do

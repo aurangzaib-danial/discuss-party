@@ -46,6 +46,14 @@ class Topic < ApplicationRecord
       group(:id)
     end
 
+    def count_likes
+      count_with_case(:like)
+    end
+
+    def count_dislikes
+      count_with_case(:dislike)
+    end
+
     private
     def case_insensitive_clause(query)
       arel_table[:title].lower.matches("%#{query.downcase}%")
@@ -67,14 +75,6 @@ class Topic < ApplicationRecord
               ).
              join_sources
       joins(topic_and_votes)
-    end
-
-    def count_likes
-      count_with_case(:like)
-    end
-
-    def count_dislikes
-      count_with_case(:dislike)
     end
 
     def count_with_case(type)
@@ -113,17 +113,24 @@ class Topic < ApplicationRecord
   def disliked?(current_user)
     has_voted?(current_user) && @current_user_vote.dislike? if current_user
   end
-
+  # like_count is set through temporary fields feteched through SQL
   def likes
-    # vote_count if @likes.nil?
-    # @likes
-    try(:like_count)
+    if try(:like_count)
+      @likes = like_count 
+
+    elsif @likes.nil?
+      vote_count
+    end
+    @likes
   end
 
   def dislikes
-    # vote_count if @dislikes.nil?
-    # @dislikes
-    try(:dislike_count)
+    if try(:like_count)
+      @dislikes = dislike_count
+    elsif @dislikes.nil?
+      vote_count
+    end
+    @dislikes
   end
 
   private
@@ -140,11 +147,11 @@ class Topic < ApplicationRecord
     @current_user_vote = topic_vote if topic_vote
   end
 
-  # def vote_count
-  #   sql = <<-SQL.strip
-  #   sum(case when topic_votes.vote = 0 then 1 else 0 end) AS like_count,
-  #   sum(case when topic_votes.vote = 1 then 1 else 0 end) AS dislike_count
-  #   SQL
-  #   @likes, @dislikes = topic_votes.pluck(sql).flatten
-  # end
+  def vote_count
+    counts = topic_votes.pluck(
+        self.class.count_likes,
+        self.class.count_dislikes
+      )
+    @likes, @dislikes = counts.flatten
+  end
 end
