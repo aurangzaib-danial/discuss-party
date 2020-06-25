@@ -25,17 +25,7 @@ class Topic < ApplicationRecord
     end
 
     def popular
-      # joins(<<-SQL).
-      #   LEFT JOIN topic_votes
-      #   ON topics.id = topic_votes.topic_id
-      #   AND topic_votes.vote = 0
-      # SQL
-      # group(:id).
-      # order(topic_votes[:vote].count.desc)
-
-      left_joins_topic_votes_by_likes.
-      group(:id).
-      order(topic_votes[:vote].count.desc)
+      includes_vote_count.order('like_count DESC')
     end
 
     def includes_vote_count
@@ -56,7 +46,7 @@ class Topic < ApplicationRecord
 
     private
     def case_insensitive_clause(query)
-      arel_table[:title].lower.matches("%#{query.downcase}%")
+      topics[:title].lower.matches("%#{query.downcase}%")
     end
 
     def topic_votes
@@ -65,16 +55,6 @@ class Topic < ApplicationRecord
 
     def topics
       arel_table
-    end
-
-    def left_joins_topic_votes_by_likes
-      topic_and_votes = topics.join(topic_votes, Arel::Nodes::OuterJoin).
-             on(
-                topics[:id].eq(topic_votes[:topic_id]).
-                and(topic_votes[:vote].eq(:like))
-              ).
-             join_sources
-      joins(topic_and_votes)
     end
 
     def count_with_case(type)
