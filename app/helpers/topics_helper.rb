@@ -50,7 +50,7 @@ module TopicsHelper
   end
 
   def topic_marked?(topic, user, type)
-    topic.send("#{type}d?", user)
+    topic.send("#{type}d_by?", user)
   end
 
   def vote_count(topic, type)

@@ -9,11 +9,11 @@ module Voting::InstanceMethods
     end
   end
 
-  def liked?(current_user)
+  def liked_by?(current_user)
     has_voted?(current_user) && @current_user_vote.like? if current_user
   end
 
-  def disliked?(current_user)
+  def disliked_by?(current_user)
     has_voted?(current_user) && @current_user_vote.dislike? if current_user
   end
   
