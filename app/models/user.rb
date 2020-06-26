@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :validatable
   has_many :topics, dependent: :delete_all
   has_many :comments, dependent: :delete_all
+  has_many :topic_votes, dependent: :delete_all
+  has_many :voted_topics, through: :topic_votes, source: :topic
 
   slug_for :name
 

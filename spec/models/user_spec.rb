@@ -4,6 +4,9 @@ RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_many(:topics).dependent(:delete_all) }
     it { should have_many(:comments).dependent(:delete_all) }
+    it { should have_many(:topic_votes).dependent(:delete_all) }
+    it { should have_many(:voted_topics).through(:topic_votes).source(:topic) }
+
   end
   it { should have_db_column :name }
   it { should validate_presence_of :name }

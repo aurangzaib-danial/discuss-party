@@ -1,4 +1,9 @@
 module Voting::InstanceMethods
+  def self.included(base)
+    base.attr_accessor :current_user_vote
+    base.attr_accessor :vote_checked
+  end
+
   def vote(current_user, vote_type)
     raise ActiveRecord::AssociationTypeMismatch, "expected instance of #{User} got instance of #{current_user.class}" unless current_user.class == User
     
@@ -10,11 +15,11 @@ module Voting::InstanceMethods
   end
 
   def liked_by?(current_user)
-    has_voted?(current_user) && @current_user_vote.like? if current_user
+    has_voted?(current_user) && current_user_vote.like? if current_user
   end
 
   def disliked_by?(current_user)
-    has_voted?(current_user) && @current_user_vote.dislike? if current_user
+    has_voted?(current_user) && current_user_vote.dislike? if current_user
   end
   
   def likes
@@ -32,16 +37,19 @@ module Voting::InstanceMethods
 
   private
   def update_vote(vote_type)
-    if @current_user_vote.vote == vote_type.to_s
-      @current_user_vote.delete
+    if current_user_vote.vote == vote_type.to_s
+      current_user_vote.delete
     else
-      @current_user_vote.update(vote: vote_type)
+      current_user_vote.update(vote: vote_type)
     end
   end
 
   def has_voted?(current_user)
+    # vote checked is assigned when votes for multiple topics are checked for a user
+    return current_user_vote if vote_checked
+    
     topic_vote = topic_votes.find_by(user: current_user)
-    @current_user_vote = topic_vote if topic_vote
+    self.current_user_vote = topic_vote if topic_vote
   end
 
   def vote_count

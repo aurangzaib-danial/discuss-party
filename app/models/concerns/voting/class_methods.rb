@@ -1,6 +1,27 @@
 module Voting::ClassMethods
   def for_list_view
-    includes_vote_count.includes(:user, :tags)
+    topics = includes_vote_count.includes(:user, :tags)
+  end
+
+  def find_votes_for(topics, current_user)
+    # this method exists for solving the problem of N+1 queries
+    # when we can to check if a user has voted on topics or not.
+    topics.load
+    return if current_user.nil?
+    votes = current_user.topic_votes.where(topic: topics.ids)
+    assign_votes(topics, votes)
+  end
+
+  def assign_votes(topics, votes)
+    topics.each do |topic|
+      topic.vote_checked = true
+      find_and_assign_vote(topic, votes) if votes.present?
+    end
+  end
+
+  def find_and_assign_vote(topic, votes)
+    vote = votes.detect {|vote| vote.topic_id == topic.id }
+    topic.current_user_vote = vote
   end
 
   def popular

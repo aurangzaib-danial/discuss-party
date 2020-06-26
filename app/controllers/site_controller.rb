@@ -9,6 +9,8 @@ class SiteController < ApplicationController
     else
       @topics = @topics.latest
     end
+
+    Topic.find_votes_for(@topics, current_user)
   end
 
   def search
