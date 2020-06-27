@@ -11,5 +11,4 @@ RSpec.describe TopicVote, type: :model do
     expect(subject).to define_enum_for(:vote).
       with_values(like: 0, dislike: 1)
   end
-  it { should validate_uniqueness_of(:topic_id).scoped_to(:user_id) }
 end

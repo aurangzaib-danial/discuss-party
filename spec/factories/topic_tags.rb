@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :topic_tag do
-    topic { nil }
-    tag { nil }
+    topic { create(:topic) }
+    tag { create(:tag) }
   end
 end
