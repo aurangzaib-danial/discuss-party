@@ -10,6 +10,10 @@ module TopicsTestHelpers
   def run_expectations_for_topics(topics)
     topics.each {|topic| expectations_for_topic(topic) }
   end
+
+  def get_topic_titles
+    page.all('h5.card-title').map { |result| result.text }
+  end
 end
 
 RSpec.configure do |config|

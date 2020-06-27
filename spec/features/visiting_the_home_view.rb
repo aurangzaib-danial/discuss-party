@@ -1,13 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature 'Visiting the home view', type: 'feature' do
+  
   def create_topics_and_visit
     @topics = 2.times.collect { create(:topic) }
     visit root_path
-  end
-
-  def get_topic_titles
-    @topic_titles = page.all('h5.card-title').map { |result| result.text }
   end
 
   scenario 'shows no content message if no topic is available' do
@@ -23,15 +20,13 @@ RSpec.feature 'Visiting the home view', type: 'feature' do
 
   scenario 'lists latest topics by default' do
     create_topics_and_visit
-    get_topic_titles
-    expect(@topic_titles).to eq([@topics.second.title, @topics.first.title])
+    expect(get_topic_titles).to eq([@topics.second.title, @topics.first.title])
   end
 
   scenario 'clicking oldest, lists topics by oldest' do
     create_topics_and_visit
     click_link :oldest
-    get_topic_titles
-    expect(@topic_titles).to eq([@topics.first.title, @topics.second.title])
+    expect(get_topic_titles).to eq([@topics.first.title, @topics.second.title])
   end
 
   scenario 'clicking popular, lists topics by popularity' do
@@ -43,8 +38,7 @@ RSpec.feature 'Visiting the home view', type: 'feature' do
     end
 
     click_link :popular
-    get_topic_titles
-    expect(@topic_titles).to eq([@topics.second.title, @topics.third.title, @topics.first.title])
+    expect(get_topic_titles).to eq([@topics.second.title, @topics.third.title, @topics.first.title])
   end
 
 
