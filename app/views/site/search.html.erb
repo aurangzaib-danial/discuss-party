@@ -6,6 +6,6 @@
   <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" id="big_search_submit">
 <% end %>
 
-<h2 id="top-heading">Found <%= pluralize(@topics.count, 'topic') %></h2>
+<h2 id="top-heading">Found <%= pluralize(@topics.size, 'topic') %></h2>
 
 <%= render(@topics) %>

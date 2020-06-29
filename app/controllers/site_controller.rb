@@ -5,6 +5,6 @@ class SiteController < ApplicationController
 
   def search
     @query = params[:q]
-    @topics = Topic.search(@query)
+    load_topics(Topic.search(@query))
   end
 end

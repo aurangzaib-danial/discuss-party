@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def load_topics(scope = nil)
-    scope = scope ? scope.topics : Topic
+  def load_topics(scope = Topic)
     @topics = scope.for_list_view(params[:view], current_user)
   end
+ 
 end

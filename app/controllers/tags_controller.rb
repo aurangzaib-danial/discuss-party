@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_action :set_tag, only: :show
   
   def show
-    load_topics(@tag)
+    load_topics(@tag.topics)
   end
 
   private

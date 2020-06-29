@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user
+  
   def profile
-    load_topics(@user)
+    load_topics(@user.topics)
   end
 
   private
