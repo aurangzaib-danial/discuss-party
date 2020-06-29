@@ -1,6 +1,6 @@
 module Voting::ClassMethods
   def for_list_view
-    topics = includes_vote_count.includes(:user, :tags)
+    includes_vote_count.includes(:user, :tags)
   end
 
   def find_votes_for(topics, current_user)
