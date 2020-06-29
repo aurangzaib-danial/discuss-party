@@ -5,4 +5,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
+
+  private
+  def load_topics(scope = nil)
+    scope = scope ? scope.topics : Topic
+    @topics = scope.for_list_view(params[:view], current_user)
+  end
 end

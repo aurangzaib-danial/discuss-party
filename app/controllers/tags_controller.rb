@@ -2,17 +2,7 @@ class TagsController < ApplicationController
   before_action :set_tag, only: :show
   
   def show
-    @topics = @tag.topics.for_list_view
-
-    if params[:view] == 'oldest'
-      @topics = @topics.oldest
-    elsif params[:view] == 'popular'
-      @topics = @topics.popular
-    else
-      @topics = @topics.latest
-    end
-
-    Topic.find_votes_for(@topics, current_user)
+    load_topics(@tag)
   end
 
   private
