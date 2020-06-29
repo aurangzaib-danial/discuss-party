@@ -51,11 +51,21 @@ module ApplicationHelper
 
   private
   def query_parameter(sort_type)
-    sort_type != :latest ? "?view=#{sort_type}" : ''
+    if sort_type == :latest
+      search_param ? "?#{search_param}" : ''
+    else
+      query = "?"
+      query << "#{search_param}&" if search_param
+      query << "view=#{sort_type}"
+    end
   end
 
   def explicits_not_present?(explicits)
     params[:view].nil? || !params[:view].in?(explicits)
+  end
+
+  def search_param
+    "q=#{params[:q]}" if request.path == '/search' && params[:q].present?
   end
 
 end
