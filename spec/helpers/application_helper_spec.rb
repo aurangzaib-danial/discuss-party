@@ -19,11 +19,11 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     it 'adds the sort type as query parameter' do
-      expect(helper.sort_link_path(:popular)).to include('/?view=popular')
+      expect(helper.sort_link_path(:popular)).to include('?view=popular')
     end
 
     it 'does not add query parameter if the sort type is latest' do
-      expect(helper.sort_link_path(:latest)).not_to include('/?view=latest')
+      expect(helper.sort_link_path(:latest)).not_to include('?view=latest')
     end
 
     it 'correctly returns the full path with query string' do
@@ -31,7 +31,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.sort_link_path(:popular)).to eq('/?view=popular')
       
       helper.request.path = '/tag-2'
-      expect(helper.sort_link_path(:oldest)).to eq('/tag-2/?view=oldest')
+      expect(helper.sort_link_path(:oldest)).to eq('/tag-2?view=oldest')
       
       helper.request.path = '/users/aurangzaib-danial'
       expect(helper.sort_link_path(:latest)).to eq('/users/aurangzaib-danial')
@@ -44,11 +44,11 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     it 'adds the sort type as query parameter' do
-      expect(helper.sort_link(:popular)).to include('/?view=popular')
+      expect(helper.sort_link(:popular)).to include('?view=popular')
     end
 
     it 'does not add query parameter if the sort type is latest' do
-      expect(helper.sort_link(:latest)).not_to include('/?view=latest')
+      expect(helper.sort_link(:latest)).not_to include('?view=latest')
     end
 
     it 'returns active class for link if the link is current' do

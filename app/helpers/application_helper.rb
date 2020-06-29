@@ -51,19 +51,11 @@ module ApplicationHelper
 
   private
   def query_parameter(sort_type)
-    if sort_type != :latest
-      "#{forward_slash}?view=#{sort_type}"
-    else
-      ''
-    end
+    sort_type != :latest ? "?view=#{sort_type}" : ''
   end
 
   def explicits_not_present?(explicits)
     params[:view].nil? || !params[:view].in?(explicits)
-  end
-
-  def forward_slash
-    '/' if request.path != '/'
   end
 
 end
