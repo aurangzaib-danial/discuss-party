@@ -24,7 +24,7 @@ class Topic < ApplicationRecord
 
   class << self
     def search(query)
-      query.present? ? where(case_insensitive_clause(query)) : []
+      where(case_insensitive_clause(query))
     end
 
     private

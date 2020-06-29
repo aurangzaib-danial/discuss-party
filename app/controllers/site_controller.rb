@@ -5,6 +5,10 @@ class SiteController < ApplicationController
 
   def search
     @query = params[:q]
-    load_topics(Topic.search(@query))
+    if @query.present?
+      load_topics(Topic.search(@query))
+    else
+      @topics = []
+    end
   end
 end

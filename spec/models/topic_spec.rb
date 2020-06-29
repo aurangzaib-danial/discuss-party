@@ -37,16 +37,11 @@ RSpec.describe Topic, type: :model do
   end
 
   describe '.search' do
-    it 'returns topics when given a simple query' do
+    it 'returns topics when given a query' do
       topic_1 = create(:topic, title: 'this is a Topic full of awesomeness')
       topic_2 = create(:topic, title: 'this is another topic full of pakistan')
 
       expect(Topic.search('topic full of')).to include(topic_1, topic_2)
-    end
-
-    it 'returns an empty array if the query is empty string or nil' do
-      expect(Topic.search(nil)).to eq([])
-      expect(Topic.search('')).to eq([])
     end
   end
 
