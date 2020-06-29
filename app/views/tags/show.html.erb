@@ -1,4 +1,5 @@
+<%= render 'partials/sorting_nav' %>
 <h2 id="top-heading" ><span class="text-capitalize"><%= @tag.name %></span></h2>
 
-<%= render(@tag.topics) || 
+<%= render(@topics) || 
   no_content_message("No topic available for #{@tag.name.capitalize}, be the first to create one.", new_topic_path) %>
