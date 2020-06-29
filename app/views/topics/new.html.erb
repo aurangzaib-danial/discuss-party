@@ -1,5 +1,7 @@
-<h2>Create Topic</h2>
+<h2 id="top-heading">Create Topic</h2>
+
 <%= render 'errors' if @topic.errors.any? %>
+
 <%= form_with model: @topic, local: true do |form| %>
   <div class="form-group">
     <%= form.label :title %>
