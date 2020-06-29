@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def sort_link(sort_type)
-    link_to sort_type, root_path(query_parameter(sort_type)),
+    link_to sort_type, sort_link_path(sort_type),
       class: "nav-item nav-link text-capitalize #{current_sort_class?(sort_type)}" 
   end
 
@@ -45,13 +45,25 @@ module ApplicationHelper
     end
   end
 
+  def sort_link_path(sort_type)
+    request.path << query_parameter(sort_type)
+  end
+
   private
   def query_parameter(sort_type)
-    {view: sort_type} unless sort_type == :latest
+    if sort_type != :latest
+      "#{forward_slash}?view=#{sort_type}"
+    else
+      ''
+    end
   end
 
   def explicits_not_present?(explicits)
     params[:view].nil? || !params[:view].in?(explicits)
+  end
+
+  def forward_slash
+    '/' if request.path != '/'
   end
 
 end
