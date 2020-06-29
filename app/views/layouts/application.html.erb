@@ -15,6 +15,7 @@
     </header>
     <%= render 'partials/flash' %>
     <main class="container">
+      <%= render 'partials/sorting_nav' if @topics.present? %>
       <%= yield %>
     </main>
   </body>

@@ -1,4 +1,4 @@
-<%= render 'partials/sorting_nav' %>
-
 <%= render(@topics) || 
-  no_content_message('No topic available, be the first to create one.', new_user_session_path) %>
+  no_content_message(
+    'No topic available, be the first to create one.', 
+    new_user_session_path) %>
