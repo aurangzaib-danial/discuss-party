@@ -14,10 +14,17 @@
     </li>
 
     <% if user_signed_in? %>
-      <%= nav_li short_user_name(current_user), 
-        user_slug_path(current_user.id, current_user.slug), 
-        class: 'nav-link text-capitalize' %>
-      <%= nav_li 'Settings', edit_user_registration_path %>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-capitalize" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= short_user_name(current_user)  %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to 'Profile', user_slug_path(current_user.id, current_user.slug), class: 'dropdown-item' %>
+          <%= link_to 'Settings', edit_user_registration_path, class: 'dropdown-item' %>
+        </div>
+      </li>
+
       <%= nav_li 'Sign out', destroy_user_session_path, method: :delete %>
     <% else %>
       <%= nav_li 'Sign in', new_user_session_path %>
