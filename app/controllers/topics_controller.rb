@@ -12,7 +12,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
-    @topic.user = current_user
+    @topic.creator = current_user
     if @topic.save
       redirect_to topic_slug_path(@topic.id, @topic.slug)
     else

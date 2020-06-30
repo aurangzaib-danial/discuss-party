@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { should have_many(:topics).dependent(:delete_all) }
+    it { should have_many(:topics).dependent(:delete_all).inverse_of(:creator)}
     it { should have_many(:comments).dependent(:delete_all) }
     it { should have_many(:topic_votes).dependent(:delete_all) }
     it { should have_many(:voted_topics).through(:topic_votes).source(:topic) }

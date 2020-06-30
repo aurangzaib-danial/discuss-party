@@ -30,7 +30,7 @@ RSpec.shared_examples 'listing topics' do
 
     topics << create(:topic)
     topics.each.with_index(1) do |topic, index|
-      topic.vote(topic.user, :like) if index == 2 || index == 3
+      topic.vote(topic.creator, :like) if index == 2 || index == 3
       topic.vote(create(:user), :like) if index == 2
     end
 

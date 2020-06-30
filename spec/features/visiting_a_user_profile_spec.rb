@@ -12,7 +12,7 @@ RSpec.feature 'Visiting a user profile', type: 'feature' do
   end
 
   def visit_collection
-    2.times { create(:topic, user: subject) }
+    2.times { create(:topic, creator: subject) }
     visit_subject
   end
 

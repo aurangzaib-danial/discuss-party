@@ -1,5 +1,5 @@
 class Topic < ApplicationRecord
-  belongs_to :user
+  belongs_to :creator, class_name: 'User', foreign_key: :user_id
   has_many :topic_tags, dependent: :delete_all
   has_many :tags, through: :topic_tags
   has_many :comments, dependent: :delete_all

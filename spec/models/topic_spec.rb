@@ -4,7 +4,7 @@ RSpec.describe Topic, type: :model do
   it { should have_db_column(:title) }
   it { should have_db_column(:description) }
   it { should have_db_column(:visibility) }
-  it { should belong_to(:user)}
+  it { should belong_to(:creator).class_name('User').with_foreign_key(:user_id)}
   it { should have_many(:topic_tags).dependent(:delete_all) }
   it { should have_many(:tags).through(:topic_tags) }
   it { should have_many(:comments).dependent(:delete_all) }
@@ -142,7 +142,7 @@ RSpec.describe Topic, type: :model do
     user_2 = create(:user)
     3.times do |index|
       topic = create(:topic)
-      topic.vote(topic.user, :like)
+      topic.vote(topic.creator, :like)
       topic.vote(user_1, :dislike)
       topic.vote(user_2, :dislike) if index == 1
       topic.vote(user_2, :like) if index == 2
@@ -197,7 +197,7 @@ RSpec.describe Topic, type: :model do
     it '.popular returns topics by popularity' do
       topics = 3.times.collect { create(:topic) }
       topics.each.with_index(1) do |topic, index|
-        topic.vote(topic.user, :like) if index == 2 || index == 3
+        topic.vote(topic.creator, :like) if index == 2 || index == 3
         topic.vote(create(:user), :like) if index == 2
       end
       expect(Topic.popular).to eq([topics.second, topics.third, topics.first])

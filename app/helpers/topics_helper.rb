@@ -5,7 +5,7 @@ module TopicsHelper
 
   def topic_user_name(topic)
     content_tag :mark, class: 'text-capitalize' do
-      link_to topic.user.name, user_slug_path(topic.user.id, topic.user.slug)
+      link_to topic.creator.name, user_slug_path(topic.creator.id, topic.creator.slug)
     end
   end
 

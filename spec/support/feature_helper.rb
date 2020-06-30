@@ -1,7 +1,7 @@
 module TopicsTestHelpers
   def expectations_for_topic(topic)
     expect(page).to have_content(topic.title)
-    expect(page).to have_content(topic.user.name)
+    expect(page).to have_content(topic.creator.name)
     expect(page).to have_content(topic.tags.first.name)
     expect(page).to have_content(topic.tags.second.name)
     expect(page).to have_content(helper.short_description(topic))

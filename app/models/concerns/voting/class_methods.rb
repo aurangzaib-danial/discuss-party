@@ -2,7 +2,7 @@ module Voting::ClassMethods
   def for_list_view(order_type, current_user)
     topics = includes_vote_count.
     add_order(order_type).
-    includes(:user, :tags)
+    includes(:creator, :tags)
     
     find_votes_for(topics, current_user)
   end

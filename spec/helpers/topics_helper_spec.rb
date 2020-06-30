@@ -10,17 +10,17 @@ RSpec.describe TopicsHelper, type: :helper do
   end
 
   it '#topic_user_name and marks the string html_safe' do
-    topic.user.name = 'sunny'
-    expect(helper.topic_user_name(topic)).to include(topic.user.name)
+    topic.creator.name = 'sunny'
+    expect(helper.topic_user_name(topic)).to include(topic.creator.name)
     expect(helper.topic_user_name(topic)).to be_html_safe
   end
 
   it '#topic_information returns topic user\'s name and tag names and marks the string html_safe' do
     topic.created_at = 1.day.ago
     topic.updated_at = 1.day.ago
-    topic.user.name = 'sunny'
+    topic.creator.name = 'sunny'
 
-    expect(helper.topic_information(topic)).to include(topic.user.name)
+    expect(helper.topic_information(topic)).to include(topic.creator.name)
     expect(helper.topic_information(topic)).to include(topic.tags.first.name)
     expect(helper.topic_information(topic)).to include('1 day ago')
 
@@ -35,14 +35,14 @@ RSpec.describe TopicsHelper, type: :helper do
 
   describe 'vote_button accepts topic, vote_type' do
     it 'like and marked' do
-        topic.vote(topic.user, :like)
-        result = helper.vote_button(topic, topic.user, :like)
+        topic.vote(topic.creator, :like)
+        result = helper.vote_button(topic, topic.creator, :like)
         expect(result).to include('like')
         expect(result).to include('thumb-marked')
     end
 
     it 'dislike but not marked' do
-        result = helper.vote_button(topic, topic.user, :dislike)
+        result = helper.vote_button(topic, topic.creator, :dislike)
         expect(result).to include('dislike')
         expect(result).not_to include('thumb-marked')
     end
