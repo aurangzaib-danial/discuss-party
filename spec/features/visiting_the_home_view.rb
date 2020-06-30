@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'Visiting the home view', type: 'feature' do
+  include_examples 'listing topics'
   
-  def create_topics_and_visit
-    @topics = 2.times.collect { create(:topic) }
+  let(:topics) {2.times.collect { create(:topic) }}
+
+  def visit_collection
+    topics
     visit root_path
   end
 
@@ -12,34 +15,5 @@ RSpec.feature 'Visiting the home view', type: 'feature' do
     message = 'No topic available, be the first to create one.'
     expect(page).to have_content(message)
   end
-
-  scenario 'lists available topics' do
-    create_topics_and_visit
-    run_expectations_for_topics(@topics)
-  end
-
-  scenario 'lists latest topics by default' do
-    create_topics_and_visit
-    expect(get_topic_titles).to eq([@topics.second.title, @topics.first.title])
-  end
-
-  scenario 'clicking oldest, lists topics by oldest' do
-    create_topics_and_visit
-    click_link :oldest
-    expect(get_topic_titles).to eq([@topics.first.title, @topics.second.title])
-  end
-
-  scenario 'clicking popular, lists topics by popularity' do
-    create_topics_and_visit
-    @topics << create(:topic)
-    @topics.each.with_index(1) do |topic, index|
-      topic.vote(topic.user, :like) if index == 2 || index == 3
-      topic.vote(create(:user), :like) if index == 2
-    end
-
-    click_link :popular
-    expect(get_topic_titles).to eq([@topics.second.title, @topics.third.title, @topics.first.title])
-  end
-
 
 end
