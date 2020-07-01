@@ -37,4 +37,11 @@ RSpec.shared_examples 'listing topics' do
     click_link :popular
     expect(get_topic_titles).to eq([topics.second.title, topics.third.title, topics.first.title])
   end
+
+  scenario 'only public topics are listed' do
+    private_topic = create(:topic, visibility: :private)
+    visit_collection
+    run_expectations_for_topics(topics)
+    expect(page).not_to have_content(private_topic.title)
+  end
 end

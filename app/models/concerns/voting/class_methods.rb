@@ -1,6 +1,7 @@
 module Voting::ClassMethods
   def for_list_view(order_type, current_user)
     topics = includes_vote_count.
+    visibility_public.
     add_order(order_type).
     includes(:creator, :tags)
     
