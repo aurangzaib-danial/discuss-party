@@ -4,3 +4,9 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
+
+
+
+$( document ).ready(function() {
+  $(".alert-success" ).fadeOut(3000);
+});
