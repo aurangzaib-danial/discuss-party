@@ -1,27 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe TopicPolicy, type: :policy do
-  let(:user) { User.new }
+  let(:topic) { create(:topic) }
 
-  subject { described_class }
-
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'topic creator' do
+    subject { described_class.new(topic.creator, topic) }
+    it { should permit_edit_and_update_actions}
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'another user' do
+    subject { described_class.new(create(:user), topic) }
+    it { should forbid_edit_and_update_actions}
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
 end
