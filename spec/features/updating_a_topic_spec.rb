@@ -8,19 +8,21 @@ RSpec.feature 'Updating a topic', type: :feature do
   scenario 'with valid input updates the topic' do
     data = { title: 'Update topic', description: Faker::Lorem.paragraph}
     visit topic_slug_path(topic.id, topic.slug)
-    click_link :edit
-
+    tag = topic.tags.first
+    click_link 'Edit'
     fill_in :topic_title, with: data[:title]
+    fill_in :topic_description, with: data[:description]
     choose :topic_visibility_private
-    uncheck "topic_tag_ids_1"
+    uncheck tag.name
 
     click_button "Update Topic"
 
+    expect(page).to have_content('Updated successfully.')
     expect(page).to have_content(data[:title])
     expect(page).to have_content(data[:description])
-    expect(page.find('main')).to have_content('private')
+    expect(page.find('main')).to have_content('Private')
 
-    expect(page).not_to have_content('tag1')
+    expect(page.find('main')).not_to have_content(tag.name)
   end
 
   scenario 'displays error on wrong input' do

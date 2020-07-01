@@ -1,9 +1,21 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_topic, only: [:show, :vote]
+  before_action :set_topic, except: %i[new create]
 
   def new
     @topic = Topic.new
+  end
+
+  def edit
+  end
+
+  def update
+    if @topic.update(topic_params)
+      redirect_to(topic_slug_path(@topic.id, @topic.slug), 
+        notice: 'Updated successfully.')
+    else
+      render :edit
+    end
   end
 
   def show

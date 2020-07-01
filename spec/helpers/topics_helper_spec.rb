@@ -3,6 +3,16 @@ require 'rails_helper'
 RSpec.describe TopicsHelper, type: :helper do
   let(:topic) { create(:topic) }
 
+  describe 'private_topic?' do
+    it 'returns private' do
+      expect(helper.private_topic?(Topic.new(visibility: :private))).to include('Private')
+    end
+    
+    it 'returns nil for a public topic' do
+      expect(helper.private_topic?(Topic.new(visibility: :public))).to be_nil
+    end
+  end
+
   it '#short description returns only 20 characters of description and adds three periods at the end' do
     topic.description = "Some quick example text to build on the card title and make up the bulk of the card's content."
     expect(helper.short_description(topic)[-3..-1]).to eq("...")

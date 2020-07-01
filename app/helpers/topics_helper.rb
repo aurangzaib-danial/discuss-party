@@ -1,4 +1,18 @@
 module TopicsHelper
+  def topic_edit_link(topic)
+    if policy(topic).edit?
+      result = ' | '
+      result << link_to('Edit', edit_topic_path(topic.id, topic.slug), class: 'edit-link')
+      result.html_safe
+    end
+  end
+
+  def private_topic?(topic)
+    if topic.visibility_private?
+      content_tag :span, 'Private', class: 'badge badge-dark'
+    end
+  end
+
   def short_description(topic)
     topic.description[0..100].strip + '...'
   end

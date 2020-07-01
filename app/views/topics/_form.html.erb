@@ -1,0 +1,36 @@
+<%= render 'errors' if topic.errors.any? %>
+
+<%= form_with model: topic, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control',  "aria-describedby": "titleHelp"%>
+    <small id="titleHelp" class="form-text text-muted">Between 5 - 70 Characters</small>
+  </div>
+
+  <label>Visibility</label>
+  <div class="form-check">
+    <%= form.radio_button :visibility, 'public', class: 'form-check-input' %>
+    <%= form.label :visibility, 'Public', value: 'Public', class: 'form-check-label' %>
+  </div>
+
+  <div class="form-check">
+    <%= form.radio_button :visibility, 'private', class: 'form-check-input' %>
+    <%= form.label :visibility, 'Private', value: 'Private', class: 'form-check-label' %>
+  </div>
+
+  <p style="margin: 10px 0;">Tags</p>
+  <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |builder| %>
+    <div class="form-check form-check-inline">
+      <%= builder.check_box class: 'form-check-input' %>
+      <%= builder.label class: 'form-check-label text-capitalize' %>
+    </div>
+  <% end %>
+
+  <div class="form-group" style="margin-top: 10px;">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control', "aria-describedby": "descriptionHelp", rows: 4%>
+    <small id="descriptionHelp" class="form-text text-muted">Write about what you want to discuss about the topic</small>
+  </div>
+
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>

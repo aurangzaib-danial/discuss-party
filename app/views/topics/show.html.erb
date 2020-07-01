@@ -1,21 +1,11 @@
-<h2 id="top-heading"><%= @topic.title %></h2>
-<p class="topic_information"><%= topic_information(@topic) %></p>
+<h2 id="top-heading"><%= @topic.title %> <%= private_topic?(@topic) %></h2>
+<p class="topic_information">
+  <%= topic_information(@topic) %> 
+  <%= topic_edit_link(@topic) %>    
+</p>
 
 <%= render 'topics/voting', topic: @topic %>
 
 <p class="lead" style="margin-bottom: 2rem;"><%= @topic.description %></p>
 
-<% if user_signed_in? %>
-  <p>
-    Comment as <mark class="text-capitalize"><%= link_to current_user.name, user_slug_path(current_user.id, current_user.slug), class: 'text-dark' %></mark>
-  </p>
-  <%= render 'comments/form', topic: @topic, comment: @comment %>
-<% else %>
-  <div style="margin-bottom: 2rem;">
-    <%= link_to 'Please sign in for joining the discussion.', new_user_session_path %>
-  </div>
-<% end %>
-
-<h5>Discussion</h5>
-<%= render(@topic.comments_by_updated_at) || 
-  no_content_message('No one has commented yet. Be the first to start the discussion!') %>
+<%= render 'topics/discussion' %>
