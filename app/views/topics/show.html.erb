@@ -1,7 +1,8 @@
 <h2 id="top-heading"><%= @topic.title %> <%= private_topic?(@topic) %></h2>
 <p class="topic_information">
   <%= topic_information(@topic) %> 
-  <%= topic_edit_link(@topic) %>    
+  <%= topic_edit_link(@topic) %>
+  <%= topic_sharing_link(@topic) %>    
 </p>
 
 <%= render 'topics/voting', topic: @topic %>

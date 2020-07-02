@@ -1,8 +1,16 @@
 module TopicsHelper
   def topic_edit_link(topic)
-    if policy(topic).edit?
+    topic_hidden_link_test(topic, :edit, 'Edit')
+  end
+
+  def topic_sharing_link(topic)
+    topic_hidden_link_test(topic, :sharing, 'Manage Sharing')
+  end
+
+  def topic_hidden_link_test(topic, action, text)
+    if policy(topic).send("#{action}?")
       result = ' | '
-      result << link_to('Edit', edit_topic_path(topic.id, topic.slug), class: 'edit-link')
+      result << link_to(text, send("#{action}_topic_path", topic.id, topic.slug), class: 'special-link')
       result.html_safe
     end
   end
