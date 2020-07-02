@@ -4,6 +4,9 @@ class Topic < ApplicationRecord
   has_many :tags, through: :topic_tags
   has_many :comments, dependent: :delete_all
   has_many :topic_votes, dependent: :delete_all
+  has_many :viewers, dependent: :delete_all
+  has_many :private_viewers, through: :viewers, source: :user
+
 
   enum visibility: { public: 0, private: 1 }, _prefix: true
 

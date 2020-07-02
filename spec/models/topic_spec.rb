@@ -9,6 +9,8 @@ RSpec.describe Topic, type: :model do
   it { should have_many(:tags).through(:topic_tags) }
   it { should have_many(:comments).dependent(:delete_all) }
   it { should have_many(:topic_votes).dependent(:delete_all) }
+  it { should have_many(:viewers).dependent(:delete_all) }
+  it { should have_many(:private_viewers).through(:viewers).source(:user) }
 
   it do 
     should define_enum_for(:visibility).

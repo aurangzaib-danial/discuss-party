@@ -6,7 +6,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:comments).dependent(:delete_all) }
     it { should have_many(:topic_votes).dependent(:delete_all) }
     it { should have_many(:voted_topics).through(:topic_votes).source(:topic) }
-
+    it { should have_many(:viewers).dependent(:delete_all) }
+    it { should have_many(:shared_topics).through(:viewers).source(:topic) }
   end
   it { should have_db_column :name }
   it { should validate_presence_of :name }

@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :delete_all
   has_many :topic_votes, dependent: :delete_all
   has_many :voted_topics, through: :topic_votes, source: :topic
+  has_many :viewers, dependent: :delete_all
+  has_many :shared_topics, through: :viewers, source: :topic
 
   slug_for :name
 
