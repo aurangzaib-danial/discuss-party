@@ -51,4 +51,8 @@ class Topic < ApplicationRecord
     comments.order(updated_at: :desc)
   end
 
+  def owner?(user)
+    creator == user
+  end
+
 end

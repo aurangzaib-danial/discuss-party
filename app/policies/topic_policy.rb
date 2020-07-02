@@ -1,14 +1,13 @@
 class TopicPolicy < ApplicationPolicy
   def edit?
-    owner?
+    record.owner?(user)
+  end
+
+  def vote?
+    record.owner?(user)
   end
 
   alias_method :update?, :edit?
-
-  private
-  def owner?
-    user == record.creator
-  end
 
   class Scope < Scope
     def resolve
