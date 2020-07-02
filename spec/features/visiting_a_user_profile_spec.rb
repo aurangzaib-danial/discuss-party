@@ -18,7 +18,7 @@ RSpec.feature 'Visiting a user profile', type: 'feature' do
 
   scenario 'shows no content message if no topic is available' do
     visit_subject
-    message = "#{subject.name.titlecase} has not created a topic yet."
+    message = "#{subject.name.titlecase} has not created a public topic yet."
     expect(page).to have_content(message)
   end
 

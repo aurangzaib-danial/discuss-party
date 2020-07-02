@@ -8,7 +8,7 @@ module UsersHelper
       message = 'You have not created a topic yet.'
       path = new_topic_path
     else
-      message = "#{guest.name.titlecase} has not created a topic yet."
+      message = "#{guest.name.titlecase} has not created a public topic yet."
       path = root_path
     end
 

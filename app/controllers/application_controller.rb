@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def load_topics(scope = Topic)
-    @topics = scope.for_list_view(params[:view], current_user)
+  def load_topics(scope = Topic, visibility = :public)
+    @topics = scope.for_list_view(params[:view], current_user, visibility)
   end
  
 end

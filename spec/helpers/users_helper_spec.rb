@@ -24,7 +24,7 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     it 'returns message for user when they are visiting some one else\'s profile' do
-      expect(helper.user_no_topic_message(third_person, current_user)).to include("#{third_person.name.titlecase} has not created a topic yet.")
+      expect(helper.user_no_topic_message(third_person, current_user)).to include("#{third_person.name.titlecase} has not created a public topic yet.")
     end
   end
 end
