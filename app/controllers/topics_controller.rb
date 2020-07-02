@@ -39,6 +39,10 @@ class TopicsController < ApplicationController
     redirect_to request.referer
   end
 
+  def sharing
+    authorize @topic
+  end
+
   private
   def set_topic
     @topic = Topic.find(params[:id])

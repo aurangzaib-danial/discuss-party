@@ -4,10 +4,11 @@ class TopicPolicy < ApplicationPolicy
   end
 
   def vote?
-    record.owner?(user)
+    edit?
   end
 
   alias_method :update?, :edit?
+  alias_method :sharing?, :edit?
 
   class Scope < Scope
     def resolve
