@@ -20,4 +20,8 @@ class User < ApplicationRecord
     name.downcase!
   end
 
+  def private_topics
+    topics.visibility_private
+  end
+
 end

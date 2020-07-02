@@ -27,4 +27,10 @@ RSpec.describe User, type: :model do
       expect(user.slug).to eq('sunny-khan')
     end
   end
+
+  it '#private_topics' do
+    user = create(:user)
+    topics = 2.times.collect { create(:topic, creator: user, visibility: :private) }
+    expect(user.private_topics).to eq(topics)
+  end 
 end
