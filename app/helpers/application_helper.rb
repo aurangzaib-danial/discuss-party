@@ -25,9 +25,7 @@ module ApplicationHelper
   end
 
   def no_content_message(message, path = nil)
-    result = content_tag :p, message, class: 'lead'
-    result = link_to result, path, class: 'text-info' if path
-    result
+    path ? link_to(message, path) : message
   end
 
   def sort_link(sort_type)
