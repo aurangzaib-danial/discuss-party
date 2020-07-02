@@ -7,9 +7,11 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    authorize @topic
   end
 
   def update
+    authorize @topic
     if @topic.update(topic_params)
       redirect_to(topic_slug_path(@topic.id, @topic.slug), 
         notice: 'Updated successfully.')
