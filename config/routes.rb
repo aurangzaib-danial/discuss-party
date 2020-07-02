@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get ':id/:slug/edit', to: 'topics#edit', as: :edit_topic
 
   get 'private', to: 'users#private'
+  get 'shared-with-me', to: 'users#shared_with_me'
   get 'users/:id/:slug', to: 'users#profile', as: :user_slug
 
   get ':slug', to: 'tags#show', as: :tag_slug
