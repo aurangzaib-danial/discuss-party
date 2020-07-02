@@ -7,11 +7,17 @@ Rails.application.routes.draw do
 
   resources :topics, only: %i[new create update] do
     resources :comments, only: :create
-    patch 'vote', on: :member
+    member do
+      patch 'vote'
+    end
   end
 
-  get ':id/:slug', to: 'topics#show', as: :topic_slug
-  get ':id/:slug/edit', to: 'topics#edit', as: :edit_topic
+  scope ':id/:slug', controller: :topics do
+    root action: 'show', as: :topic_slug
+    get 'edit', as: :edit_topic
+    get 'sharing', as: :sharing_topic
+  end
+
 
   get 'private', to: 'users#private'
   get 'shared-with-me', to: 'users#shared_with_me'
