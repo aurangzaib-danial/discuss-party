@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       patch 'vote'
     end
+    resources :viewers, only: :create
   end
 
   scope ':id/:slug', controller: :topics do
