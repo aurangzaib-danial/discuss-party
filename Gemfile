@@ -64,4 +64,6 @@ gem 'devise', '~> 4.7'
 
 gem 'font-awesome-sass'
 
-gem "pundit", "~> 2.1"
+gem 'pundit', '~> 2.1'
+
+gem 'valid_email', require: ['valid_email/all_with_extensions']

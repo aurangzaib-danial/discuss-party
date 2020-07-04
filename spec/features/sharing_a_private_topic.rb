@@ -14,7 +14,7 @@ RSpec.feature 'sharing a private topic' do
       visit topic_slug_path(topic.id, topic.slug)
       click_link 'Manage Sharing'
 
-      fill_in :email, with: third_user.email
+      fill_in :viewer_user_email, with: third_user.email
       click_button 'Share'
 
       expect(topic.private_viewers).to include(third_user)
