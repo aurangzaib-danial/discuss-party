@@ -18,7 +18,7 @@ RSpec.feature 'sharing a private topic' do
       click_button 'Share'
 
       expect(topic.private_viewers).to include(third_user)
-      expect(page).to have_content('Succesfully shared.')
+      expect(page).to have_content('Successfully shared.')
       expect(page).to have_content(third_user.email)
     end
 

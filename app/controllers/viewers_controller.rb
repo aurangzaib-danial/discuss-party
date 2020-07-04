@@ -3,9 +3,9 @@ class ViewersController < ApplicationController
   before_action :set_topic
 
   def create
-    viewer = @topic.viewers.build(viewer_params)
-    if viewer.save
-      redirect_to topic_sharing_path(@topic), alert: 'Successfully shared.'
+    @viewer = @topic.viewers.build(viewer_params)
+    if @viewer.save
+      redirect_to sharing_topic_path(@topic.id, @topic.slug), alert: 'Successfully shared.'
     else
       render 'topics/sharing'
     end

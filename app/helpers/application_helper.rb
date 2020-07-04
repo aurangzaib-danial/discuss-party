@@ -66,4 +66,8 @@ module ApplicationHelper
     "q=#{params[:q]}" if request.path == '/search' && params[:q].present?
   end
 
+  def field_class(object, attribute)
+    "form-control #{ 'is-invalid' if object.errors[attribute].any? }"
+  end
+
 end

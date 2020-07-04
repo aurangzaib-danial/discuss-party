@@ -1,22 +1,23 @@
 <h4 id="top-heading">Manage sharing for <mark class="font-weight-light"><%= @topic.title %></mark></h4>
 
 <section class="sharing_form">
-  <%= form_with model: [@topic, Viewer.new], local: true do |form| %>
+  <%= form_with model: [@topic, @viewer], local: true do |form| %>
     <div class="form-group">
       <%= form.label :user_email, 'Share with someone' %>
-      <%= form.email_field :user_email, placeholder: 'Email', autofocus: true %>
-<!--  
-      class: 'form-control is-invalid'
-      <div class="invalid-feedback">
-        Please provide a valid email.
-      </div>
-       -->
+      
+      <%= form.email_field(:user_email, placeholder: 'Email', 
+        autofocus: true, class: field_class(@viewer, :user_email)) %>
+      
+      <% if @viewer.errors[:user_email].any? %>
+
+        <div class="invalid-feedback">
+          <%= @viewer.errors[:user_email].first %>
+        </div>
+
+      <% end %>
+
     </div>
+    
     <%= form.submit 'Share', class: 'btn btn-primary' %>
   <% end %>
 </section>
-
-
-<!--  TODO
-# 1. Setup viewer controller for sharing a topic with a user.
-# 2. Continue with tests -->

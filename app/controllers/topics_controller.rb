@@ -41,6 +41,7 @@ class TopicsController < ApplicationController
 
   def sharing
     authorize @topic
+    @viewer = Viewer.new
   end
 
   private
