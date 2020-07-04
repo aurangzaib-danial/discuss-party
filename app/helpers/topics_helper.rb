@@ -1,4 +1,13 @@
 module TopicsHelper
+
+  def back_path_for_topic(topic)
+    if action_name.in? ['edit', 'update']
+      topic_slug_path(topic.id, topic.slug)
+    else
+      root_path
+    end
+  end
+
   def topic_edit_link(topic)
     topic_hidden_link_test(topic, :edit, 'Edit')
   end
