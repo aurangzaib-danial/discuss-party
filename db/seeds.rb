@@ -1,28 +1,44 @@
-sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: '5w9u6jGs#iZv', name: 'Aurangzaib Danial')
-avi = User.create!(email: 'avi@fs.com', password: 'khan1234', name: 'Avi Flombaum')
+sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: 'khan1234', name: 'Aurangzaib Danial Liaqat Khan')
+avi = User.create!(email: 'avi@fs.com', password: 'avi1234', name: 'Avi Flombaum')
+adam = User.create!(email: 'adam@comedy.com', password: 'adam1234', name: 'Adam Weissman')
+random_user = User.create!(email: Faker::Internet.unique.email, password: 'random1234', name: Faker::Name.unique.name)
 
+@users = [sunny, avi, adam]
 
-tags = Tag.create!([{name: 'games'}, {name: 'reading'}])
-other_tag = Tag.create(name: 'interesting')
-%w[Game Book].each.with_index do |category, index|
-  user = User.create!(email: Faker::Internet.email, password: Devise.friendly_token[0..20], name: Faker::Name.name)
- 
-  3.times do
-    title = Faker.const_get(category).unique.title
-    description = Faker::Lorem.paragraph(sentence_count: 20)
-    topic = Topic.new(title: title, creator: user, description: description)
-    topic.topic_tags.build(tag: tags[index])
-    topic.topic_tags.build(tag: other_tag)
-    topic.save!
-    topic.vote(user, :like)
-  end
+tags = Tag.create!(
+  [
+    {name: 'games'}, 
+    {name: 'reading'}, 
+    {name: 'interesting'}, 
+    {name: 'politics'}
+  ]
+)
 
+def faker_topic(topic_type, creator, visibility, *tags)
+  topic = Topic.create!(
+    title: Faker::const_get(topic_type).unique.title, 
+    description: Faker::Lorem.paragraph(sentence_count: 20), 
+    creator: creator,
+    visibility: visibility,
+    tags: tags
+  )
+
+  topic.vote(@users.sample, :like)
+  topic
 end
 
-second = Topic.second
-second.vote(sunny, :like)
-second.vote(avi, :like)
-second.vote(User.last, :dislike)
+sunny_topic = faker_topic('Game', sunny, :public, tags.first, tags.third)
+sunny_topic.vote(random_user, :like)
 
-third = Topic.fourth
-third.vote(avi, :like)
+faker_topic('Book', sunny, :private, tags.second, tags.last)
+
+faker_topic('Game', adam, :public, tags.second, tags.last)
+adam_topic = faker_topic('Book', adam, :private, tags.second, tags.third, tags.last)
+adam_topic.private_viewers << sunny
+
+faker_topic('Game', avi, :public, tags.first, tags.third)
+avi_topic = faker_topic('Book', avi, :public, tags.last)
+avi_topic.private_viewers << sunny
+
+faker_topic('Book', random_user, :public, tags.second, tags.third, tags.last)
+
