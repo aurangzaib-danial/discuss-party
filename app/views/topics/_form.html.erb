@@ -17,6 +17,9 @@
     <%= form.radio_button :visibility, 'private', class: 'form-check-input' %>
     <%= form.label :visibility, 'Private', value: 'Private', class: 'form-check-label' %>
   </div>
+  <% if action_name.in?(['edit', 'update']) && topic.visibility_private? %>
+    <small class="form-text text-muted">Updating a private topic to public removes all private users</small>
+  <% end %>
 
   <p style="margin: 10px 0;">Tags</p>
   <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |builder| %>

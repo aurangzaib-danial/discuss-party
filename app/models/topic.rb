@@ -11,6 +11,8 @@ class Topic < ApplicationRecord
 
   strip_attributes only: :title
 
+  before_save :switched_from_private_to_public?
+
   validates_length_of :title, in: 5..70
   validates_length_of :description, minimum: 20
   validate :has_at_least_one_tag
@@ -59,6 +61,13 @@ class Topic < ApplicationRecord
 
   def viewers_with_users
     viewers.includes(:user)
+  end
+
+  def switched_from_private_to_public?
+    return if changes[:visibility].nil?
+    value_before = changes[:visibility].first
+    # value_after = changes[:visibility].second
+    viewers.delete_all if value_before == 'private'
   end
 
 end

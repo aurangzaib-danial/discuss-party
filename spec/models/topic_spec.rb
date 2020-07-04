@@ -206,6 +206,17 @@ RSpec.describe Topic, type: :model do
     end
   end
 
+  it 'changing private to public topic removes all viewers' do
+    topic = create(:topic, visibility: :private)
+    user_1 = create(:user)
+    user_2 = create(:user)
+    topic.viewers.create(user: user_1)
+    topic.viewers.create(user: user_2)
+
+    topic.update(visibility: :public)
+    expect(topic.private_viewers).to be_empty
+  end
+
 end
 
 

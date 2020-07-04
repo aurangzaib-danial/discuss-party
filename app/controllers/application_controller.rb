@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def topic_is_private?
-    if @topic.visibility_private?
+    unless @topic.visibility_private?
       redirect_to topic_slug_path(@topic.id, @topic.slug)
     end
   end
