@@ -1,23 +1,33 @@
 <h4 id="top-heading">Manage sharing for <mark class="font-weight-light"><%= @topic.title %></mark></h4>
 
-<section class="sharing_form">
-  <%= form_with model: [@topic, @viewer], local: true do |form| %>
-    <div class="form-group">
-      <%= form.label :user_email, 'Share with someone' %>
-      
-      <%= form.email_field(:user_email, placeholder: 'Email', 
-        autofocus: true, class: field_class(@viewer, :user_email)) %>
-      
-      <% if @viewer.errors[:user_email].any? %>
+<%= render 'topics/sharing_form' %>
 
-        <div class="invalid-feedback">
-          <%= @viewer.errors[:user_email].first %>
-        </div>
-
+<% if @topic.viewers_with_users.present? %>
+  <h5 style="margin-bottom: 20px;">Currently sharing with</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @topic.viewers_with_users.each do |viewer| %>
+        <tr>
+          <td class="text-capitalize"><%= viewer.user.name %></td>
+          <td><%= email_link(viewer.user.email) %></td>
+          <td>
+            <%= button_to('Remove share', [@topic, viewer], 
+              method: :delete, class: 'btn btn-danger', 
+              data: {confirm: "Are you sure you want to remove access for #{viewer.user.name.titlecase}?"},
+              id: "viewer_#{viewer.id}"
+            )%>
+          </td>
+        </tr>
       <% end %>
-
-    </div>
-    
-    <%= form.submit 'Share', class: 'btn btn-primary' %>
-  <% end %>
-</section>
+    </tbody>
+  </table>
+<% else %>
+  <p>You have't shared this topic with anyone yet.</p>
+<% end %>

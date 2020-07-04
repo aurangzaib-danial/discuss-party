@@ -20,7 +20,7 @@ RSpec.describe UsersHelper, type: :helper do
     let(:third_person) {create(:user)}
 
     it 'returns message for current user if they are visiting their own profile' do
-      expect(helper.user_no_topic_message(current_user, current_user)).to include('You have not created a topic yet.')
+      expect(helper.user_no_topic_message(current_user, current_user)).to include('You have not created a public topic yet.')
     end
 
     it 'returns message for user when they are visiting some one else\'s profile' do

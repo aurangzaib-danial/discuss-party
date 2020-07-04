@@ -12,17 +12,17 @@ RSpec.describe Viewer, type: :model do
     it 'email format' do
       subject.user_email = ''
       subject.valid?
-      expect(subject.errors[:user_email].first).to eq('Invalid Email')
+      expect(subject.errors[:user_email].first).to eq('Invalid email')
       
       subject.user_email = 'khan@'
       subject.valid?
-      expect(subject.errors[:user_email].first).to eq('Invalid Email')
+      expect(subject.errors[:user_email].first).to eq('Invalid email')
     end
 
     it 'error when user is not found using their email' do
       subject.user_email = 'khan@hotmail.com'
       subject.valid?
-      expect(subject.errors[:user_email].first).to eq('Email not found')
+      expect(subject.errors[:user_email].first).to eq('Coud not find a user with that email')
     end
 
     it 'reports no error when user is found with provided email' do
@@ -50,6 +50,14 @@ RSpec.describe Viewer, type: :model do
       viewer.valid?
       expect(viewer.errors.any?).to be_falsey
       expect(viewer.user).to eq(user)
+    end
+
+    it 'cannot share topic with topic creator email' do
+      topic = create(:topic)
+
+      viewer = topic.viewers.build(user_email: topic.creator.email)
+      viewer.valid?
+      expect(viewer.errors[:user_email].first).to eq('You cannot share with yourself')
     end
   end
 end

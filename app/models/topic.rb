@@ -57,4 +57,8 @@ class Topic < ApplicationRecord
     creator == user
   end
 
+  def viewers_with_users
+    viewers.includes(:user)
+  end
+
 end

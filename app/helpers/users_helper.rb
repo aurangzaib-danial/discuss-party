@@ -5,7 +5,7 @@ module UsersHelper
 
   def user_no_topic_message(guest, current)
     if current == guest
-      message = 'You have not created a topic yet.'
+      message = 'You have not created a public topic yet.'
       path = new_topic_path
     else
       message = "#{guest.name.titlecase} has not created a public topic yet."
