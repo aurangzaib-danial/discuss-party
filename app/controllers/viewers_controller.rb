@@ -1,7 +1,8 @@
 class ViewersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_topic
-
+  before_action :topic_is_private?
+  
   def create
     authorize @topic, :sharing?
     @viewer = @topic.viewers.build(viewer_params)

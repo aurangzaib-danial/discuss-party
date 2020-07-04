@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :set_topic, except: %i[new create]
+  before_action :topic_is_private?, only: :sharing
 
   def new
     @topic = Topic.new

@@ -4,7 +4,7 @@ module TopicsHelper
   end
 
   def topic_sharing_link(topic)
-    topic_hidden_link_test(topic, :sharing, 'Manage Sharing')
+    topic_hidden_link_test(topic, :sharing, 'Manage Sharing') if topic.visibility_private?
   end
 
   def topic_hidden_link_test(topic, action, text)

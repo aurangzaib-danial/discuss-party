@@ -18,5 +18,11 @@ class ApplicationController < ActionController::Base
   def load_topics(scope = Topic, visibility = :public)
     @topics = scope.for_list_view(params[:view], current_user, visibility)
   end
+
+  def topic_is_private?
+    if @topic.visibility_private?
+      redirect_to topic_slug_path(@topic.id, @topic.slug)
+    end
+  end
  
 end
