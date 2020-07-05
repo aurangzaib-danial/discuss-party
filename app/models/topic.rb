@@ -64,9 +64,9 @@ class Topic < ApplicationRecord
   end
 
   def switched_from_private_to_public?
-    return if changes[:visibility].nil?
-    value_before = changes[:visibility].first
-    # value_after = changes[:visibility].second
+    return unless visibility_changed?
+    value_before = visibility_change.first
+    value_after = visibility_change.second
     viewers.delete_all if value_before == 'private'
   end
 

@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_topic
   def create
+    authorize @topic, :comment?
     @comment = Comment.new(comment_params)
     @comment.topic = @topic
     @comment.user = current_user

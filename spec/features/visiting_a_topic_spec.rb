@@ -17,6 +17,7 @@ RSpec.feature 'Visiting a topic', type: :feature do
   context 'private topic' do
     scenario 'private is mentioned on a private topic' do
       topic = create(:topic, visibility: :private)
+      sign_in(topic.creator)
       visit topic_slug_path(topic.id, topic.slug)
       expect(page.find('main')).to have_content('Private')
     end

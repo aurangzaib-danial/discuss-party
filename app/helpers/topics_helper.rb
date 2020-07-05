@@ -1,7 +1,10 @@
 module TopicsHelper
 
   def back_path_for_topic(topic)
-    if action_name.in? ['edit', 'update', 'sharing']
+    if topic.persisted?
+      unless topic.title.present?
+        topic.title = topic.title_change.first
+      end
       topic_slug_path(topic.id, topic.slug)
     else
       root_path

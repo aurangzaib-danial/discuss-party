@@ -2,17 +2,16 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :set_topic, except: %i[new create]
   before_action :topic_is_private?, only: :sharing
+  before_action :authorize_action, except: %i[new create]
 
   def new
     @topic = Topic.new
   end
 
   def edit
-    authorize @topic
   end
 
   def update
-    authorize @topic
     if @topic.update(topic_params)
       redirect_to(topic_slug_path(@topic.id, @topic.slug), 
         notice: 'Updated successfully.')
@@ -41,7 +40,6 @@ class TopicsController < ApplicationController
   end
 
   def sharing
-    authorize @topic
     @viewer = Viewer.new
     @topic.viewers_with_users.load
   end
@@ -52,5 +50,8 @@ class TopicsController < ApplicationController
   end
   def topic_params
     params.require(:topic).permit(:title, :description, :visibility, tag_ids: [])
+  end
+  def authorize_action
+    authorize @topic
   end
 end

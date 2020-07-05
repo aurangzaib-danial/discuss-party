@@ -27,4 +27,8 @@ class User < ApplicationRecord
     topics.visibility_private
   end
 
+  def guest?
+    !persisted?
+  end
+
 end
