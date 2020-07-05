@@ -15,11 +15,6 @@ RSpec.feature 'User visits their private topics', type: :feature do
     visit_subject
   end
 
-  scenario 'cannot visit private topics if not logged in' do
-    visit private_path
-    expect(current_path).to_not eq(private_path)
-  end
-
   scenario 'lists private topics of current user' do
     public_topic = create(:topic, creator: user)
     unreleated_topic = create(:topic)
