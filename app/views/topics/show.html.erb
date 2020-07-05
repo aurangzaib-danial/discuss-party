@@ -7,6 +7,8 @@
 
 <%= render 'topics/voting', topic: @topic %>
 
-<p class="lead" style="margin-bottom: 2rem;"><%= @topic.description %></p>
+<section class="lead" style="margin-bottom: 2rem;">
+  <%= simple_format @topic.description %>
+</section>
 
 <%= render 'topics/discussion' %>
