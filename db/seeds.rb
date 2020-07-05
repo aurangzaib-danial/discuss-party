@@ -42,3 +42,15 @@ avi_topic.private_viewers << sunny
 
 faker_topic('Book', random_user, :public, tags.second, tags.third, tags.last)
 
+
+some_users = [FactoryBot.create(:user), FactoryBot.create(:user), FactoryBot.create(:user)]
+
+50.times do
+  Topic.new.tap do |t|
+    t.title = Faker::Book.title
+    t.description = Faker::Lorem.paragraph(sentence_count: 15)
+    t.tags = [tags.sample]
+    t.creator = some_users.sample
+    t.save!
+  end
+end
