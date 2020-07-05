@@ -33,7 +33,7 @@ class Topic < ApplicationRecord
 
     private
     def case_insensitive_clause(query)
-      topics[:title].lower.matches("%#{query.downcase}%")
+      topics[:title].matches("%#{query}%")
     end
 
     def topic_votes

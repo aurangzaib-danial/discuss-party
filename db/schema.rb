@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_205319) do
+ActiveRecord::Schema.define(version: 2020_07_05_193337) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
@@ -49,12 +50,13 @@ ActiveRecord::Schema.define(version: 2020_07_02_205319) do
   end
 
   create_table "topics", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "description"
     t.integer "visibility", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.index ["title"], name: "index_topics_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
