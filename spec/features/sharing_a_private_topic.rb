@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'sharing a private topic' do
+RSpec.feature 'sharing a private topic', type: :feature do
   let(:topic) {create(:topic)}
   let(:user) {topic.creator}
   let(:third_user) {create(:user)}

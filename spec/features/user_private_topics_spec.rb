@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User visits their private topics' do
+RSpec.feature 'User visits their private topics', type: :feature do
 
   subject(:user) { create(:user) }
   let(:topics) { subject.private_topics }
