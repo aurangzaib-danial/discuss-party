@@ -1,7 +1,7 @@
 module TopicsHelper
 
   def back_path_for_topic(topic)
-    if action_name.in? ['edit', 'update']
+    if action_name.in? ['edit', 'update', 'sharing']
       topic_slug_path(topic.id, topic.slug)
     else
       root_path
