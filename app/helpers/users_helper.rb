@@ -1,6 +1,6 @@
 module UsersHelper
   def short_user_name(user)
-    user.name.length <= 10 ? user.name : (user.name[0..9] + '...')
+    truncate user.name, length: 10
   end
 
   def user_no_topic_message(guest, current)

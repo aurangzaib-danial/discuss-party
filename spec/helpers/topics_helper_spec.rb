@@ -13,12 +13,6 @@ RSpec.describe TopicsHelper, type: :helper do
     end
   end
 
-  it '#short description returns only 20 characters of description and adds three periods at the end' do
-    topic.description = "Some quick example text to build on the card title and make up the bulk of the card's content."
-    expect(helper.short_description(topic)[-3..-1]).to eq("...")
-    expect(helper.short_description(topic).length).to be >= 23 # 3 chars of dots
-  end
-
   it '#topic_user_name and marks the string html_safe' do
     topic.creator.name = 'sunny'
     expect(helper.topic_user_name(topic)).to include(topic.creator.name)
