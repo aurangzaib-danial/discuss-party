@@ -67,3 +67,5 @@ gem 'font-awesome-sass'
 gem 'pundit', '~> 2.1'
 
 gem 'valid_email', require: ['valid_email/all_with_extensions']
+
+gem "kaminari", "~> 1.2"
