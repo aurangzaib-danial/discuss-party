@@ -8,7 +8,7 @@ class SiteController < ApplicationController
     if @query.present?
       load_topics(Topic.search(@query))
     else
-      @topics = []
+      @topics, @topics_scope = [], []
     end
   end
 end

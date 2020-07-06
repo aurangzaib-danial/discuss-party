@@ -16,7 +16,13 @@ class ApplicationController < ActionController::Base
 
   private
   def load_topics(scope = Topic, visibility = :public)
-    @topics = scope.for_list_view(params[:view], current_user, visibility)
+    @topics = scope.for_list_view(
+      order_type: params[:view], 
+      current_user: current_user, 
+      visibility: visibility, 
+      page_number: params[:page]
+    )
+    @topics_scope = scope.where(visibility: visibility)
   end
 
   def topic_is_private?

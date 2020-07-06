@@ -15,8 +15,18 @@
     </header>
     <%= render 'partials/flash' %>
     <main class="container">
-      <%= render 'partials/sorting_nav' if @topics.present? %>
+      
+      <% if @topics.present? %>
+        <%= render 'partials/sorting_nav' %>
+        <%= paginate @topics_scope.page(params[:page]) %>
+      <% end %>
+
       <%= yield %>
+
+      <% if @topics_scope.present? %>
+        <%= page_entries_info @topics_scope.page(params[:page]) %> 
+        <%= paginate @topics_scope.page(params[:page]) %>
+      <% end %>
     </main>
   </body>
 </html>
