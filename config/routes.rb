@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   
   root 'site#home'
-  get 'about', to: 'site#about'
   get 'search', to: 'site#search'
 
   resources :topics, only: %i[new create update] do
@@ -19,9 +18,11 @@ Rails.application.routes.draw do
     get 'sharing', as: :sharing_topic
   end
 
+  scope '/', controller: 'users' do
+    get 'private'
+    get 'shared-with-me'
+  end 
 
-  get 'private', to: 'users#private'
-  get 'shared-with-me', to: 'users#shared_with_me'
   get 'users/:id/:slug', to: 'users#profile', as: :user_slug
 
   get ':slug', to: 'tags#show', as: :tag_slug
