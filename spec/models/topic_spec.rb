@@ -21,6 +21,11 @@ RSpec.describe Topic, type: :model do
   describe 'validations' do
     it { should strip_attribute :title }
     it { should validate_length_of(:title).is_at_least(5).is_at_most(70)}
+    it 'title must have atleast a letter or a number' do
+      should_not allow_value('$$$$$$$$').for(:title).with_message('must have atleast a letter or a number')
+      should allow_value('$$$$$$$$$a').for(:title)
+      should allow_value('$$$$$$$$$1').for(:title)
+    end
     it { should validate_length_of(:description).is_at_least(20)}
     
     it 'should have at least one tag associated with it' do

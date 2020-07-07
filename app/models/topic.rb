@@ -14,6 +14,8 @@ class Topic < ApplicationRecord
   before_save :switched_from_private_to_public?
 
   validates_length_of :title, in: 5..70
+  validates_format_of(:title, with: /[a-zA-Z0-9]/, 
+    message: 'must have atleast a letter or a number')
   validates_length_of :description, minimum: 20
   validate :has_at_least_one_tag
   
