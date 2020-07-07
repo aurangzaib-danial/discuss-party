@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic.destroy
+    @topic.delete
     redirect_to(user_slug_path(current_user.id, current_user.slug), 
       notice: 'Successfully deleted.')
   end
