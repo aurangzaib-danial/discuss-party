@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     authorize @topic, :comment?
     @comment = Comment.new(comment_params)
     @comment.topic = @topic
-    @comment.user = current_user
+    @comment.user_id = current_user_id
     
     if @comment.save
       redirect_to topic_slug_path(@topic.id, @topic.slug)
