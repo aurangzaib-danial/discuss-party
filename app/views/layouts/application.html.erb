@@ -15,11 +15,11 @@
     </header>
     <%= render 'partials/flash' %>
     <main class="container">
+      <%= render 'partials/sorting_nav' if @topics.present?%>
       
-      <% if @topics.present? %>
-        <%= render 'partials/sorting_nav' %>
-        <%= paginate @topics_scope.page(params[:page]), window: 2%>
-      <% end %>
+      <%= content_tag :h2, yield(:heading), class: 'text-capitalize', id: 'top-heading' %>
+      
+      <%= paginate @topics_scope.page(params[:page]), window: 2 if @topics.present?%>
 
       <%= yield %>
 

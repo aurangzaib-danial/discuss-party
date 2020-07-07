@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def heading(text)
+    content_for :heading, text
+  end
+
   def nav_li(text, path, url_options = {})
     content_tag :li, class: "nav-item #{current_class?(path)}" do
       link_to path, {class: 'nav-link'}.merge(url_options) do
