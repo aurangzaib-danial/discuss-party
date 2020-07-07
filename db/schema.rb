@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_220223) do
+ActiveRecord::Schema.define(version: 2020_07_07_233229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -81,7 +81,13 @@ ActiveRecord::Schema.define(version: 2020_07_07_220223) do
     t.index ["topic_id", "user_id"], name: "index_viewers_on_topic_id_and_user_id", unique: true
   end
 
-  add_foreign_key "comments", "topics"
-  add_foreign_key "comments", "users"
-  add_foreign_key "topics", "users", column: "creator_id"
+  add_foreign_key "comments", "topics", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "topic_tags", "tags", name: "topic_tags_tag_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "topic_tags", "topics", name: "topic_tags_topic_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "topic_votes", "topics", name: "topic_votes_topic_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "topic_votes", "users", name: "topic_votes_user_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "topics", "users", column: "creator_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "viewers", "topics", name: "viewers_topic_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "viewers", "users", name: "viewers_user_id_fk", on_update: :cascade, on_delete: :cascade
 end

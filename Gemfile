@@ -55,6 +55,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails-erd'
+  gem "immigrant", "~> 0.3.6"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -69,3 +70,4 @@ gem 'pundit', '~> 2.1'
 gem 'valid_email', require: ['valid_email/all_with_extensions']
 
 gem "kaminari", "~> 1.2"
+
