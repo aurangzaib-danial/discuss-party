@@ -3,22 +3,23 @@ require 'rails_helper'
 RSpec.describe TopicPolicy, type: :policy do
   let(:topic) { create(:topic) }
   let(:common_actions) { %i[show vote comment] }
+  let(:destructive_actions) { %i[sharing destroy edit update] }
+  let(:creator_actions) { destructive_actions + common_actions }
+
 
   context 'topic creator' do
     subject { described_class.new(topic.creator, topic) }
-    it { should permit_edit_and_update_actions }
-    it { should permit_actions common_actions.push(:sharing) }
+    it { should permit_actions creator_actions }
     context 'private topic' do
       before {topic.update(visibility: :private)}
-      it { should permit_actions common_actions.push(:sharing) }
+      it { should permit_actions creator_actions }
     end
   end
 
   context 'another user' do
     subject { described_class.new(create(:user), topic) }
     
-    it { should forbid_edit_and_update_actions }
-    it { should forbid_action(:sharing) }
+    it { should forbid_actions(destructive_actions) }
     it { should permit_actions(common_actions) }
   end
 
@@ -47,16 +48,3 @@ RSpec.describe TopicPolicy, type: :policy do
   end
 
 end
-
-# show, vote
-
-# public
-# every user can show
-# every user can vote
-# every user can comment
-
-# private
-# creator can do everything
-# only private_viewers can view
-# only private_viewers can comment
-# only private_viewers can vote

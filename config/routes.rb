@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'site#home'
   get 'search', to: 'site#search'
 
-  resources :topics, only: %i[new create update] do
+  resources :topics, only: %i[new create update destroy] do
     resources :comments, only: :create
     member do
       patch 'vote'

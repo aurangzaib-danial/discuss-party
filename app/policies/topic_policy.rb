@@ -12,6 +12,7 @@ class TopicPolicy < ApplicationPolicy
 
   alias_method :update?, :edit?
   alias_method :sharing?, :edit?
+  alias_method :destroy?, :edit?
 
   alias_method :vote?, :show?
   alias_method :comment?, :show?

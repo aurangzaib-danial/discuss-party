@@ -38,4 +38,8 @@
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>
 
+<%= button_to('Delete', topic, 
+  method: :delete, data: {confirm: 'Are you sure?'}, 
+  class: 'btn btn-danger', id: 'deleteTopic') if topic.persisted?%>
+
 <%= link_to 'Back', back_path_for_topic(topic), class: 'btn btn-secondary back-button' %>

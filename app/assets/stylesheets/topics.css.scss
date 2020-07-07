@@ -1,15 +1,3 @@
-.topic_information {
-  line-height: 2rem;
-}
-
-.topic_information a {
-  @extend .text-dark;
-}
-
-.topic_information a.special-link {
-  @extend .text-info;
-}
-
 .voting {
   margin-bottom: 1rem;
 }

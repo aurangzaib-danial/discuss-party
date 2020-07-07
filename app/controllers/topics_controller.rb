@@ -8,9 +8,6 @@ class TopicsController < ApplicationController
     @topic = Topic.new
   end
 
-  def edit
-  end
-
   def update
     if @topic.update(topic_params)
       redirect_to(topic_slug_path(@topic.id, @topic.slug), 
@@ -42,6 +39,12 @@ class TopicsController < ApplicationController
   def sharing
     @viewer = Viewer.new
     @topic.viewers_with_users.load
+  end
+
+  def destroy
+    @topic.destroy
+    redirect_to(user_slug_path(current_user.id, current_user.slug), 
+      notice: 'Successfully deleted.')
   end
 
   private
