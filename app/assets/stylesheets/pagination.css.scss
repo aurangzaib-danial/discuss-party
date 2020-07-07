@@ -1,3 +1,21 @@
-ul.custom_pagination {
-  margin-bottom: 1.5rem;
+// ul.custom_pagination {
+//   margin-bottom: 1.5rem;
+// }
+
+#topPagination {
+  float: right;
+}
+
+@media (max-width: 800px) {
+  #topPagination {
+    float: none;
+  }
+
+  #top-heading {
+    display: block;
+  }
+
+  ul.custom_pagination {
+    margin-top: 0.75rem;
+  }
 }

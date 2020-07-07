@@ -53,3 +53,13 @@ some_users = [FactoryBot.create(:user), FactoryBot.create(:user), FactoryBot.cre
     t.save!
   end
 end
+
+100.times do
+  Topic.new.tap do |t|
+    t.title = Faker::Book.title
+    t.description = Faker::Lorem.paragraph(sentence_count: 15)
+    t.tags = [tags.second, tags.third]
+    t.creator = sunny
+    t.save!
+  end
+end
