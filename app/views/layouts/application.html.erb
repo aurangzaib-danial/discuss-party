@@ -18,14 +18,16 @@
       
       <% if @topics.present? %>
         <%= render 'partials/sorting_nav' %>
-        <%= paginate @topics_scope.page(params[:page]) %>
+        <%= paginate @topics_scope.page(params[:page]), window: 2%>
       <% end %>
 
       <%= yield %>
 
       <% if @topics.present? %>
-        <%= page_entries_info @topics_scope.page(params[:page]) %> 
-        <%= paginate @topics_scope.page(params[:page]) %>
+        <p class='text-center'>
+          <%= page_entries_info @topics_scope.page(params[:page]) %>
+        </p>
+        <%= paginate @topics_scope.page(params[:page]), window: 2 %>
       <% end %>
     </main>
   </body>
