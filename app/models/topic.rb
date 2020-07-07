@@ -58,7 +58,7 @@ class Topic < ApplicationRecord
   end
 
   def owner?(user)
-    creator == user
+    creator_id == user.id
   end
 
   def viewers_with_users

@@ -1,5 +1,6 @@
 class SiteController < ApplicationController
   def home
+    # console
     load_topics
   end
 

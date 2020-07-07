@@ -5,12 +5,12 @@ module Voting::InstanceMethods
   end
 
   def vote(current_user, vote_type)
-    raise ActiveRecord::AssociationTypeMismatch, "expected instance of #{User} got instance of #{current_user.class}" unless current_user.class == User
+    test_argument(current_user)
     
     if has_voted?(current_user)
       update_vote(vote_type)
     else
-      topic_votes.create(user: current_user, vote: vote_type)
+      topic_votes.create(by_user_or_its_id?(current_user).merge(vote: vote_type))
     end
   end
 
@@ -48,7 +48,7 @@ module Voting::InstanceMethods
     # vote checked is assigned when votes for multiple topics are checked for a user
     return current_user_vote if vote_checked
     
-    topic_vote = topic_votes.find_by(user: current_user)
+    topic_vote = topic_votes.find_by(by_user_or_its_id?(current_user))
     self.current_user_vote = topic_vote if topic_vote
   end
 
@@ -61,5 +61,16 @@ module Voting::InstanceMethods
     result = (counts == [nil, nil] ? [0, 0] : counts)
 
     @likes, @dislikes = result
+  end
+
+  def by_user_or_its_id?(current_user)      
+    current_user.class == User ? {user: current_user} : {user_id: current_user}
+  end
+
+  def test_argument(user)
+    unless user.class.in?([User, Integer])
+      raise(ActiveRecord::AssociationTypeMismatch, 
+        "expected instance of #{User} or #{Integer} got instance of #{user.class}") 
+    end
   end
 end

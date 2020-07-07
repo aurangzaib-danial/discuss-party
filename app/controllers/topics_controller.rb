@@ -23,7 +23,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
-    @topic.creator = current_user
+    @topic.creator_id = current_user_id
     if @topic.save
       redirect_to topic_slug_path(@topic.id, @topic.slug)
     else
@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
   end
 
   def vote
-    @topic.vote(current_user, params[:vote])
+    @topic.vote(current_user_id, params[:vote])
     redirect_to request.referer
   end
 

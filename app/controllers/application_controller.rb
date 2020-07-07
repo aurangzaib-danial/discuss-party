@@ -35,5 +35,9 @@ class ApplicationController < ActionController::Base
       redirect_to topic_slug_path(@topic.id, @topic.slug)
     end
   end
+
+  def current_user_id
+    session['warden.user.user.key'].try(:flatten).try(:first)
+  end
  
 end
