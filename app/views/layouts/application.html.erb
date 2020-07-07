@@ -23,7 +23,7 @@
 
       <%= yield %>
 
-      <% if @topics_scope.present? %>
+      <% if @topics.present? %>
         <%= page_entries_info @topics_scope.page(params[:page]) %> 
         <%= paginate @topics_scope.page(params[:page]) %>
       <% end %>

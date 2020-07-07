@@ -16,13 +16,18 @@ class ApplicationController < ActionController::Base
 
   private
   def load_topics(scope = Topic, visibility = :public)
+    @topics_scope = scope.where(visibility: visibility)
+    page_out_of_range?
     @topics = scope.for_list_view(
       order_type: params[:view], 
       current_user: current_user, 
       visibility: visibility, 
       page_number: params[:page]
     )
-    @topics_scope = scope.where(visibility: visibility)
+  end
+
+  def page_out_of_range?
+    params[:page] = 1 if @topics_scope.page(params[:page]).out_of_range?
   end
 
   def topic_is_private?
