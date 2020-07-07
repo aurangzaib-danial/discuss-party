@@ -3,15 +3,17 @@
 @import "font-awesome";
 @import "./*";
 
+#simpleHeading {
+  margin-top: 1.5rem;
+}
 
-#top-heading {
+#topHeading {
   display: inline-block;
 }
 
 .right-nav-ul {
   margin-right: 20px;
 }
-
 
 .flash-box {
   display: flex;
@@ -37,14 +39,4 @@
   margin: 2rem 0;
 }
 
-.topic_information {
-  line-height: 2rem;
-}
 
-.topic_information a {
-  @extend .text-dark;
-}
-
-.topic_information a.special-link {
-  @extend .text-info;
-}

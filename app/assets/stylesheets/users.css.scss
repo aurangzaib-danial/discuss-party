@@ -1,0 +1,17 @@
+@media screen and (min-width: 1200px) {
+  @media screen and (max-width: 1366px) {
+    span.short_name {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 15ch;
+    }
+  }
+  @media screen and (max-width: 1280px) {
+    span.short_name {
+      max-width: 8ch;
+    }
+  }
+}
+

@@ -6,12 +6,12 @@
   float: right;
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   #topPagination {
     float: none;
   }
 
-  #top-heading {
+  #topHeading {
     display: block;
   }
 

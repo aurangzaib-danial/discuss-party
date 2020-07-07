@@ -1,6 +1,7 @@
 module UsersHelper
   def short_user_name(user)
-    truncate user.name, length: 10
+    name = truncate user.name, length: 30
+    content_tag :span, name, class: 'short_name'
   end
 
   def user_no_topic_message(guest, current)
