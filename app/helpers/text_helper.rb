@@ -6,4 +6,8 @@ module TextHelper
   def first_topic?(counter)
     ' first_topic' if counter == 0
   end
+
+  def heading_id
+    @topics.present? ? 'topHeading' : 'simpleHeading'
+  end
 end

@@ -17,7 +17,7 @@
     <main class="container">
       <%= render 'partials/sorting_nav' if @topics.present?%>
       
-      <%= content_tag :h2, yield(:heading), class: 'text-capitalize', id: 'topHeading' if content_for?(:heading)%>
+      <%= content_tag :h2, yield(:heading), class: 'text-capitalize', id: heading_id if content_for?(:heading)%>
       
       <% if @topics.present? %>
         <div id="topPagination">
