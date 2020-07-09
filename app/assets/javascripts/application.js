@@ -12,6 +12,8 @@ $(document).ready(function() {
   $(".alert-success" ).fadeOut(3000);
 });
 
-$(document).ready(function () {
-  bsCustomFileInput.init()
-})
+$(function(){
+  $(document).on("turbolinks:load", function(){
+    bsCustomFileInput.init();
+  });
+});

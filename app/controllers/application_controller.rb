@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name display_picture])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
-  end
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name display_picture])
+end
 
   private
   def load_topics(scope = Topic, visibility = :public)

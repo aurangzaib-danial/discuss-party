@@ -5,6 +5,15 @@ module UsersHelper
     content_tag :span, name, class: 'short_name'
   end
 
+  def back_path_for_user(user)
+    unless user.name.present?
+      user.name = user.name_change.first
+      user_slug_path(user.id, user.name)
+    else
+      user_slug_path(user.id, user.name)
+    end
+  end
+
   def user_no_topic_message(guest, current)
     if current == guest
       message = 'You have not created a public topic yet.'
