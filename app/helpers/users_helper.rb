@@ -23,6 +23,8 @@ module UsersHelper
 
   private
   def make_thumbnail(user, width:, height:)
-    image_tag asset_path('sunny.jpeg'), class: 'rounded_thumbnail', width: width, height: height
+    return '' unless user.display_picture.attached?
+    attachment = user.display_picture.variant(resize_to_limit: [width, height])
+    image_tag attachment, class: 'rounded-thumbnail' 
   end
 end
