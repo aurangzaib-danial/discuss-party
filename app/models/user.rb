@@ -8,13 +8,14 @@ class User < ApplicationRecord
   has_many :voted_topics, through: :topic_votes, source: :topic
   has_many :viewers, dependent: :delete_all
   has_many :shared_topics, through: :viewers, source: :topic
-  has_one_attached :avatar
+  has_one_attached :display_picture
 
   slug_for :name
 
   validates_presence_of :name
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   validates_length_of :name, maximum: 50
+  validates :display_picture, content_type: [:png, :jpg, :jpeg], size: { less_than: 10.megabytes , message: 'must be less than 10 mb' }
   
   strip_attributes only: :name, collapse_spaces: true
 
