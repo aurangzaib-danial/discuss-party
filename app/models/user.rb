@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :voted_topics, through: :topic_votes, source: :topic
   has_many :viewers, dependent: :delete_all
   has_many :shared_topics, through: :viewers, source: :topic
+  has_one_attached :avatar
 
   slug_for :name
 

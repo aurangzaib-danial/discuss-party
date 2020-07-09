@@ -10,6 +10,15 @@
     <%= f.label :email, class: 'sr-only'%>
     <%= f.email_field :email, class: 'form-control', placeholder: 'Email address' %>
 
+    <div class="input-group">
+      <div class="custom-file">
+        <%= f.label :avatar, 'Display picture', class: 'custom-file-label text-left' %>
+        <%= f.file_field :avatar, class: 'custom-file-input'%>
+      </div>
+    </div>
+
+    <small class="form-text text-muted text-left mb-3" style="margin-left: 0.9rem;">(optional)</small>
+
     <%= f.label :password, class: 'sr-only'%>
     <%= f.password_field :password, class: 'form-control', placeholder: 'Password', autocomplete: 'new-password' %>
 
