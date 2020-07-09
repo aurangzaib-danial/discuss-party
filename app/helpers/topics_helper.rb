@@ -39,9 +39,13 @@ module TopicsHelper
     end
   end
 
+  def topic_user_thumbnail_and_name(topic)
+    small_thumbnail(topic.creator) + ' ' + topic_user_name(topic)
+  end
+
   def topic_information(topic)
     <<-HTML.html_safe
-    Created by #{topic_user_name(topic) } #{topic_created_at_in_words(topic)}
+    #{topic_user_thumbnail_and_name(topic)} #{topic_created_at_in_words(topic)}
     | Tags: #{print_tags(topic.tags)}
     HTML
   end
