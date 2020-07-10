@@ -5,10 +5,10 @@
     <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
 
     <%= f.label :name, class: 'sr-only'%>
-    <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Name' %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Name', autocomplete: 'name'%>
 
     <%= f.label :email, class: 'sr-only'%>
-    <%= f.email_field :email, class: 'form-control', placeholder: 'Email address' %>
+    <%= f.email_field :email, class: 'form-control', placeholder: 'Email address', autocomplete: 'username' %>
 
     <div class="input-group">
       <div class="custom-file">

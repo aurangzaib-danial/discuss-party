@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <%= f.label :email%>
-    <%= f.text_field :email, class: 'form-control', autocomplete: 'email' %>
+    <%= f.text_field :email, class: 'form-control', autocomplete: 'username' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
