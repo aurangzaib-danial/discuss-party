@@ -34,13 +34,13 @@ module TopicsHelper
   end
 
   def topic_user_name(topic)
-    content_tag :mark, class: 'text-capitalize' do
-      link_to topic.creator.name, user_slug_path(topic.creator.id, topic.creator.slug)
-    end
+    content_tag :mark, topic.creator.name, class: 'text-capitalize'
   end
 
   def topic_user_thumbnail_and_name(topic)
-    small_thumbnail(topic.creator) + ' ' + topic_user_name(topic)
+    link_to user_slug_path(topic.creator.id, topic.creator.slug), style: 'font-weight: normal;' do 
+      (small_thumbnail(topic.creator) + topic_user_name(topic)).html_safe
+    end
   end
 
   def topic_information(topic)
