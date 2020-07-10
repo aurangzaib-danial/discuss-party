@@ -8,6 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def update_resource(resource, params)
+    test_display_picture?(resource, params)
     if (params[:password].blank? && 
         params[:password_confirmation].blank? &&
         params[:current_password].blank?)
@@ -15,6 +16,12 @@ class RegistrationsController < Devise::RegistrationsController
       resource.update_without_password(params)
     else
       resource.update_with_password(params)
+    end
+  end
+
+  def test_display_picture?(resource, params)
+    if params[:display_picture].blank?
+      resource.test_attachment = false
     end
   end
 end

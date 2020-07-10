@@ -15,11 +15,17 @@ class User < ApplicationRecord
   validates_presence_of :name
   validates_format_of :name, :with => /\A[^0-9`!@#\$%\^&*+_=]+\z/
   validates_length_of :name, maximum: 50
-  validates :display_picture, content_type: [:png, :jpg, :jpeg], size: { less_than: 10.megabytes , message: 'must be less than 10 mb' }
+  validates(:display_picture, 
+    content_type: [:png, :jpg, :jpeg], 
+    size: { less_than: 10.megabytes , message: 'must be less than 10 mb' },
+    if: :test_attachment?
+    )
   
   strip_attributes only: :name, collapse_spaces: true
 
   before_save :downcase_name
+
+  attr_writer :test_attachment
 
   def downcase_name
     name.downcase!
@@ -31,6 +37,10 @@ class User < ApplicationRecord
 
   def guest?
     !persisted?
+  end
+  
+  def test_attachment?
+    @test_attachment == false ? false : true
   end
 
 end
