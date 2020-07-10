@@ -4,7 +4,7 @@ module Voting::ClassMethods
     where(visibility: visibility).
     add_order(order_type).
     page(page_number).
-    includes(:creator, :tags)
+    includes(:tags, creator: {display_picture_attachment: :blob})
 
     find_votes_for(topics, current_user)
   end
