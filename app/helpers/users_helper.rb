@@ -33,7 +33,9 @@ module UsersHelper
   private
   def make_thumbnail(user, width:, height:)
     return '' unless user.display_picture.attached?
-    attachment = user.display_picture.variant(resize_to_limit: [width, height])
-    image_tag attachment, class: 'rounded-thumbnail' 
+    
+    attachment = @attachment || user.display_picture 
+
+    image_tag attachment.variant(resize_to_limit: [width, height]), class: 'rounded-thumbnail'
   end
 end

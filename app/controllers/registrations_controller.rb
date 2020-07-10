@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :load_attachment, only: %i[edit update]
 
   protected
   def configure_permitted_parameters
@@ -23,5 +24,9 @@ class RegistrationsController < Devise::RegistrationsController
     if params[:display_picture].blank?
       resource.test_attachment = false
     end
+  end
+
+  def load_attachment
+    @attachment = ActiveStorage::Attachment.find_by(record_id: current_user_id)
   end
 end

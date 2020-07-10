@@ -13,17 +13,23 @@
     <%= f.text_field :email, class: 'form-control', autocomplete: 'email' %>
   </div>
 
-  <div class="form-group" style="margin-top: 1.3rem; max-width: 400px;">
-    <%= small_thumbnail(resource) %>
-    <div class="custom-file">
-      <%= f.label :display_picture, 'Update display picture', class: 'custom-file-label text-left' %>
-      <%= f.file_field :display_picture, class: 'custom-file-input'%>
-    </div>
-  </div>
-
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+
+  <div class="input-group mb-3" style="margin-top: 1.3rem; max-width: 400px;">
+    
+    <% if @attachment %>
+    <div class="input-group-prepend" style="margin-right: 10px;">
+      <%= small_thumbnail(resource) %>
+    </div>
+    <% end %>
+
+    <div class="custom-file">
+      <%= f.label :display_picture, 'Update display picture', class: 'custom-file-label text-left', style: 'border-radius: 0.25rem' %>
+      <%= f.file_field :display_picture, class: 'custom-file-input'%>
+    </div>
+  </div>
 
   <div class="form-group">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
@@ -39,7 +45,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    <%= f.label :current_password %> <i>(only if you change your password)</i>
     <%= f.password_field :current_password, class: 'form-control', autocomplete: 'current_password' %>
   </div>
 
