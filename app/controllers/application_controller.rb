@@ -5,14 +5,6 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path,
       alert: 'You are not authorized to access this page.')
   end
-  
-  before_action :configure_permitted_parameters, if: :devise_controller?
-
-  protected
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name display_picture])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[name display_picture])
-end
 
   private
   def load_topics(scope = Topic, visibility = :public)
