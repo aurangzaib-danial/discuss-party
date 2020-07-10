@@ -24,6 +24,7 @@ class User < ApplicationRecord
   strip_attributes only: :name, collapse_spaces: true
 
   before_save :downcase_name
+  before_destroy :delete_display_picture
 
   attr_writer :test_attachment
 
@@ -41,6 +42,10 @@ class User < ApplicationRecord
   
   def test_attachment?
     @test_attachment == false ? false : true
+  end
+
+  def delete_display_picture
+    display_picture.purge_later
   end
 
 end
