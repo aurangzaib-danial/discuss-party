@@ -42,10 +42,6 @@
   margin-bottom: 1.2rem;
 }
 
-.shared_links {
-  font-size: 16px;
-}
-
 .shared_links h2 {
    width: 100%; 
    text-align: center; 
@@ -58,4 +54,8 @@
 .shared_links h2 span { 
     background:#fff; 
     padding:0 10px; 
+}
+
+.shared_links a {
+  margin-bottom: 15px;
 }
