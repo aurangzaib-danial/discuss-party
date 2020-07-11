@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:voted_topics).through(:topic_votes).source(:topic) }
     it { should have_many(:viewers).dependent(:delete_all) }
     it { should have_many(:shared_topics).through(:viewers).source(:topic) }
+    it { should have_many(:oauth_identities).dependent(:delete_all)}
   end
   it { should have_db_column :name }
   it { should validate_presence_of :name }

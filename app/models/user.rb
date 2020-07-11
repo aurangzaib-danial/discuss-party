@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :voted_topics, through: :topic_votes, source: :topic
   has_many :viewers, dependent: :delete_all
   has_many :shared_topics, through: :viewers, source: :topic
+  has_many :oauth_identities, dependent: :delete_all
   has_one_attached :display_picture
 
   slug_for :name
@@ -29,6 +30,16 @@ class User < ApplicationRecord
 
   attr_writer :test_attachment
 
+  def self.find_or_create_from_auth_info(auth_hash)
+    
+    user = find_or_create_by(email: auth_hash[:info][:email]) do |user|
+      user.password = Devise.friendly_token[0, 20]
+    end
+
+    user.identities.create(provider: auth_hash[:provider], uid: auth_hash[:uid])
+
+  end
+
   def downcase_name
     name.downcase!
   end
@@ -48,5 +59,7 @@ class User < ApplicationRecord
   def delete_display_picture
     display_picture.purge_later
   end
+
+
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_202832) do
+ActiveRecord::Schema.define(version: 2020_07_11_091941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2020_07_09_202832) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["topic_id", "user_id"], name: "index_comments_on_topic_id_and_user_id"
+  end
+
+  create_table "oauth_identities", force: :cascade do |t|
+    t.bigint "uid"
+    t.string "provider"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "provider"], name: "index_oauth_identities_on_user_id_and_provider", unique: true
   end
 
   create_table "tags", force: :cascade do |t|
@@ -105,6 +114,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_202832) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "topics", on_update: :cascade, on_delete: :cascade
   add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "oauth_identities", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "topic_tags", "tags", name: "topic_tags_tag_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "topic_tags", "topics", name: "topic_tags_topic_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "topic_votes", "topics", name: "topic_votes_topic_id_fk", on_update: :cascade, on_delete: :cascade
