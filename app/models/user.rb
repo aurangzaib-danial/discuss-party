@@ -30,15 +30,21 @@ class User < ApplicationRecord
 
   attr_writer :test_attachment
 
-  def self.find_or_create_from_auth_info(auth_hash)
+  def self.find_or_create_from_auth_hash(auth_hash)
+    binding.pry
+    # name
+    # picture 
+    # email
+    auth_info = auth_hash[:info]
     user = find_or_create_by(email: auth_hash[:info][:email]) do |user|
+      user.name = auth_info[:name]
       user.password = Devise.friendly_token[0, 20]
     end
-    create_user_identity(user, auth_hash[:provider], auth_hash[:uid])
+    create_user_oauth_identity(user, auth_hash[:provider], auth_hash[:uid])
     user
   end
 
-  def self.create_user_identity(user, provider, uid)
+  def self.create_user_oauth_identity(user, provider, uid)
     unless user.oauth_identities.exists?(provider: provider)
       user.oauth_identities.create(provider: provider, uid: uid)
     end
