@@ -21,7 +21,7 @@ class User < ApplicationRecord
     content_type: [:png, :jpg, :jpeg], 
     size: { less_than: 10.megabytes , message: 'must be less than 10 mb' },
     if: :test_attachment?
-    )
+  )
   
   strip_attributes only: :name, collapse_spaces: true
 
@@ -31,13 +31,17 @@ class User < ApplicationRecord
   attr_writer :test_attachment
 
   def self.find_or_create_from_auth_info(auth_hash)
-    
     user = find_or_create_by(email: auth_hash[:info][:email]) do |user|
       user.password = Devise.friendly_token[0, 20]
     end
+    create_user_identity(user, auth_hash[:provider], auth_hash[:uid])
+    user
+  end
 
-    user.identities.create(provider: auth_hash[:provider], uid: auth_hash[:uid])
-
+  def self.create_user_identity(user, provider, uid)
+    unless user.oauth_identities.exists?(provider: provider)
+      user.oauth_identities.create(provider: provider, uid: uid)
+    end
   end
 
   def downcase_name
@@ -59,7 +63,5 @@ class User < ApplicationRecord
   def delete_display_picture
     display_picture.purge_later
   end
-
-
 
 end
