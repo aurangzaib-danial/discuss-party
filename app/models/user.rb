@@ -30,23 +30,29 @@ class User < ApplicationRecord
 
   attr_writer :test_attachment
 
-  def self.find_or_create_from_auth_hash(auth_hash)
-    binding.pry
-    # name
-    # picture 
-    # email
-    auth_info = auth_hash[:info]
-    user = find_or_create_by(email: auth_hash[:info][:email]) do |user|
-      user.name = auth_info[:name]
-      user.password = Devise.friendly_token[0, 20]
-    end
-    create_user_oauth_identity(user, auth_hash[:provider], auth_hash[:uid])
-    user
-  end
+  class << self
+    def find_or_create_from_auth_hash(auth_hash)
+      auth_info = auth_hash[:info]
+      user = find_or_create_by(email: auth_info[:email]) do |user|
+        user.name = auth_info[:name]
+        user.password = Devise.friendly_token[0, 20]
+        attach_image_from_provider(user, image_url: auth_info[:image])
+      end
 
-  def self.create_user_oauth_identity(user, provider, uid)
-    unless user.oauth_identities.exists?(provider: provider)
-      user.oauth_identities.create(provider: provider, uid: uid)
+      create_user_oauth_identity(user, auth_hash[:provider], auth_hash[:uid])
+      user
+    end
+
+    def attach_image_from_provider(user, image_url:)
+      user.display_picture.attach(
+        AttachmentFromInternet.for_active_storage(image_url)
+      )
+    end
+
+    def create_user_oauth_identity(user, provider, uid)
+      unless user.oauth_identities.exists?(provider: provider)
+        user.oauth_identities.create(provider: provider, uid: uid)
+      end
     end
   end
 

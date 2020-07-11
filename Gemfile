@@ -81,3 +81,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'valid_email', require: ['valid_email/all_with_extensions']
+
+gem "down", "~> 5.1"
