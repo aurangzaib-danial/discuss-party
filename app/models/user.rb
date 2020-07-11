@@ -32,27 +32,27 @@ class User < ApplicationRecord
 
   class << self
     def find_or_create_from_auth_hash(auth_hash)
-      auth_info = auth_hash[:info]
-      user = find_or_create_by(email: auth_info[:email]) do |user|
-        user.name = auth_info[:name]
-        user.password = Devise.friendly_token[0, 20]
-        attach_image_from_provider(user, image_url: auth_info[:image])
-      end
+      info = auth_hash[:info]
+      
+      user = find_by_email(info[:email]) || create_with_job(info)
 
       create_user_oauth_identity(user, auth_hash[:provider], auth_hash[:uid])
-      user
-    end
 
-    def attach_image_from_provider(user, image_url:)
-      user.display_picture.attach(
-        AttachmentFromInternet.for_active_storage(image_url)
-      )
+      user
     end
 
     def create_user_oauth_identity(user, provider, uid)
       unless user.oauth_identities.exists?(provider: provider)
         user.oauth_identities.create(provider: provider, uid: uid)
       end
+    end
+
+    def create_with_job(info)
+      user = self.new(email: info[:email], name: info[:name])
+      user.password = Devise.friendly_token[0, 20]
+      user.save
+      UserAttachmentJob.perform_later(user, info[:image])
+      user
     end
   end
 
