@@ -1,10 +1,8 @@
 <%= render 'errors' if topic.errors.any? %>
 
 <%= form_with model: topic, local: true do |form| %>
-  <div class="form-group">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: 'form-control',  "aria-describedby": "titleHelp"%>
-    <small id="titleHelp" class="form-text text-muted">Between 5 - 70 Characters</small>
+  <div class="form-group" style="margin-top: 2rem;">
+    <%= form.text_field :title, class: 'form-control topic_title_field',  "aria-describedby": "titleHelp", placeholder: 'Type a title...', autofocus: true, autocomplete: false%>
   </div>
 
   <label>Visibility</label>
