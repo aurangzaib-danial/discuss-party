@@ -22,14 +22,8 @@ gem 'pundit', '~> 2.1'
 
 # Assets
 gem 'sass-rails', '>= 6'
-gem 'sprockets', '~> 4'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
-gem 'bootstrap', '~> 4.5.0'
-gem 'font-awesome-sass', '~> 5.13'
+gem "webpacker", "~> 4.2.2"
 
-# Javascripts
-gem 'turbolinks', '~> 5.2'
-gem 'jquery-rails', '4.4.0'
 
 #pagination
 gem "kaminari", "~> 1.2"
