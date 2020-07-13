@@ -1,9 +1,10 @@
 sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: 'khan1234', name: 'Aurangzaib Danial Liaqat Khan')
 avi = User.create!(email: 'avi@fs.com', password: 'avi1234', name: 'Avi Flombaum')
 adam = User.create!(email: 'adam@comedy.com', password: 'adam1234', name: 'Adam Weissman')
-random_user = User.create!(email: Faker::Internet.unique.email, password: 'random1234', name: Faker::Name.unique.name)
 
 @users = [sunny, avi, adam]
+
+random_user = User.create!(email: Faker::Internet.unique.email, password: 'random1234', name: Faker::Name.unique.name)
 
 tags = Tag.create!(
   [
@@ -62,4 +63,23 @@ end
     t.creator = sunny
     t.save!
   end
+end
+
+last_topic = Topic.last
+second_to_last = Topic.second_to_last
+
+50.times do
+  last_topic.comments.create!(content: Faker::Lorem.paragraph(sentence_count: 10), user: @users.sample)
+end
+
+50.times do
+  second_to_last.comments.create!(content: Faker::Lorem.paragraph(sentence_count: 10), user: @users.sample)
+end
+
+images_path = Rails.root.join('tmp', 'images')
+image_names = ['sunny', 'avi', 'adam']
+
+@users.each.with_index do |user, index|
+  filename = image_names[index] + '.jpg'
+  user.display_picture.attach(io: File.open(images_path.join(filename)), filename: filename)
 end

@@ -20,7 +20,7 @@
       <%= content_tag :h2, yield(:heading), class: 'text-capitalize', id: heading_id if content_for?(:heading)%>
       
       <% if @topics.present? %>
-        <div id="topPagination">
+        <div class="custom-pagination" id="topPagination">
           <%= paginate @topics_scope.page(params[:page]), window: 2%>
         </div>
       <% end %>
@@ -31,7 +31,9 @@
         <p class='text-center'>
           <%= page_entries_info @topics_scope.page(params[:page]) %>
         </p>
-        <%= paginate @topics_scope.page(params[:page]), window: 2 %>
+        <div class="custom-pagination">
+          <%= paginate @topics_scope.page(params[:page]), window: 2 %>  
+        </div>
       <% end %>
     </main>
   </body>

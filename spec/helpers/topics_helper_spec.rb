@@ -13,18 +13,6 @@ RSpec.describe TopicsHelper, type: :helper do
     end
   end
 
-  it '#topic_user_name and marks the string html_safe' do
-    topic.creator.name = 'sunny'
-    expect(helper.topic_user_name(topic)).to include(topic.creator.name)
-    expect(helper.topic_user_name(topic)).to be_html_safe
-  end
-
-  it '#topic_created_at_in_words' do
-    topic = build(:topic, created_at: 1.day.ago, updated_at: 1.day.ago)
-
-    expect(topic_created_at_in_words(topic)).to eq('1 day ago')
-  end
-
   describe 'vote_button accepts topic, vote_type' do
     it 'like and marked' do
         topic.vote(topic.creator, :like)

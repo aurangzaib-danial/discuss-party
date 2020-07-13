@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Topic, type: :model do
   it { should have_db_column(:title) }
-  it { should have_db_column(:description) }
   it { should have_db_column(:visibility) }
   it { should belong_to(:creator).class_name('User')}
   it { should have_many(:topic_tags).dependent(:delete_all) }

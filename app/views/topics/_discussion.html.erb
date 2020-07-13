@@ -8,7 +8,17 @@
 <% end %>
 
 <section id="discussion">
-  <h5>Discussion</h5>
-  <%= render(@topic.comments_with_eager_loading) || 
-  no_content_message('No one has commented yet. Be the first to start the discussion!') %>
+  <h4>Discussion</h4>
+  <div class="comments-top-pagination custom-pagination">
+    <%= paginate @comments, window: 2 %>
+  </div>
+  
+  <%= render(@comments) %>
+  
+  <p class='text-center'>
+    <%= page_entries_info @comments %>
+  </p>
+  <div class="custom-pagination">
+    <%= paginate @comments, window: 2 %>  
+  </div>
 </section>

@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
 
   def show
     @comment = Comment.new if user_signed_in?
+    @comments = @topic.comments_eager_load_and_paginate(params[:page])
   end
 
   def create

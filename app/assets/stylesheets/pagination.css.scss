@@ -1,21 +1,30 @@
-// ul.custom_pagination {
-//   margin-bottom: 1.5rem;
-// }
 
-#topPagination {
+#topPagination, .comments-top-pagination {
   float: right;
 }
 
+.custom-pagination nav ul {
+  justify-content: center !important;
+}
+
 @media screen and (max-width: 800px) {
-  #topPagination {
+  #topPagination, .comments-top-pagination {
     float: none;
+  }
+
+  
+  #discussion h4 {
+    margin-bottom: 1rem;
+    display: block;
   }
 
   #topHeading {
     display: block;
   }
 
-  ul.custom_pagination {
+  #topPagination {
     margin-top: 0.75rem;
   }
 }
+
+
