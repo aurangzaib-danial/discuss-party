@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_113326) do
+ActiveRecord::Schema.define(version: 2020_07_13_121240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_113326) do
   create_table "comments", force: :cascade do |t|
     t.bigint "topic_id", null: false
     t.bigint "user_id", null: false
-    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["topic_id", "user_id"], name: "index_comments_on_topic_id_and_user_id"
@@ -91,7 +90,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_113326) do
 
   create_table "topics", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
     t.integer "visibility", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
