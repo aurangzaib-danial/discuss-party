@@ -14,6 +14,7 @@ class Topic < ApplicationRecord
   strip_attributes only: :title
 
   before_save :switched_from_private_to_public?
+  before_save :add_description_excerpt
 
   validates_length_of :title, in: 5..70
   validates_format_of(:title, with: /[a-zA-Z0-9]/, 
@@ -74,8 +75,9 @@ class Topic < ApplicationRecord
     viewers.delete_all if value_before == 'private'
   end
 
-  def plain_description
-    topic.description.to_plain_text.gsub(/\[.*\]/, '') # gsub removes the images captions
+  def add_description_excerpt
+    self.description_excerpt = description.to_plain_text.gsub(/\[.*\]/, '')[0..97]
+    #remove image captains and limit the number of characters to 97
   end
 
 end

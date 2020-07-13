@@ -2,8 +2,8 @@ module Voting::ClassMethods
   def for_list_view(order_type:, current_user:, visibility:, page_number:)
     topics = includes_vote_count.
     where(visibility: visibility).
-    add_order(order_type).
     page(page_number).
+    add_order(order_type).
     includes(:tags, creator: {display_picture_attachment: :blob})
 
     find_votes_for(topics, current_user)
