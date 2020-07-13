@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_topic
+  before_action :set_topic, only: :create
+  before_action :set_comment, only: :destroy
+
   def create
     authorize @topic, :comment?
     @comment = Comment.new(comment_params)
@@ -14,9 +16,18 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @comment
+    @comment.destroy
+    redirect_to request.referer
+  end
+
   private
   def set_topic
     @topic = Topic.find(params[:topic_id])
+  end
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
   def comment_params
     params.require(:comment).permit(:content)

@@ -6,9 +6,13 @@
   <div class="comment-content">
     <%= comment.content %>
   </div>
-  <div class="text-right">
-    <button class="btn btn-danger">Delete</button>
-  </div>
+
+  <% if policy(comment).destroy? %>
+    <div class="text-right">
+      <%= button_to 'Delete', comment, method: :delete, class: 'btn btn-danger' %>
+    </div>  
+  <% end %>
+
 </article>
 
 

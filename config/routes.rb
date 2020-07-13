@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :viewers, only: %i[create destroy]
   end
 
+  resources :comments, only: :destroy
+
   scope ':id/:slug', controller: :topics do
     root action: 'show', as: :topic_slug
     get 'edit', as: :edit_topic

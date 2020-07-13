@@ -9,6 +9,6 @@
 
 <section id="discussion">
   <h5>Discussion</h5>
-  <%= render(@topic.comments) || 
+  <%= render(@topic.comments_with_eager_loading) || 
   no_content_message('No one has commented yet. Be the first to start the discussion!') %>
 </section>

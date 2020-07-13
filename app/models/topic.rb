@@ -76,4 +76,8 @@ class Topic < ApplicationRecord
     #remove image captains and limit the number of characters to 97
   end
 
+  def comments_with_eager_loading
+    comments.with_rich_text_content_and_embeds.with_users
+  end
+
 end
