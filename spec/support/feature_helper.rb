@@ -4,7 +4,6 @@ module TopicsTestHelpers
     expect(page).to have_content(topic.creator.name)
     expect(page).to have_content(topic.tags.first.name)
     expect(page).to have_content(topic.tags.second.name)
-    expect(page).to have_content(helper.truncate(topic.description, length: 100))
   end
 
   def run_expectations_for_topics(topics)

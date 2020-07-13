@@ -26,7 +26,7 @@ RSpec.describe Topic, type: :model do
       should allow_value('$$$$$$$$$a').for(:title)
       should allow_value('$$$$$$$$$1').for(:title)
     end
-    it { should validate_length_of(:description).is_at_least(20)}
+    it { should validate_presence_of(:description)}
     
     it 'should have at least one tag associated with it' do
       topic = build(:topic)

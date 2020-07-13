@@ -9,7 +9,7 @@
     </h6>
     
     <p class="card-text" style="margin-top: 1rem;">
-      <%= truncate topic.description, length: 100 %>    
+      <%= formatted_description(topic) %>    
     </p>
     <%= render 'topics/voting', topic: topic %>
     <%= link_to 'View Discussion', topic_slug_path(topic.id, topic.slug), class: 'card-link' %>

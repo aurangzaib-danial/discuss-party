@@ -11,7 +11,7 @@ RSpec.feature 'User creates a topic', :type => :feature do
       topic = build(:topic)
 
       fill_in :topic_title, with: topic.title
-      fill_in :topic_description, with: topic.description
+      page.find("#topic_description_trix_input_topic", visible: false).set(topic.description)
       choose :topic_visibility_private
       check "topic_tag_ids_#{Tag.second.id}"
       check "topic_tag_ids_#{Tag.third.id}"
@@ -19,7 +19,7 @@ RSpec.feature 'User creates a topic', :type => :feature do
       click_button "Create Topic"
 
       expect(page).to have_text(topic.title)
-      expect(page).to have_text(topic.description)
+      expect(page).to have_content(topic.description.to_plain_text)
       expect(page).to have_text(Tag.second.name)
       expect(page).to have_text(Tag.third.name)
     end

@@ -7,6 +7,8 @@ class Topic < ApplicationRecord
   has_many :viewers, dependent: :delete_all
   has_many :private_viewers, through: :viewers, source: :user
 
+  has_rich_text :description
+
   enum visibility: { public: 0, private: 1 }, _prefix: true
 
   strip_attributes only: :title
@@ -16,7 +18,7 @@ class Topic < ApplicationRecord
   validates_length_of :title, in: 5..70
   validates_format_of(:title, with: /[a-zA-Z0-9]/, 
     message: 'must have atleast a letter or a number')
-  validates_length_of :description, minimum: 20
+  validates_presence_of :description
   validate :has_at_least_one_tag
   
   slug_for :title
@@ -70,6 +72,10 @@ class Topic < ApplicationRecord
     value_before = visibility_change.first
     value_after = visibility_change.second
     viewers.delete_all if value_before == 'private'
+  end
+
+  def plain_description
+    topic.description.to_plain_text.gsub(/\[.*\]/, '') # gsub removes the images captions
   end
 
 end

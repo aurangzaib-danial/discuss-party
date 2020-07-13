@@ -1,5 +1,9 @@
 module TopicsHelper
 
+  def formatted_description(topic)
+    truncate(topic.description.to_plain_text.gsub(/\[.*\]/, ''), length: 100)
+  end
+
   def back_path_for_topic(topic)
     if topic.persisted?
       unless topic.title.present?

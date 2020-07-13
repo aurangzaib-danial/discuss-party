@@ -27,10 +27,10 @@
     </div>
   <% end %>
 
-  <div class="form-group" style="margin-top: 10px;">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: 'form-control', "aria-describedby": "descriptionHelp", rows: 4%>
-    <small id="descriptionHelp" class="form-text text-muted">Write about what you want to discuss about the topic</small>
+  <div class="form-group" style="margin: 1.5rem 0; max-width: 900px;">
+    
+    <%= form.rich_text_area :description, "aria-describedby": "descriptionHelp", placeholder: 'Write about what you want to discuss about the topic...'%>
+    <small id="descriptionHelp" class="form-text text-muted text-right">Drag and drop images</small>
   </div>
 
   <%= form.submit class: 'btn btn-primary' %>
