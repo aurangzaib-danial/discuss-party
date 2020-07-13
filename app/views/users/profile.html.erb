@@ -1,3 +1,5 @@
+<% title @user.name.titlecase %>
+
 <%= heading @user.name %>
 
 <%= render(@topics) || user_no_topic_message(@user, current_user) %>

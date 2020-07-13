@@ -21,4 +21,5 @@ This project is built in pure Ruby on Rails code, Javascript is not used.
 ### Future features
 1. Votes for comments (create polymorphic association on votes table and use it instead of topic_votes)
 2. Allow comment editing using JavaScript.
+3. Sort comments
 

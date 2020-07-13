@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def title(text)
+    text += ' - Discuss Party' unless text == 'Discuss Party'
+    content_for :title, text
+  end
+
   def heading(text)
     content_for :heading, text
   end

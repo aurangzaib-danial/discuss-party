@@ -1,3 +1,5 @@
+<% title "#{@query} - Discuss Pary" %>
+
 <%= heading "Found #{pluralize(@topics_scope.count, 'topic')}" %>
 
 <%= form_with url: search_path, method: :get, local: true do %>
