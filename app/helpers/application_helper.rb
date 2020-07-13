@@ -52,6 +52,10 @@ module ApplicationHelper
     request.path << query_parameter(sort_type)
   end
 
+  def created_at_in_words(object)
+    distance_of_time_in_words_to_now(object.created_at) + ' ago'
+  end
+
   private
   def query_parameter(sort_type)
     if sort_type == :latest

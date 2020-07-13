@@ -18,4 +18,7 @@ This project is built in pure Ruby on Rails code, Javascript is not used.
 5. Sort topics by either latest, oldest or popularity.
 6. Users can easily comment on topics.
 
-### Write more features ....
+### Future features
+1. Votes for comments (create polymorphic association on votes table and use it instead of topic_votes)
+2. Allow comment editing using JavaScript.
+

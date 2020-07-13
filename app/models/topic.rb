@@ -56,10 +56,6 @@ class Topic < ApplicationRecord
     end
   end
 
-  def comments_by_updated_at
-    comments.order(updated_at: :desc)
-  end
-
   def owner?(user)
     creator_id == user.id
   end

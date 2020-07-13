@@ -1,8 +1,22 @@
-<div class="card">
-  <div class="card-body">
-    <h6 class="card-subtitle mb-2 text-muted"><mark class="text-capitalize"><%= comment.user.name %></mark></h6>
-    <p class="card-text"><%= comment.content %></p>
-<!--     <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a> -->
+<article class="comment">
+  <div class="comment-info">
+    <%= user_thumbnail_and_name(comment.user) %>
+    <%= created_at_in_words(comment) %>
   </div>
-</div>
+  <div class="comment-content">
+    <%= comment.content %>
+  </div>
+  <div class="text-right">
+    <button class="btn btn-danger">Delete</button>
+  </div>
+</article>
+
+
+<!--
+User picture
+User name
+Comment at when in words
+Comment delete
+Comment
+
+  -->

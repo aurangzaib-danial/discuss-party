@@ -33,25 +33,11 @@ module TopicsHelper
     end
   end
 
-  def topic_user_name(topic)
-    content_tag :mark, topic.creator.name, class: 'text-capitalize'
-  end
-
-  def topic_user_thumbnail_and_name(topic)
-    link_to user_slug_path(topic.creator.id, topic.creator.slug), style: 'font-weight: normal;' do 
-      (small_thumbnail(topic.creator) + topic_user_name(topic)).html_safe
-    end
-  end
-
   def topic_information(topic)
     <<-HTML.html_safe
-    #{topic_user_thumbnail_and_name(topic)} #{topic_created_at_in_words(topic)}
+    #{user_thumbnail_and_name(topic.creator)} #{created_at_in_words(topic)}
     | Tags: #{print_tags(topic.tags)}
     HTML
-  end
-
-  def topic_created_at_in_words(topic)
-    distance_of_time_in_words_to_now(topic.created_at) + ' ago'
   end
 
   def vote_button(topic, user, type)

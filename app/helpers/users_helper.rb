@@ -30,6 +30,16 @@ module UsersHelper
     make_thumbnail(user, width: 50, height: 50)
   end
 
+  def user_link(user, klass = 'user-link')
+    link_to user_slug_path(user.id, user.slug), class: "#{klass} text-capitalize", &Proc.new
+  end
+
+  def user_thumbnail_and_name(user)
+    user_link(user) do
+      (small_thumbnail(user) + user.name).html_safe
+    end
+  end
+
   private
   def make_thumbnail(user, width:, height:)
     return '' unless user.display_picture.attached?
