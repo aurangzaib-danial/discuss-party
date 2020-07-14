@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+    
+  namespace :manage do
+    resources :tags, only: :index
+  end
+
   devise_for(:users, 
     controllers: { registrations: 'registrations',  
       omniauth_callbacks: 'omniauth_callbacks' }
