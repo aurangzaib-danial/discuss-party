@@ -17,13 +17,37 @@ import("bootstrap")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+
+function copyScript() {
+  $('#copy button').click(function() {
+      $(this).html('Copied!')
+
+      const temp = $("<input>")
+
+      $("body").append(temp)
+
+      temp.val($(this).val()).select()
+
+      document.execCommand("copy")
+      
+      temp.remove()
+      
+      const selected = this
+
+      setTimeout(function(){ $(selected).html('Copy link') }, 3000);
+  })
+}
+
 $(document).ready(function() {
   $(".alert-success" ).fadeOut(3000);
   bsCustomFileInput.init()
+  copyScript()
 });
 
 $(function(){
   $(document).on("turbolinks:load", function(){
-    bsCustomFileInput.init();
-  });
-});
+    bsCustomFileInput.init()
+    copyScript()
+  })
+})
+

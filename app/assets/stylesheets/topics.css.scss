@@ -45,10 +45,19 @@
 
 .topic-description {
   font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .topic-trix-editor {
   min-height: calc(100vh - 530px);
   padding-top: 1.5em;
   border: 0;
+}
+
+#copy {
+  margin-bottom: 20px;
+}
+
+#copy button {
+  font-size: 0.9rem;
 }

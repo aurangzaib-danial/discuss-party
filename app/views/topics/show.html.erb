@@ -11,8 +11,12 @@
 
   <%= render 'topics/voting', topic: @topic %>
 
-  <section style="margin-bottom: 2rem;" class="topic-description">
+  <section class="topic-description">
     <%= @topic.description %>
+  </section>
+
+  <section id="copy" class="text-right">
+    <%= button_tag 'Copy link', value: topic_slug_url(@topic.id, @topic.slug), class: 'btn btn-secondary' %>
   </section>
 
   <%= render 'topics/discussion' %>
