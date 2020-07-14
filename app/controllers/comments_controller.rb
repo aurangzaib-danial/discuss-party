@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   def destroy
     authorize @comment
     @comment.destroy
-    redirect_to request.referer
+    redirect_to @comment.topic
   end
 
   private

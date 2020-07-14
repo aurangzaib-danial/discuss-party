@@ -8,6 +8,8 @@ class Comment < ApplicationRecord
 
   scope :with_users, -> { includes(user: {display_picture_attachment: :blob}) }
 
+  scope :latest, -> { order(created_at: :desc) }
+
   def commentator?(user)
     self.user_id == user.id
   end

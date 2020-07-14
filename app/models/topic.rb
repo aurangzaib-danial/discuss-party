@@ -76,8 +76,10 @@ class Topic < ApplicationRecord
     #remove image captains and limit the number of characters to 97
   end
 
-  def comments_eager_load_and_paginate(page_number)
+  def comments_for_display(page_number)
     comments.page(page_number).
+    per(15).
+    latest.
     with_rich_text_content_and_embeds.
     with_users
   end
