@@ -1,5 +1,5 @@
-sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: 'khan1234', name: 'Aurangzaib Danial Liaqat Khan')
-avi = User.create!(email: 'avi@fs.com', password: 'avi1234', name: 'Avi Flombaum')
+sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: 'khan1234', name: 'Aurangzaib Danial Liaqat Khan', role: :admin)
+avi = User.create!(email: 'avi@fs.com', password: 'avi1234', name: 'Avi Flombaum', role: :moderator)
 adam = User.create!(email: 'adam@comedy.com', password: 'adam1234', name: 'Adam Weissman')
 
 @users = [sunny, avi, adam]

@@ -11,6 +11,13 @@ RSpec.describe User, type: :model do
     it { should have_many(:oauth_identities).dependent(:delete_all)}
   end
   it { should have_db_column :name }
+  it { should have_db_column(:role).of_type(:integer)}
+
+  it do 
+    should define_enum_for(:role).
+    with_values(normal_user: 0, admin: 1, moderator: 2)
+  end
+
   it { should validate_presence_of :name }
   it { should_not allow_value('Sunny123#$').for(:name) }
   it { should validate_length_of(:name).is_at_most(50)}

@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :oauth_identities, dependent: :delete_all
   has_one_attached :display_picture
 
+  enum role: { normal_user: 0, admin: 1, moderator: 2 }
+
   slug_for :name
 
   validates_presence_of :name
