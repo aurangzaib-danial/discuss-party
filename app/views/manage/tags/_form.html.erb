@@ -1,0 +1,23 @@
+<% if tag.errors.any? %>
+  <div id="errors_explanation" class="text-danger">
+    <h5><%= pluralize(tag.errors.size, 'error') %> prohibited this tag from being saved:</h5>
+    <ul>
+      <% tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: [:manage, tag], local: true, html: {id: 'tagForm'} do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control', autofocus: true %>
+  </div>
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>
+
+<div class="text-center">
+  <%= link_to 'Back', manage_tags_path, class: 'btn btn-secondary back-button' %>
+</div>
+

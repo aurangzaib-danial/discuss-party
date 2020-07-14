@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
     
   namespace :manage do
-    resources :tags, only: %i[index new]
+    resources :tags, except: :show
   end
 
   devise_for(:users, 

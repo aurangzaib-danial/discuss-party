@@ -12,8 +12,8 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Topic count</th>
-      <th scope="col">Action</th>
+      <th scope="col">Topics count</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +21,10 @@
       <tr>
         <td class="text-capitalize"><%= tag.name %></td>
         <td><%= tag.topics_count %></td>
-        <td>Edit | Delete</td>
+        <td>
+        <%= link_to 'Edit', edit_manage_tag_path(tag), class: 'btn btn-secondary' %> 
+        <br><br><%= link_to 'Delete', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to delete #{tag.name}?"}, class: 'btn btn-danger'%>
+        </td>
       </tr>
     <% end %>
   </tbody>
