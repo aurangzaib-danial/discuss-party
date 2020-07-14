@@ -8,9 +8,15 @@
       max-width: 15ch;
     }
   }
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: 1300px) {
     span.short_name {
       max-width: 8ch;
+    }
+  }
+
+  @media screen and (max-width: 1240px) {
+    span.short_name {
+      max-width: 5ch;
     }
   }
 }

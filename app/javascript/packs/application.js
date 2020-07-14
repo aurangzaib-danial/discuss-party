@@ -38,16 +38,30 @@ function copyScript() {
   })
 }
 
+function commentFormValidation() {
+  $('#commentForm').on('submit', function(e){
+    const field = $('#comment_content_trix_input_comment').val()
+    const button = $('#commentForm input[type="submit"]')
+    if(field == "") {
+      e.preventDefault()
+      $('trix-editor').addClass('invalid-comment')
+    } else {
+      button.prop('disabled', true)
+    }
+  })
+}
+
 $(document).ready(function() {
-  $(".alert-success" ).fadeOut(3000);
+  $(".alert-success" ).fadeOut(3000)
   bsCustomFileInput.init()
   copyScript()
-});
+  commentFormValidation()
+})
 
 $(function(){
   $(document).on("turbolinks:load", function(){
     bsCustomFileInput.init()
     copyScript()
+    commentFormValidation()
   })
 })
-

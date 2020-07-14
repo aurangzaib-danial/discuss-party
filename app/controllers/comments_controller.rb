@@ -8,18 +8,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.topic = @topic
     @comment.user_id = current_user_id
-    
-    if @comment.save
-      redirect_to topic_slug_path(@topic.id, @topic.slug)
-    else
-      render 'topics/show'
-    end
+    @comment.save
+    redirect_to topic_slug_path(@topic.id, @topic.slug)
   end
 
   def destroy
     authorize @comment
     @comment.destroy
-    redirect_to @comment.topic
+    redirect_to topic_slug_path(@comment.topic.id, @comment.topic.slug), notice: 'Successfully deleted.'
   end
 
   private

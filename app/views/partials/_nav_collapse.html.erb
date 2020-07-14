@@ -1,16 +1,8 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto">
     <%= nav_li 'Home', root_path %>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Tags
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <% Tag.all.each do |tag| %>
-          <%= link_to tag.name, tag_slug_path(tag.slug), class: 'dropdown-item text-capitalize' %>
-        <% end %>
-      </div>
-    </li>
+
+    <%= render 'partials/tags_dropdown' %>
 
     <% if user_signed_in? %>
       <%= nav_li(short_user_name(current_user), 

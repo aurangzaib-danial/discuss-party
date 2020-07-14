@@ -26,6 +26,6 @@ RSpec.feature 'User comments on a topic', type: :feature do
     visit topic_slug_path(topic.id, topic.slug)
     comments = page.all('.comment-content .trix-content').map { |result| result.text }
 
-    expect(comments).to eq %w(One Two)
+    expect(comments).to eq %w(Two One)
   end
 end
