@@ -4,6 +4,8 @@ RSpec.describe Tag, type: :model do
   it { should have_db_column(:name) }
   it { should have_many(:topic_tags).dependent(:delete_all) }
   it { should have_many(:topics).through(:topic_tags) }
+  it { should have_db_column(:topics_count).of_type(:integer).with_options(default: 0, null: false) }
+
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
