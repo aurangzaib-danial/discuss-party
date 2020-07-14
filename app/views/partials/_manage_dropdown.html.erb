@@ -3,7 +3,7 @@
     Manage
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a href="#" class="dropdown-item">Tags managment</a>
+    <%= link_to 'Manage tags', manage_tags_path, class: 'dropdown-item' %>
     <a href="#" class="dropdown-item">Topic Reports(5)</a>
     <% if current_user.admin? %>
       <a href="#" class="dropdown-item">Moderators managment</a>  

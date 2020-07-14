@@ -3,3 +3,26 @@
 <h2 id="simpleHeading">Manage tags</h2>
 
 <%# CREATE UPDATE DELETE TAGS  %>
+<div id="createTag" class="text-center">
+  <%= link_to 'Create tag', new_manage_tag_path, class: 'btn btn-outline-primary' %>
+</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Topic count</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td class="text-capitalize"><%= tag.name %></td>
+        <td><%= tag.topics.count %></td>
+        <td>Edit | Delete</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

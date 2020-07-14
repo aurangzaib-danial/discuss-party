@@ -6,6 +6,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import "@fortawesome/fontawesome-free/scss/brands";
 @import "bootstrap-social.css";
 @import "./*";
+@import "./manage/*";
+
 
 #simpleHeading {
   margin-top: 1.5rem;
