@@ -1,0 +1,10 @@
+<% if tag.errors.any? %>
+  <div id="errors_explanation" class="text-danger">
+    <h5><%= pluralize(tag.errors.size, 'error') %> prohibited this tag from being saved:</h5>
+    <ul>
+      <% tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

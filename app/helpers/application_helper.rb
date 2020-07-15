@@ -5,8 +5,9 @@ module ApplicationHelper
     content_for :title, text
   end
 
-  def heading(text)
+  def heading(text, capitalize: true)
     content_for :heading, text
+    content_for :heading_class, 'text-capitalize' if capitalize
   end
 
   def nav_li(text, path, url_options = {})

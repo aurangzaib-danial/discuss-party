@@ -1,8 +1,8 @@
 <% title @tag.name %>
 
-<%= heading @tag.name %>
+<%= heading @tag.name, capitalize: false %>
 
 <%= render(@topics) || 
   no_content_message(
-    "No topic available for #{@tag.name.capitalize}, be the first to create one.", 
+    "No topic available for #{@tag.name}, be the first to create one.", 
     new_topic_path) %>

@@ -17,8 +17,8 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td class="text-capitalize">
-          <%= link_to tag.name, tag_slug_path(tag.slug), class: 'text-dark' %>
+        <td>
+          <%= link_to tag.name, tag_path(tag), class: 'text-dark' %>
         </td>
         <td><%= tag.topics_count %></td>
         <td>

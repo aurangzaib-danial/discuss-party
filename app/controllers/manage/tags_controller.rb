@@ -36,6 +36,6 @@ class Manage::TagsController < Manage::ManagementController
   end
 
   def set_tag
-    @tag = Tag.find(params[:id])
+    @tag = Tag.friendly.find(params[:id])
   end
 end

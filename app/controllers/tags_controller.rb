@@ -7,6 +7,6 @@ class TagsController < ApplicationController
 
   private
   def set_tag
-    @tag = Tag.find_by_slug(params[:slug])
+    @tag = Tag.friendly.find(params[:id])
   end
 end

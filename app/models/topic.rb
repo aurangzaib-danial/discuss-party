@@ -18,7 +18,7 @@ class Topic < ApplicationRecord
 
   validates_length_of :title, in: 5..70
   validates_format_of(:title, with: /[a-zA-Z0-9]/, 
-    message: 'must have atleast a letter or a number')
+    message: 'must have at least a letter or a number')
   validates_presence_of :description
   validate :has_at_least_one_tag
   

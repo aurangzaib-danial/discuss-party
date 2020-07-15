@@ -8,7 +8,7 @@ RSpec.feature 'Visiting a tag view', type: 'feature' do
   let(:topics) { subject.topics }
 
   def visit_subject
-    visit tag_slug_path(subject.slug)
+    visit tag_path(tag)
   end
 
   def visit_collection
@@ -21,7 +21,7 @@ RSpec.feature 'Visiting a tag view', type: 'feature' do
 
   scenario 'shows no content message if no topic is available' do
     visit_subject
-    message = "No topic available for #{subject.name.capitalize}, be the first to create one."
+    message = "No topic available for #{subject.name}, be the first to create one."
     expect(page).to have_content(message)
   end
 

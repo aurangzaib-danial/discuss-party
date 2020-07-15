@@ -35,5 +35,5 @@ Rails.application.routes.draw do
 
   get 'users/:id/:slug', to: 'users#profile', as: :user_slug
 
-  get ':slug', to: 'tags#show', as: :tag_slug
+  get ':id', to: 'tags#show', as: :tag
 end

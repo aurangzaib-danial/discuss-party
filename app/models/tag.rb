@@ -1,4 +1,7 @@
 class Tag < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: %i[slugged history]
+
   has_many :topic_tags, dependent: :delete_all
   has_many :topics, through: :topic_tags
 
@@ -6,17 +9,12 @@ class Tag < ApplicationRecord
   validates_length_of :name, minimum: 3, maximum: 30
   validates_uniqueness_of :name
   validates_format_of(:name, with: /[a-zA-Z0-9]/, 
-    message: 'must have atleast a letter or a number')
+    message: 'must have at least a letter or a number')
 
+  before_save :update_slug
 
-  def self.find_by_slug(slug)
-    find_by_name(slug) || 
-    raise(ActiveRecord::RecordNotFound, 
-      "Couldn't find Tag with 'slug'=#{slug}")
+  def update_slug
+    slug = nil if name_changed?
+    # friendly_id auto updates slug if it's set to nil
   end
-
-  def slug
-    name
-  end
-
 end

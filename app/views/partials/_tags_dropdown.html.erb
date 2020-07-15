@@ -4,7 +4,7 @@
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% Tag.all.each do |tag| %>
-      <%= link_to tag.name, tag_slug_path(tag.slug), class: 'dropdown-item text-capitalize' %>
+      <%= link_to tag.name, tag_path(tag), class: 'dropdown-item' %>
     <% end %>
   </div>
 </li>
