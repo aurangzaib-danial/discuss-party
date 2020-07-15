@@ -16,25 +16,11 @@
     <%= render 'partials/flash' %>
     <main class="container">
       <%= render 'partials/sorting_nav' if @topics.present?%>
-      
-      <%= content_tag :h2, yield(:heading), class: content_for(:heading_class), id: heading_id if content_for?(:heading)%>
-      
-      <% if @topics.present? %>
-        <div class="custom-pagination" id="topPagination">
-          <%= paginate @topics_scope.page(params[:page]), window: 2%>
-        </div>
-      <% end %>
+      <%= render 'partials/heading_with_pagination' %>            
 
-      <%= yield %>
+      <%= content_for?(:semi_container) ? yield(:semi_container) : yield %>
 
-      <% if @topics.present? %>
-        <p class='text-center'>
-          <%= page_entries_info @topics_scope.page(params[:page]) %>
-        </p>
-        <div class="custom-pagination">
-          <%= paginate @topics_scope.page(params[:page]), window: 2 %>  
-        </div>
-      <% end %>
+      <%= render 'partials/bottom_pagination' if @topics.present? %>
     </main>
   </body>
 </html>

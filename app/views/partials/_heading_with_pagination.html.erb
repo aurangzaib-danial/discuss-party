@@ -1,0 +1,7 @@
+<%= content_tag :h2, yield(:heading), class: content_for(:heading_class), id: heading_id if content_for?(:heading)%>
+
+<% if @topics.present? %>
+  <div class="custom-pagination" id="topPagination">
+    <%= paginate @topics_scope.page(params[:page]), window: 2%>
+  </div>
+<% end %>

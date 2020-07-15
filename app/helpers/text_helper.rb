@@ -10,4 +10,8 @@ module TextHelper
   def heading_id
     @topics.present? ? 'topHeading' : 'simpleHeading'
   end
+
+  def read_time(topic)
+    pluralize(topic.reading_time, 'minute') + ' read'
+  end
 end

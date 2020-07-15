@@ -84,4 +84,11 @@ class Topic < ApplicationRecord
     with_users
   end
 
+  def reading_time
+    words_per_minute = 150
+    text = description.to_plain_text
+    minutes = (text.scan(/\w+/).length / words_per_minute).to_i
+    minutes == 0 ? 1 : minutes
+  end
+
 end

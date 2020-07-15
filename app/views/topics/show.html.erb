@@ -1,23 +1,21 @@
 <% title @topic.title %>
 
-<div class="semi-container">
-  <h2 id="simpleHeading"><%= @topic.title %> <%= private_topic?(@topic) %></h2>
+<h2 id="simpleHeading"><%= @topic.title %> <%= private_topic?(@topic) %></h2>
 
-  <p class="topic_information">
-    <%= topic_information(@topic) %> 
-    <%= topic_edit_link(@topic) %>
-    <%= topic_sharing_link(@topic) %>    
-  </p>
+<p class="topic_information">
+  <%= topic_information(@topic) %> 
+  <%= topic_edit_link(@topic) %>
+  <%= topic_sharing_link(@topic) %>    
+</p>
 
-  <%= render 'topics/voting', topic: @topic %>
+<%= render 'topics/voting', topic: @topic %>
 
-  <section class="topic-description">
-    <%= @topic.description %>
-  </section>
+<section class="topic-description">
+  <%= @topic.description %>
+</section>
 
-  <section id="copy" class="text-right">
-    <%= button_tag 'Copy link', value: topic_slug_url(@topic.id, @topic.slug), class: 'btn btn-secondary' %>
-  </section>
+<section id="copy" class="text-right">
+  <%= button_tag 'Link', value: topic_slug_url(@topic.id, @topic.slug), class: 'btn  btn-secondary' %>
+</section>
 
-  <%= render 'topics/discussion' %>
-</div>
+<%= render 'topics/discussion' %>

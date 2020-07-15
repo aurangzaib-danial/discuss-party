@@ -4,6 +4,8 @@ class TopicsController < ApplicationController
   before_action :topic_is_private?, only: :sharing
   before_action :authorize_action, except: %i[new create]
 
+  layout 'semi_container', only: %i[show new edit]
+
   def new
     @topic = Topic.new
   end

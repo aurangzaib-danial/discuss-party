@@ -34,7 +34,7 @@ function copyScript() {
       
       const selected = this
 
-      setTimeout(function(){ $(selected).html('Copy link') }, 3000);
+      setTimeout(function(){ $(selected).html('Link') }, 3000);
   })
 }
 

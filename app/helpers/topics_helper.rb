@@ -35,7 +35,7 @@ module TopicsHelper
 
   def topic_information(topic)
     <<-HTML.html_safe
-    #{user_thumbnail_and_name(topic.creator)} #{created_at_in_words(topic)}
+    #{user_thumbnail_and_name(topic.creator)} #{created_at_in_words(topic)} | #{read_time(topic)}
     | Tags: #{print_tags(topic.tags)}
     HTML
   end
