@@ -10,10 +10,10 @@ RSpec.describe Tag, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_least(3).is_at_most(30) }
-    it 'parameterize name before validation' do
-      subject.name = 'tag-$hello'
-      subject.save
-      expect(subject.name).to eq('tag-hello')
+    it 'name must have atleast a letter or a number' do
+      should_not allow_value('$$$$$$$$').for(:name).with_message('must have atleast a letter or a number')
+      should allow_value('$$$$$$$$$a').for(:name)
+      should allow_value('$$$$$$$$$1').for(:name)
     end
     it 'should validate_uniqueness_of name' do
       tag_1 = create(:tag)
