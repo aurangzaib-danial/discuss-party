@@ -1,17 +1,14 @@
-#tagsList {
+.tags-list {
   margin-bottom: 1rem;
   line-height: 2.2;
 }
 
 .tag-pill {
-  color: #FFFFFF;
-  background-color: #17a2b8;
   border-radius: 3px;
   padding: 0.25rem;
   margin-right: 0.25rem;
 }
 
 .tag-pill:hover{
-  color: #FFFFFF;
   text-decoration: none;
 }

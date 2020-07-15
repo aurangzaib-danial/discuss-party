@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_064517) do
+ActiveRecord::Schema.define(version: 2020_07_15_162854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2020_07_15_064517) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "topics_count", default: 0, null: false
     t.string "slug"
+    t.string "text_color", default: "#FFFFFF", null: false
+    t.string "background_color", default: "#17a2b8", null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
     t.index ["slug"], name: "index_tags_on_slug", unique: true
   end

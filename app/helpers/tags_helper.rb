@@ -4,4 +4,13 @@ module TagsHelper
       content_tag :mark, link_to(tag.name, tag_path(tag))
     end.join(', ').html_safe
   end
+
+  def tag_pill(tag)
+    link_to tag.name, tag_path(tag), class: 'tag-pill', style: tag_style(tag)
+  end
+
+  private
+  def tag_style(tag)
+    "color: #{tag.text_color}; background-color: #{tag.background_color}"
+  end
 end

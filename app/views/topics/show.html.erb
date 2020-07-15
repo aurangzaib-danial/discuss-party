@@ -2,11 +2,13 @@
 
 <h2 id="simpleHeading"><%= @topic.title %> <%= private_topic?(@topic) %></h2>
 
-<section id="tagsList">
+<% if @topic.tags.present? %>
+  <section class="tags-list">
   <% @topic.tags.each do |tag| %>
-    <%= link_to tag.name, tag_path(tag), class: 'tag-pill'  %>
+    <%= tag_pill(tag) %>
   <% end %>
-</section>
+  </section>
+<% end %>
 
 <p class="topic_information">
   <%= topic_info(@topic) %> 

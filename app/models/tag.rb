@@ -12,6 +12,8 @@ class Tag < ApplicationRecord
   validates_uniqueness_of :name
   validates_format_of(:name, with: /[a-zA-Z0-9]/, 
     message: 'must have at least a letter or a number')
+  validates :text_color, css_hex_color: true
+  validates :background_color, css_hex_color: true
 
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
