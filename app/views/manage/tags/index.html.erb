@@ -1,14 +1,12 @@
 <% title 'Manage tags' %>
 
-<h2 id="simpleHeading">Manage tags</h2>
+<h2 id="simpleHeading" class="text-center">Manage tags</h2>
 
-<%# CREATE UPDATE DELETE TAGS  %>
 <div id="createTag" class="text-center">
-  <%= link_to 'Create tag', new_manage_tag_path, class: 'btn btn-outline-primary' %>
+  <%= link_to 'Create tag', new_manage_tag_path, class: 'btn btn-lg btn-outline-primary' %>
 </div>
 
-
-<table class="table">
+<table class="table" id="tagsTable">
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -19,11 +17,13 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td class="text-capitalize"><%= tag.name %></td>
+        <td class="text-capitalize">
+          <%= link_to tag.name, tag_slug_path(tag.slug), class: 'text-dark' %>
+        </td>
         <td><%= tag.topics_count %></td>
         <td>
-        <%= link_to 'Edit', edit_manage_tag_path(tag), class: 'btn btn-secondary' %> 
-        <br><br><%= link_to 'Delete', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to delete #{tag.name}?"}, class: 'btn btn-danger'%>
+        <%= link_to 'Edit', edit_manage_tag_path(tag), class: 'btn btn-outline-secondary' %> 
+        <%= link_to 'Delete', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to delete #{tag.name}?"}, class: 'btn btn-outline-danger tag-delete-button'%>
         </td>
       </tr>
     <% end %>

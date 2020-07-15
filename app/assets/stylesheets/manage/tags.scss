@@ -6,3 +6,22 @@
   max-width: 400px; 
   margin: 0 auto;
 }
+
+#tagsTable {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tag-delete-button {
+  margin-left: 20px;
+}
+
+@media (max-width: 470px) {
+  #tagsTable .btn {
+    display: block;
+  }
+  .tag-delete-button {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
