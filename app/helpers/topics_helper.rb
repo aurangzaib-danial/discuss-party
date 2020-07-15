@@ -35,7 +35,8 @@ module TopicsHelper
 
   def topic_for_list(topic)
     <<-HTML.html_safe
-    #{user_thumbnail_and_name(topic.creator)} #{created_at_in_words(topic)} | #{print_tags(topic.tags)}
+    #{user_thumbnail_and_name(topic.creator)} #{created_at_in_words(topic)} 
+    <div style="margin-top: 10px;">#{print_tags(topic.tags)}</div>
     HTML
   end
 

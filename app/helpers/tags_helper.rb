@@ -1,8 +1,8 @@
 module TagsHelper
   def print_tags(tags)
     tags.map do |tag|
-      content_tag :mark, link_to(tag.name, tag_path(tag))
-    end.join(', ').html_safe
+      link_to "##{tag.name}", tag_path(tag), class: 'text-secondary'
+    end.join(' ')
   end
 
   def tag_pill(tag)

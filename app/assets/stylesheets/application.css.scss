@@ -53,8 +53,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   line-height: 2rem;
 }
 
-.topic_information a, .user-link {
+.user-link {
   @extend .text-dark;
+  font-weight: 500;
 }
 
 .topic_information a.special-link {
