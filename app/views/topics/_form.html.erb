@@ -20,7 +20,7 @@
   <% end %>
 
   <p style="margin: 10px 0;">Tags</p>
-  <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |builder| %>
+  <%= form.collection_check_boxes :tag_ids, Tag.alphabetically, :id, :name do |builder| %>
     <div class="form-check form-check-inline">
       <%= builder.check_box class: 'form-check-input' %>
       <%= builder.label class: 'form-check-label text-capitalize' %>

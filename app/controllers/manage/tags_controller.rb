@@ -1,7 +1,7 @@
 class Manage::TagsController < Manage::ManagementController
   before_action :set_tag, only: %i[edit destroy update]
   def index
-    @tags = Tag.all
+    @tags = Tag.alphabetically
   end
 
   def new

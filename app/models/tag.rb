@@ -2,6 +2,8 @@ class Tag < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: %i[slugged history]
 
+  scope :alphabetically, -> { order('LOWER(name)') }
+
   has_many :topic_tags, dependent: :delete_all
   has_many :topics, through: :topic_tags
 
@@ -11,10 +13,7 @@ class Tag < ApplicationRecord
   validates_format_of(:name, with: /[a-zA-Z0-9]/, 
     message: 'must have at least a letter or a number')
 
-  before_save :update_slug
-
-  def update_slug
-    slug = nil if name_changed?
-    # friendly_id auto updates slug if it's set to nil
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
   end
 end

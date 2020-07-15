@@ -3,7 +3,7 @@
     Tags
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <% Tag.all.each do |tag| %>
+    <% Tag.alphabetically.each do |tag| %>
       <%= link_to tag.name, tag_path(tag), class: 'dropdown-item' %>
     <% end %>
   </div>
