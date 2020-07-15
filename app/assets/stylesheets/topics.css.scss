@@ -49,16 +49,33 @@
 }
 
 .topic-trix-editor {
-  min-height: calc(100vh - 530px);
+  min-height: calc(100vh - 540px);
   padding-top: 1.5em;
   border: 0;
   font-size: 1.2rem;
 }
 
+.topic-trix-editor pre {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  font-family: monospace;
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 0.5em;
+  white-space: pre;
+  background-color: #eee;
+  overflow-x: auto;
+}
+
 #copy {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 #copy button {
   font-size: 0.9rem;
+}
+
+.topic_form {
+  margin: 1rem 0 1.5rem;
 }

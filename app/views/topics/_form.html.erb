@@ -1,7 +1,7 @@
 <%= render 'errors' if topic.errors.any? %>
 
-<%= form_with model: topic, local: true do |form| %>
-  <div class="form-group" style="margin-top: 2rem;">
+<%= form_with model: topic, local: true, class: 'topic_form' do |form| %>
+  <div class="form-group">
     <%= form.text_field :title, class: 'form-control topic_title_field',  "aria-describedby": "titleHelp", placeholder: 'Type a title...', autofocus: true, autocomplete: false%>
   </div>
 
@@ -35,8 +35,10 @@
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>
 
-<%= button_to('Delete', topic, 
+<div style="display: inline-block">
+  <%= button_to('Delete', topic, 
   method: :delete, data: {confirm: 'Are you sure?'}, 
   class: 'btn btn-danger', id: 'deleteTopic') if topic.persisted?%>
+</div>
 
-<%= link_to 'Back', back_path_for_topic(topic), class: 'btn btn-secondary back-button' %>
+<%= link_to 'Back', back_path_for_topic(topic), class: 'btn btn-secondary float-right', style: 'margin-bottom: 1rem' %>
