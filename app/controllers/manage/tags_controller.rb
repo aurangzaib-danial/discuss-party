@@ -32,7 +32,7 @@ class Manage::TagsController < Manage::ManagementController
 
   private
   def tag_params
-    params.require(:tag).permit(:name)
+    params.require(:tag).permit(:name, :text_color, :background_color)
   end
 
   def set_tag
