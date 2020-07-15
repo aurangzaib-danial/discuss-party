@@ -20,7 +20,6 @@ class Topic < ApplicationRecord
   validates_format_of(:title, with: /[a-zA-Z0-9]/, 
     message: 'must have at least a letter or a number')
   validates_presence_of :description
-  validate :has_at_least_one_tag
   
   slug_for :title
 
@@ -47,12 +46,6 @@ class Topic < ApplicationRecord
 
     def topics
       arel_table
-    end
-  end
-
-  def has_at_least_one_tag
-    if topic_tags.size < 1
-      errors.add(:tags, 'must be at least one.')
     end
   end
 

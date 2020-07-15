@@ -8,12 +8,10 @@ RSpec.feature 'Updating a topic', type: :feature do
   scenario 'with valid input updates the topic' do
     data = { title: 'Update topic', description: Faker::Lorem.paragraph}
     visit topic_slug_path(topic.id, topic.slug)
-    tag = topic.tags.first
     click_link 'Edit'
     fill_in 'topic[title]', with: data[:title]
     page.find("#topic_description_trix_input_topic_#{topic.id}", visible: false).set(data[:description])
     choose :topic_visibility_private
-    uncheck tag.name
 
     click_button "Update Topic"
 

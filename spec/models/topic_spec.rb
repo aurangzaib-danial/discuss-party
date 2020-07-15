@@ -26,12 +26,6 @@ RSpec.describe Topic, type: :model do
       should allow_value('$$$$$$$$$1').for(:title)
     end
     it { should validate_presence_of(:description)}
-    
-    it 'should have at least one tag associated with it' do
-      topic = build(:topic)
-      topic.topic_tags = []
-      expect(topic).not_to be_valid
-    end
   end
 
   describe '#slug' do

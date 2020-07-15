@@ -2,8 +2,6 @@ module TopicsTestHelpers
   def expectations_for_topic(topic)
     expect(page).to have_content(topic.title)
     expect(page).to have_content(topic.creator.name)
-    expect(page).to have_content(topic.tags.first.name)
-    expect(page).to have_content(topic.tags.second.name)
   end
 
   def run_expectations_for_topics(topics)
