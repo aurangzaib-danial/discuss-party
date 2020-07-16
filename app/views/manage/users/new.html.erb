@@ -1,0 +1,22 @@
+<% title 'Block user' %>
+
+<h2 id="simpleHeading" style="margin-bottom: 1.5rem;" class="text-center">Block user</h2>
+
+<%= form_with url: manage_users_path, local: true, html: {class: 'manage-form'} do |form| %>
+  <div class="form-group">
+    <%= form.label :id, 'Enter ID' %>
+    <%= form.text_field :id, autofocus: true, required: true, class: field_class(@user, :block_error) %>
+    
+    <% if @user.errors[:block_error].any? %>
+        <div class="invalid-feedback">
+          <%= @user.errors[:block_error].first %>
+        </div>
+    <% end %>
+  </div>
+  <%= form.submit 'Block', class: 'btn btn-danger' %>
+<% end %>
+
+<div class="text-center">
+  <%= link_to 'Back', manage_users_path, class: 'btn btn-secondary back-button' %>
+</div>
+

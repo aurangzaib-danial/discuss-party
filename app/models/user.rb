@@ -70,18 +70,44 @@ class User < ApplicationRecord
       end
     end
 
+    def block_user_by_id(id, current_user)
+      (User.find_by_id(id) || User.new).tap do |user|
+        if user.persisted?
+          block_user(user, current_user)
+        else
+          add_block_error(user, "Couldn't find user with that id")
+        end
+      end
+    end
+
     private
     def add_mod_error(user, message)
       user.errors.add(:moderator, message)
+    end
+
+    def add_block_error(user, message)
+      user.errors.add(:block_error, message)
     end
 
     def make_moderator(user)
       if user.admin?
         add_mod_error(user, "Can't make an admin a moderator")
       elsif user.moderator?
-        add_mod_error(user, 'This is user is already a moderator')
+        add_mod_error(user, 'This user is already a moderator')
       else
         user.role = 'moderator'
+      end
+    end
+
+    def block_user(user, current_user)
+      if user.blocked?
+        add_block_error(user, 'This user is already blocked')
+      elsif user.admin?
+        add_block_error(user, "Can't block an admin")
+      elsif user.moderator? && current_user.moderator?
+        add_block_error(user, "Can't block a moderator")
+      else
+        user.status = 'blocked'
       end
     end
   end
@@ -108,6 +134,10 @@ class User < ApplicationRecord
 
   def valid_moderator?
     !errors[:moderator].any?
+  end
+
+  def blockable?
+    !errors[:block_error].any?
   end
 
   def staff?

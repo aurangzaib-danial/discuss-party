@@ -68,13 +68,50 @@ RSpec.describe User, type: :model do
 
     it 'email of a user who is already a moderator' do
       user = create(:user, role: 'moderator')
-      expect(error(user.email)).to eq("This is user is already a moderator")
+      expect(error(user.email)).to eq("This user is already a moderator")
     end
 
-    it 'user successful canditator for becoming a moderator' do
+    it 'user successful candidate for becoming a moderator' do
       user = create(:user)
-      expect(User.make_mod_by_email(user.email)).to be_valid
+      expect(User.make_mod_by_email(user.email).valid_moderator?).to eq(true)
     end
   end 
+
+  describe '.block_user_by_id' do
+    def error(id, user)
+      User.block_user_by_id(id, user).errors[:block_error].first
+    end
+    
+    it 'id does not exist' do
+      expect(error(1, User.new)).to eq("Couldn't find user with that id")
+    end
+
+    it 'id of an admin' do
+      user = create(:user, role: 'admin')
+      expect(error(user.id, user)).to eq("Can't block an admin")
+    end
+
+    it 'id of a moderator' do
+      user = create(:user, role: 'moderator')
+      expect(error(user.id, user)).to eq("Can't block a moderator")
+    end
+
+    it 'id of a user who is already blocked' do
+      user = create(:user, status: 'blocked')
+      expect(error(user.id, user)).to eq("This user is already blocked")
+    end
+
+    it 'user who can be blocked' do
+      user = create(:user)
+      mod = create(:user, role: 'moderator')
+      expect(User.block_user_by_id(user.id, mod)).to be_valid
+    end
+
+    it 'admin can block a mod' do
+      admin = create(:user, role: 'admin')
+      mod = create(:user, role: 'moderator')
+      expect(User.block_user_by_id(mod.id, admin).blockable?).to eq(true)
+    end
+  end
 
 end
