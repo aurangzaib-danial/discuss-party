@@ -16,4 +16,15 @@ class Manage::ModeratorsController < Manage::ManagementController
       render :new
     end
   end
+
+  def destroy
+    user = User.find(params[:id])
+    if user.moderator?
+      user.normal_user!
+      message = {notice: 'Successfully removed moderator.'}
+    else
+      message = {alert: 'Provided ID was not of a moderator.'}
+    end
+    redirect_to manage_moderators_path, message
+  end
 end

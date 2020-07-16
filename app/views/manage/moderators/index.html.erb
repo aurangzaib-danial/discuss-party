@@ -17,10 +17,11 @@
   <tbody>
     <% @moderators.each do |moderator| %>
       <tr>
-        <td class="text-capitalize"><%= moderator.name %></td>
-        <td><%= mail_to moderator.name %></td>
+        <td><%= user_link(moderator) {moderator.name} %></td>
+        <td><%= mail_to moderator.email %></td>
         <td>
-        <%= link_to 'Remove', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to remove?"}, class: 'btn btn-outline-danger'%>
+        <%= link_to('Remove', manage_moderator_path(moderator), method: :delete, 
+          data: {confirm: "Are you sure you want to remove #{moderator.name.titlecase}?"}, class: 'btn btn-outline-danger')%>
         </td>
       </tr>
     <% end %>
