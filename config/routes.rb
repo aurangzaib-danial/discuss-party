@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :manage do
     resources :tags, except: :show
     resources :moderators, only: %i[index new create destroy]
+    resources :users, only: %i[index new create destroy]
   end
 
   devise_for(:users, 

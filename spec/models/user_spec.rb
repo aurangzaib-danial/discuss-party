@@ -19,6 +19,14 @@ RSpec.describe User, type: :model do
     with_values(normal_user: 0, admin: 1, moderator: 2)
   end
 
+  it {should have_db_column(:status).of_type(:integer)}
+  it {should have_db_index(:status)}
+
+  it do 
+    should define_enum_for(:status).
+    with_values(active: 0, blocked: 1)
+  end
+
   it { should validate_presence_of :name }
   it { should_not allow_value('Sunny123#$').for(:name) }
   it { should validate_length_of(:name).is_at_most(50)}

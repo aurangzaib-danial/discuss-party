@@ -6,7 +6,7 @@
     <%= link_to 'Manage tags', manage_tags_path, class: 'dropdown-item' %>
     
     <a href="#" class="dropdown-item">Topic Reports(5)</a>
-    
+    <%= link_to 'Manage users', manage_users_path, class: 'dropdown-item' %>
     <% if current_user.admin? %>
       <%= link_to 'Moderators', manage_moderators_path, class: 'dropdown-item' %>
     <% end %>

@@ -1,0 +1,36 @@
+<% title 'Manage users' %>
+
+<h2 id="simpleHeading" class="text-center">Manage users</h2>
+
+<div class="manage-button">
+  <%= link_to 'Block a user', new_manage_user_path, class: 'btn btn-lg btn-outline-primary' %>
+</div>
+
+<% if @blocked_users.present? %>
+  <table class="table moderators-table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @blocked_users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user_link(user) {user.name} %></td>
+          <td><%= mail_to user.email %></td>
+          <td>
+          <%= link_to('Remove', manage_user_path(user), method: :delete, 
+            data: {confirm: "Are you sure you want to remove #{user.name.titlecase}?"}, class: 'btn btn-outline-danger')%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center">No one is currently blocked because everyone is being nice.</p>
+<% end %>
+

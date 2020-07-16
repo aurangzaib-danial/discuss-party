@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_one_attached :display_picture
 
   enum role: { normal_user: 0, admin: 1, moderator: 2 }
+  enum status: { active: 0, blocked: 1 }
 
   slug_for :name
 
