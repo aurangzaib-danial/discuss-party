@@ -109,4 +109,8 @@ class User < ApplicationRecord
     !errors[:moderator].any?
   end
 
+  def staff?
+    moderator? || admin?
+  end
+
 end
