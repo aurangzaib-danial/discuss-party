@@ -12,6 +12,7 @@ RSpec.describe User, type: :model do
   end
   it { should have_db_column :name }
   it { should have_db_column(:role).of_type(:integer)}
+  it { should have_db_index(:role)}
 
   it do 
     should define_enum_for(:role).
