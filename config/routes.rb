@@ -2,6 +2,9 @@ Rails.application.routes.draw do
     
   namespace :manage do
     resources :tags, except: :show
+    controller :management do
+      get 'moderators'
+    end
   end
 
   devise_for(:users, 
