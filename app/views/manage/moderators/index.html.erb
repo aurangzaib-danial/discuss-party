@@ -3,7 +3,7 @@
 <h2 id="simpleHeading" class="text-center">Moderators</h2>
 
 <div class="manage-button">
-  <%= link_to 'Create Moderator', '#', class: 'btn btn-lg btn-outline-primary' %>
+  <%= link_to 'Create Moderator', new_manage_moderator_path, class: 'btn btn-lg btn-outline-primary' %>
 </div>
 
 <table class="table moderators-table">
@@ -17,8 +17,8 @@
   <tbody>
     <% @moderators.each do |moderator| %>
       <tr>
-        <td><%= moderator.name %></td>
-        <td><%= moderator.email %></td>
+        <td class="text-capitalize"><%= moderator.name %></td>
+        <td><%= mail_to moderator.name %></td>
         <td>
         <%= link_to 'Remove', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to remove?"}, class: 'btn btn-outline-danger'%>
         </td>

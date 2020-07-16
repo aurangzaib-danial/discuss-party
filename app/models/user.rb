@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable, :recoverable and :omniauthable
   devise :database_authenticatable, :registerable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i(github google_oauth2 facebook twitter)
+
   has_many :topics, foreign_key: :creator_id, dependent: :delete_all, inverse_of: :creator
   has_many :comments, dependent: :delete_all
   has_many :topic_votes, dependent: :delete_all
@@ -10,6 +11,7 @@ class User < ApplicationRecord
   has_many :viewers, dependent: :delete_all
   has_many :shared_topics, through: :viewers, source: :topic
   has_many :oauth_identities, dependent: :delete_all
+
   has_one_attached :display_picture
 
   enum role: { normal_user: 0, admin: 1, moderator: 2 }
@@ -56,6 +58,31 @@ class User < ApplicationRecord
       UserAttachmentJob.perform_later(user, info[:image])
       user
     end
+
+    def make_mod_by_email(email)
+      (User.find_by_email(email) || User.new).tap do |user|
+        if user.persisted?
+          make_moderator(user)
+        else
+          add_mod_error(user, "Couldn't find user with that email")
+        end
+      end
+    end
+
+    private
+    def add_mod_error(user, message)
+      user.errors.add(:moderator, message)
+    end
+
+    def make_moderator(user)
+      if user.admin?
+        add_mod_error(user, "Can't make an admin a moderator")
+      elsif user.moderator?
+        add_mod_error(user, 'This is user is already a moderator')
+      else
+        user.role = 'moderator'
+      end
+    end
   end
 
   def downcase_name
@@ -76,6 +103,10 @@ class User < ApplicationRecord
 
   def delete_display_picture
     display_picture.purge_later
+  end
+
+  def valid_moderator?
+    !errors[:moderator].any?
   end
 
 end

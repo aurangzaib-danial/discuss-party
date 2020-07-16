@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-    
+  root 'site#home'
+  get 'search', to: 'site#search'
+  
   namespace :manage do
     resources :tags, except: :show
     resources :moderators, only: %i[index new create]
@@ -9,9 +11,6 @@ Rails.application.routes.draw do
     controllers: { registrations: 'registrations',  
       omniauth_callbacks: 'omniauth_callbacks' }
   )
-  
-  root 'site#home'
-  get 'search', to: 'site#search'
 
   resources :topics, only: %i[new create update destroy] do
     resources :comments, only: :create

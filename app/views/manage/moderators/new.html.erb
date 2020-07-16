@@ -1,0 +1,22 @@
+<% title 'Create new moderator' %>
+
+<h2 id="simpleHeading" style="margin-bottom: 1.5rem;" class="text-center">New moderator</h2>
+
+<%= form_with url: manage_moderators_path, local: true, html: {class: 'manage-form'} do |form| %>
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.email_field :email, autofocus: true, required: true, class: field_class(@moderator, :moderator) %>
+    
+    <% if @moderator.errors[:moderator].any? %>
+        <div class="invalid-feedback">
+          <%= @moderator.errors[:moderator].first %>
+        </div>
+    <% end %>
+  </div>
+  <%= form.submit 'Create', class: 'btn btn-primary' %>
+<% end %>
+
+<div class="text-center">
+  <%= link_to 'Back', manage_moderators_path, class: 'btn btn-secondary back-button' %>
+</div>
+

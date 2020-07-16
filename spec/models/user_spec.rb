@@ -42,5 +42,31 @@ RSpec.describe User, type: :model do
     user = create(:user)
     topics = 2.times.collect { create(:topic, creator: user, visibility: :private) }
     expect(user.private_topics).to eq(topics)
+  end
+
+  describe '.make_mod_by_email' do
+    def error(email)
+      User.make_mod_by_email(email).errors[:moderator].first
+    end
+    
+    it 'email does not exist' do
+      expect(error('test@test.com')).to eq("Couldn't find user with that email")
+    end
+
+    it 'email of an admin' do
+      user = create(:user, role: 'admin')
+      expect(error(user.email)).to eq("Can't make an admin a moderator")
+    end
+
+    it 'email of a user who is already a moderator' do
+      user = create(:user, role: 'moderator')
+      expect(error(user.email)).to eq("This is user is already a moderator")
+    end
+
+    it 'user successful canditator for becoming a moderator' do
+      user = create(:user)
+      expect(User.make_mod_by_email(user.email)).to be_valid
+    end
   end 
+
 end
