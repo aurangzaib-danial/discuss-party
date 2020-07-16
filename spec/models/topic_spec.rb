@@ -10,6 +10,7 @@ RSpec.describe Topic, type: :model do
   it { should have_many(:topic_votes).dependent(:delete_all) }
   it { should have_many(:viewers).dependent(:delete_all) }
   it { should have_many(:private_viewers).through(:viewers).source(:user) }
+  it { should have_many(:reports)}
 
   it do 
     should define_enum_for(:visibility).

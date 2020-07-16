@@ -9,6 +9,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:viewers).dependent(:delete_all) }
     it { should have_many(:shared_topics).through(:viewers).source(:topic) }
     it { should have_many(:oauth_identities).dependent(:delete_all)}
+    it { should have_many(:reports).dependent(:delete_all)}
+    it { should have_many(:reported_topics).through(:reports).source(:topic)}
   end
   it { should have_db_column :name }
   it { should have_db_column(:role).of_type(:integer)}

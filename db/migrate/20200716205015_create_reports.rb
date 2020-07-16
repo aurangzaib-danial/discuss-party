@@ -7,8 +7,8 @@ class CreateReports < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_foreign_key :reports, :topics
-    add_foreign_key :reports, :users
+    add_foreign_key :reports, :topics, on_update: :cascade, on_delete: :cascade
+    add_foreign_key :reports, :users, on_update: :cascade, on_delete: :cascade
     add_index :reports, [:user_id, :topic_id], unique: true
   end
 end

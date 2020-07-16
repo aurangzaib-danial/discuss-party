@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :viewers, dependent: :delete_all
   has_many :shared_topics, through: :viewers, source: :topic
   has_many :oauth_identities, dependent: :delete_all
+  has_many :reports, dependent: :delete_all
+  has_many :reported_topics, through: :reports, source: :topic
 
   has_one_attached :display_picture
 

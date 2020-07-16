@@ -153,8 +153,8 @@ ActiveRecord::Schema.define(version: 2020_07_16_205015) do
   add_foreign_key "comments", "topics", on_update: :cascade, on_delete: :cascade
   add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "oauth_identities", "users", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "reports", "topics"
-  add_foreign_key "reports", "users"
+  add_foreign_key "reports", "topics", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "reports", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "topic_tags", "tags", name: "topic_tags_tag_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "topic_tags", "topics", name: "topic_tags_topic_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "topic_votes", "topics", name: "topic_votes_topic_id_fk", on_update: :cascade, on_delete: :cascade
