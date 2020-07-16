@@ -144,4 +144,12 @@ class User < ApplicationRecord
     moderator? || admin?
   end
 
+  def active_for_authentication?
+    super and self.active?
+  end
+
+  def inactive_message
+    "Your account has been blocked. Please contact support."
+  end
+
 end

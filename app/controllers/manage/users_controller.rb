@@ -2,7 +2,7 @@ class Manage::UsersController < Manage::ManagementController
   before_action :is_user_staff_memeber?
 
   def index
-    @blocked_users = User.blocked.order(:id)
+    @blocked_users = policy_scope(User.blocked)
   end
 
   def new
@@ -38,6 +38,3 @@ class Manage::UsersController < Manage::ManagementController
     redirect_to manage_users_path, "#{flash_type}": message
   end
 end
-
-# policy scope for users
-# do not let blocked users sign in
