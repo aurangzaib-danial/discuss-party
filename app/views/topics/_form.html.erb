@@ -7,12 +7,12 @@
 
   <div class="form-check form-check-inline">
     <%= form.radio_button :visibility, 'public', class: 'form-check-input' %>
-    <%= form.label :visibility, 'Public', value: 'Public', class: 'form-check-label' %>
+    <%= form.label :visibility, 'Public', value: 'public', class: 'form-check-label' %>
   </div>
 
   <div class="form-check form-check-inline">
     <%= form.radio_button :visibility, 'private', class: 'form-check-input' %>
-    <%= form.label :visibility, 'Private', value: 'Private', class: 'form-check-label' %>
+    <%= form.label :visibility, 'Private', value: 'private', class: 'form-check-label' %>
   </div>
   <% if action_name.in?(['edit', 'update']) && topic.visibility_private? %>
     <small class="form-text text-muted">Updating a private topic to public removes all private users</small>

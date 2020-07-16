@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :comments, only: :create
     member do
       patch 'vote'
+      post 'report'
     end
     resources :viewers, only: %i[create destroy]
   end

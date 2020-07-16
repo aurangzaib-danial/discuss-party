@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :set_topic, except: %i[new create]
   before_action :topic_is_private?, only: :sharing
-  before_action :authorize_action, except: %i[new create]
+  before_action :authorize_action, except: %i[new create report]
 
   layout 'semi_container', only: %i[show new edit create update]
 
@@ -48,6 +48,11 @@ class TopicsController < ApplicationController
     @topic.delete
     redirect_to(user_slug_path(current_user.id, current_user.slug), 
       notice: 'Successfully deleted.')
+  end
+
+  def report
+    # TODO
+    # report the topic and also pundit permissions
   end
 
   private

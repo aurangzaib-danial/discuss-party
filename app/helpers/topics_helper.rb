@@ -27,6 +27,16 @@ module TopicsHelper
     end
   end
 
+  def topic_report(topic)
+    text = '| '
+    if current_user.nil?
+      text += link_to 'Report', report_topic_path, method: :post
+    elsif topic.visibility_public? and !topic.owner?(current_user)
+      text += link_to 'Report', '#', class: 'text-dark', data: {toggle: 'modal', target: '#reportModal'}
+    end
+    text.html_safe
+  end
+
   def private_topic?(topic)
     if topic.visibility_private?
       content_tag :span, 'Private', class: 'badge badge-dark'
