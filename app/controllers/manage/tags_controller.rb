@@ -1,15 +1,20 @@
 class Manage::TagsController < Manage::ManagementController
   before_action :set_tag, only: %i[edit destroy update]
+  before_action :authorize_action, only: %i[edit destroy update]
+
   def index
     @tags = Tag.alphabetically
+    authorize @tags
   end
 
   def new
     @tag = Tag.new
+    authorize @tag
   end
 
   def create
     @tag = Tag.new(tag_params)
+    authorize @tag
     if @tag.save
       redirect_to manage_tags_path, notice: 'Successfully created.'
     else
@@ -37,5 +42,9 @@ class Manage::TagsController < Manage::ManagementController
 
   def set_tag
     @tag = Tag.friendly.find(params[:id])
+  end
+
+  def authorize_action
+    authorize @tag
   end
 end
