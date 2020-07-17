@@ -11,7 +11,7 @@
         <%= form_with model: [@topic, @report], id: 'reportForm', local: true do |form| %>
           <% Report.report_types.each do |type| %>
             <div class="form-check">
-              <%= form.radio_button :report_type, type, class: 'form-check-input' %>
+              <%= form.radio_button :report_type, type, class: 'form-check-input', required: true %>
               <%= form.label :report_type, type.capitalize, value: type, class: 'form-check-label' %>
             </div>
           <% end %>
