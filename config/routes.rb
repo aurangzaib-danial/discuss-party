@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :tags, except: :show
     resources :moderators, only: %i[index new create destroy]
     resources :users, only: %i[index new create destroy]
-    resources :reports, only: :index
+    resources :topics, only: :index
   end
 
   devise_for(:users, 

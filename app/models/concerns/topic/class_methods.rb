@@ -30,6 +30,34 @@ module Topic::ClassMethods
     topics.where.not(id: current_user.reported_topic_ids)
   end
 
+  def reported_topics
+    joins(:reports).
+    select(topics[Arel.star]).
+    select(count_rude).
+    select(count_spam).
+    select(count_harassment).
+    select(count_copyright).
+    visibility_public.
+    where(reports_count_are_greater_than_zero).
+    group(:id).
+    order(reports_count: :desc)
+  end
+
+  def reported_topics_count
+    select(:id).distinct.joins(:reports).visibility_public.count
+  end
+
+  def self.extended(base)
+    class << base
+      private
+      Report.report_types.each do |type|
+        define_method "count_#{type}" do
+          case_for_reports(type)
+        end
+      end
+    end
+  end
+
   private
   def case_insensitive_clause(query)
     topics[:title].matches("%#{query}%")
@@ -41,5 +69,21 @@ module Topic::ClassMethods
 
   def topics
     arel_table
+  end
+
+  def reports_count_are_greater_than_zero
+    topics[:reports_count].gt(0)
+  end
+
+  def case_for_reports(type)
+    Arel::Nodes::Case.new.
+    when(reports[:report_type].eq(type)).then(1).
+    else(0).
+    sum.
+    as("#{type}_count")
+  end
+
+  def reports
+    Report.arel_table
   end
 end

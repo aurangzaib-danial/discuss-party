@@ -1,0 +1,38 @@
+<% title 'Reports' %>
+
+<h2 id="simpleHeading" class="text-center" style="margin-bottom: 1rem;">Reports</h2>
+
+<% if @reported_topics.present? %>
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col" width="35%">Title</th>
+        <th scope="col">Rude</th>
+        <th scope="col">Harassment</th>
+        <th scope="col">Spam</th>
+        <th scope="col">Copyright</th>
+
+        <th scope="col">Total Reports</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reported_topics.each do |topic| %>
+        <tr>
+          <td><%= topic.id %></td>
+          <td><%= link_to topic.title, topic_slug_path(topic.id, topic.slug), class: 'text-dark' %></td>
+          <td><%= topic.rude_count %></td>
+          <td><%= topic.harassment_count %></td>
+          <td><%= topic.spam_count %></td>
+          <td><%= topic.copyright_count %></td>
+          <td><%= topic.reports_count %></td>
+          <td><button class="btn btn-danger">Remove topic</button></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center">Nothing to report.</p>
+<% end %>
+

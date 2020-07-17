@@ -216,6 +216,51 @@ RSpec.describe Topic, type: :model do
     expect(topic.private_viewers).to be_empty
   end
 
+  it '.reported_topics_count returns the number of topics reported' do
+    user = create(:user)
+    3.times do
+      topic = create(:topic)
+      topic.reports.create(user: user, report_type: 'rude')
+    end
+    Topic.last.reports.create(user: create(:user), report_type: 'spam')
+    expect(Topic.reported_topics_count).to eq(3)
+  end
+
+  it '.reported_topics have report_type counts and are ordered by reports_count :desc' do
+    topic_1 = create(:topic)
+    topic_2 = create(:topic)
+
+    user_1 = create(:user)
+    user_2 = create(:user)
+    user_3 = create(:user)
+
+    topic_1.reports.create(user: user_1, report_type: 'rude')
+    topic_1.reports.create(user: user_2, report_type: 'rude')
+    topic_1.reports.create(user: user_3, report_type: 'spam')
+
+    topic_2.reports.create(user: user_1, report_type: 'harassment')
+    topic_2.reports.create(user: user_2, report_type: 'rude')
+    topic_2.reports.create(user: user_3, report_type: 'spam')
+    topic_2.reports.create(user: create(:user), report_type: 'spam')
+
+    topics = Topic.reported_topics
+    first = topics.first
+    second = topics.second
+    
+    expect(first).to eq(topic_2) #because topic_2 has more reports than topic_1
+    expect(second).to eq(topic_1)
+    
+    expect(first.spam_count).to eq(2)
+    expect(first.rude_count).to eq(1)
+    expect(first.harassment_count).to eq(1)
+    expect(first.copyright_count).to eq(0)
+
+
+    expect(second.spam_count).to eq(1)
+    expect(second.rude_count).to eq(2)
+    expect(second.harassment_count).to eq(0)
+    expect(second.copyright_count).to eq(0)
+  end
 end
 
 

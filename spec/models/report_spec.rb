@@ -14,14 +14,4 @@ RSpec.describe Report, type: :model do
         copyright: 3
       )
   end
-
-  it '.reported_topics_count returns the number of topics reported' do
-    user = create(:user)
-    3.times do
-      topic = create(:topic)
-      topic.reports.create(user: user, report_type: 'rude')
-    end
-    Topic.last.reports.create(user: create(:user), report_type: 'spam')
-    expect(Report.reported_topics_count).to eq(3)
-  end
 end
