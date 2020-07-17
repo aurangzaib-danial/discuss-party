@@ -14,7 +14,7 @@
   <%= topic_info(@topic) %> 
   <%= topic_edit_link(@topic) %>
   <%= topic_sharing_link(@topic) %>    
-  <%= topic_report(@topic) %>
+  <%= topic_report(@topic, @report) %>
 </p>
 
 <%= render 'topics/voting', topic: @topic %>
@@ -28,4 +28,4 @@
 </section>
 
 <%= render 'topics/discussion' %>
-<%= render 'report_modal' if current_user and policy(Report.new).create?(@topic) %>
+<%= render 'report_modal' if current_user and policy(@report).create? %>

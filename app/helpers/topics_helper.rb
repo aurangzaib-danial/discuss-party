@@ -27,12 +27,16 @@ module TopicsHelper
     end
   end
 
-  def topic_report(topic)
+  def topic_report(topic, report = nil)
     if current_user.nil?
-      (' | ' + link_to('Report', topic_reports_path, method: :post)).html_safe
-    elsif policy(Report.new).create?(topic) 
-      (' | ' + link_to('Report', '#', class: 'text-dark', data: {toggle: 'modal', target: '#reportModal'})).html_safe
+      report_link(topic_reports_path(topic), method: :post)
+    elsif policy(report).create? 
+      report_link('#', data: {toggle: 'modal', target: '#reportModal'})
     end
+  end
+
+  def report_link(path, options)
+    (' | ' + link_to('Report', path, options.merge(class: 'text-dark'))).html_safe
   end
 
   def private_topic?(topic)

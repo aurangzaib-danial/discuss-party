@@ -20,7 +20,10 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @comment = Comment.new if user_signed_in?
+    if user_signed_in?
+      @comment = Comment.new if user_signed_in?
+      @report = @topic.reports.build
+    end
     @comments = @topic.comments_for_display(params[:page])
   end
 

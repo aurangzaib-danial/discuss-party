@@ -30,6 +30,8 @@ module ApplicationHelper
       class_name = 'danger'
     when 'notice'
       class_name = 'success'
+    when 'report_message'
+      class_name = 'info'
     end
     
     "alert alert-#{class_name} flash-alert"
