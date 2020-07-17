@@ -1,28 +1,7 @@
 module Voting::ClassMethods
-  def for_list_view(order_type:, current_user:, visibility:, page_number:)
-    topics = includes_vote_count.
-    where(visibility: visibility).
-    page(page_number).
-    add_order(order_type).
-    includes(:tags, creator: {display_picture_attachment: :blob})
-
-    find_votes_for(topics, current_user)
-  end
-
-  def add_order(order_type)
-    case order_type
-    when 'oldest'
-      oldest
-    when 'popular'
-      popular
-    else
-      latest
-    end
-  end
-
   def find_votes_for(topics, current_user)
     # this method exists for solving the problem of N+1 queries
-    # when we can to check if a user has voted on topics or not.
+    # when we wnat to check if a user has voted on topics or not.
     topics.load
     return topics if current_user.nil?
     votes = current_user.topic_votes.where(topic: topics.ids)
