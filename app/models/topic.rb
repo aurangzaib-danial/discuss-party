@@ -11,7 +11,7 @@ class Topic < ApplicationRecord
   has_many :topic_votes, dependent: :delete_all
   has_many :viewers, dependent: :delete_all
   has_many :private_viewers, through: :viewers, source: :user
-  has_many :reports
+  has_many :reports, dependent: :delete_all
 
   has_rich_text :description
 
