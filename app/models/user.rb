@@ -1,10 +1,10 @@
 class User < ApplicationRecord
+  extend ClassMethods
+  include InstanceMethods
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable, :recoverable and :omniauthable
   devise :database_authenticatable, :registerable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i(github google_oauth2 facebook twitter)
-
-  extend UserClassMethods
 
   has_many :topics, foreign_key: :creator_id, dependent: :delete_all, inverse_of: :creator
   has_many :comments, dependent: :delete_all
@@ -38,45 +38,5 @@ class User < ApplicationRecord
   before_destroy :delete_display_picture
 
   attr_writer :test_attachment
-
-  def downcase_name
-    name.downcase!
-  end
-
-  def private_topics
-    topics.visibility_private
-  end
-
-  def guest?
-    !persisted?
-  end
-  
-  def test_attachment?
-    @test_attachment == false ? false : true
-  end
-
-  def delete_display_picture
-    display_picture.purge_later
-  end
-
-  def valid_moderator?
-    !errors[:moderator].any?
-  end
-
-  def blockable?
-    !errors[:block_error].any?
-  end
-
-  def staff?
-    moderator? || admin?
-  end
-
-  def active_for_authentication?
-    super and self.active?
-  end
-
-  def inactive_message
-    "Your account has been blocked. Please contact support."
-  end
 
 end

@@ -1,4 +1,4 @@
-module UserClassMethods
+module User::ClassMethods
   def find_or_create_from_auth_hash(auth_hash)
     info = auth_hash[:info]
     
