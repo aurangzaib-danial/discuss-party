@@ -64,6 +64,10 @@ module ApplicationHelper
     distance_of_time_in_words_to_now(object.created_at) + ' ago'
   end
 
+  def report_count_badge
+    content_tag :span, Report.reported_topics_count, class: 'badge badge-info', style: 'vertical-align: text-top'
+  end
+
   private
   def query_parameter(sort_type)
     if sort_type == :latest

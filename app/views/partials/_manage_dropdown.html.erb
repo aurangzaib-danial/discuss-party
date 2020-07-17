@@ -3,7 +3,7 @@
     Manage
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <%= link_to "Reports #{Report.reported_topic_count}", manage_reports_path, class: 'dropdown-item' %>
+    <%= link_to "Reports #{report_count_badge}".html_safe, manage_reports_path, class: 'dropdown-item' %>
     <%= link_to 'Manage tags', manage_tags_path, class: 'dropdown-item' %>
     <%= link_to 'Manage users', manage_users_path, class: 'dropdown-item' %>
     <% if current_user.admin? %>
