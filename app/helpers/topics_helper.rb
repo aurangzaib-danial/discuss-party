@@ -30,7 +30,7 @@ module TopicsHelper
   def topic_report(topic)
     if current_user.nil?
       (' | ' + link_to('Report', topic_reports_path, method: :post)).html_safe
-    elsif topic.public_and_not_owned_by?(current_user)
+    elsif policy(Report.new).create?(topic) 
       (' | ' + link_to('Report', '#', class: 'text-dark', data: {toggle: 'modal', target: '#reportModal'})).html_safe
     end
   end
