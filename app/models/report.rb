@@ -6,4 +6,8 @@ class Report < ApplicationRecord
   def self.report_types
     defined_enums["report_type"].keys
   end
+
+  def self.reported_topics_count
+    select(:topic_id).distinct.count
+  end
 end
