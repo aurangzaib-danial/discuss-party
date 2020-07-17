@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :set_topic, except: %i[new create]
   before_action :topic_is_private?, only: :sharing
-  before_action :authorize_action, except: %i[new create report]
+  before_action :authorize_action, except: %i[new create]
 
   layout 'semi_container', only: %i[show new edit create update]
 

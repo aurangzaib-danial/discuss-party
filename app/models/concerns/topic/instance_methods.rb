@@ -33,4 +33,8 @@ module Topic::InstanceMethods
     minutes = (text.scan(/\w+/).length / words_per_minute).to_i
     minutes == 0 ? 1 : minutes
   end
+
+  def public_and_not_owned_by?(user)
+    visibility_public? and !owner?(user)
+  end
 end

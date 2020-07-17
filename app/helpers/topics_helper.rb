@@ -28,13 +28,11 @@ module TopicsHelper
   end
 
   def topic_report(topic)
-    text = '| '
     if current_user.nil?
-      text += link_to 'Report', topic_reports_path, method: :post
-    elsif topic.visibility_public? and !topic.owner?(current_user)
-      text += link_to 'Report', '#', class: 'text-dark', data: {toggle: 'modal', target: '#reportModal'}
+      (' | ' + link_to('Report', topic_reports_path, method: :post)).html_safe
+    elsif topic.public_and_not_owned_by?(current_user)
+      (' | ' + link_to('Report', '#', class: 'text-dark', data: {toggle: 'modal', target: '#reportModal'})).html_safe
     end
-    text.html_safe
   end
 
   def private_topic?(topic)

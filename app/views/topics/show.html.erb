@@ -28,4 +28,4 @@
 </section>
 
 <%= render 'topics/discussion' %>
-<%= render 'report_modal' if current_user and @topic.visibility_public? and !@topic.owner?(current_user)%>
+<%= render 'report_modal' if current_user and @topic.public_and_not_owned_by?(current_user) %>
