@@ -37,4 +37,8 @@ module Topic::InstanceMethods
   def public_and_not_owned_by?(user)
     visibility_public? and !owner?(user)
   end
+
+  def reported_by?(user_id)
+    reports.exists?(user: user_id)
+  end
 end
