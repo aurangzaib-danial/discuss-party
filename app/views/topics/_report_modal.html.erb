@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with url: report_topic_path(@topic), id: 'reportForm', local: true do |form| %>
+        <%= form_with model: [@topic, Report.new], id: 'reportForm', local: true do |form| %>
           <% Report.report_types.each do |type| %>
             <div class="form-check">
               <%= form.radio_button :report_type, type, class: 'form-check-input' %>

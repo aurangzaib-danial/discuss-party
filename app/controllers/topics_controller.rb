@@ -50,11 +50,6 @@ class TopicsController < ApplicationController
       notice: 'Successfully deleted.')
   end
 
-  def report
-    # TODO
-    # report the topic and also pundit permissions
-  end
-
   private
   def set_topic
     @topic = Topic.find(params[:id])

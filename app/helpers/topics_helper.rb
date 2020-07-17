@@ -30,7 +30,7 @@ module TopicsHelper
   def topic_report(topic)
     text = '| '
     if current_user.nil?
-      text += link_to 'Report', report_topic_path, method: :post
+      text += link_to 'Report', topic_reports_path, method: :post
     elsif topic.visibility_public? and !topic.owner?(current_user)
       text += link_to 'Report', '#', class: 'text-dark', data: {toggle: 'modal', target: '#reportModal'}
     end
@@ -52,7 +52,7 @@ module TopicsHelper
 
   def topic_info(topic)
     <<-HTML.html_safe
-    #{user_thumbnail_and_name(topic.creator)} #{created_at_in_words(topic)} | #{read_time(topic)}
+    #{user_thumbnail_and_name(topic.creator)} #{span_muted created_at_in_words(topic)} | #{span_muted read_time(topic)}
     HTML
   end
 
@@ -91,5 +91,9 @@ module TopicsHelper
 
   def vote_count(topic, type)
     topic.send("#{type}s").to_s
+  end
+
+  def span_muted(text)
+    content_tag :span, text, class: 'text-muted'
   end
 end
