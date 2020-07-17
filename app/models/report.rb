@@ -1,6 +1,6 @@
 class Report < ApplicationRecord
   belongs_to :user
-  belongs_to :topic
+  belongs_to :topic, counter_cache: true
   enum report_type: {rude: 0, harassment: 1, spam: 2, copyright: 3}
 
   def self.report_types

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_205015) do
+ActiveRecord::Schema.define(version: 2020_07_17_163148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_205015) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false
     t.text "description_excerpt"
+    t.bigint "reports_count", default: 0, null: false
     t.index ["creator_id"], name: "index_topics_on_creator_id"
     t.index ["title"], name: "index_topics_on_title_trigram", opclass: :gin_trgm_ops, using: :gin
   end

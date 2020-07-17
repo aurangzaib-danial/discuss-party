@@ -65,7 +65,9 @@ module ApplicationHelper
   end
 
   def report_count_badge
-    content_tag :span, Report.reported_topics_count, class: 'badge badge-info', style: 'vertical-align: text-top'
+    count = Report.reported_topics_count
+    color = count == 0 ? 'info' : 'danger'
+    content_tag :span, count, class: "badge badge-#{color}", style: 'vertical-align: text-top'
   end
 
   private
