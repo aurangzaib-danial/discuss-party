@@ -3,8 +3,8 @@
     Tags
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <% Tag.alphabetically.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag), class: 'dropdown-item' %>
+    <% Tag.alphabetically_cached.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag), class: 'dropdown-item' %>
     <% end %>
   </div>
 </li>

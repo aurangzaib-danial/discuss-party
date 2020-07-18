@@ -16,19 +16,18 @@
   </thead>
   <tbody>
     <% @tags.each do |tag| %>
-      <tr>
-        <td>
-          <%= tag_pill(tag) %>
-        </td>
-        <td><%= tag.topics_count %></td>
-        <td>
-        <%= link_to 'Edit', edit_manage_tag_path(tag), class: 'btn btn-outline-secondary' %>
-        
-        <% if policy(@tags).destroy? %>
-          <%= link_to 'Delete', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to delete #{tag.name}?"}, class: 'btn btn-outline-danger tag-delete-button'%>
-        <% end %> 
-        </td>
-      </tr>
+        <tr>
+          <td>
+            <%= tag_pill(tag) %>
+          </td>
+          <td><%= tag.topics_count %></td>
+          <td>
+          <%= link_to 'Edit', edit_manage_tag_path(tag), class: 'btn btn-outline-secondary' %>
+          <% if policy(@tags).destroy? %>
+            <%= link_to 'Delete', manage_tag_path(tag), method: :delete, data: {confirm: "Are you sure you want to delete #{tag.name}?"}, class: 'btn btn-outline-danger tag-delete-button'%>
+          <% end %> 
+          </td>
+        </tr>
     <% end %>
   </tbody>
 </table>

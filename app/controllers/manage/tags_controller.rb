@@ -3,7 +3,7 @@ class Manage::TagsController < Manage::ManagementController
   before_action :authorize_action, only: %i[edit destroy update]
 
   def index
-    @tags = Tag.alphabetically
+    @tags = Tag.alphabetically_cached
     authorize @tags
   end
 

@@ -5,7 +5,7 @@ RSpec.describe Topic, type: :model do
   it { should have_db_column(:visibility) }
   it { should belong_to(:creator).class_name('User')}
   it { should have_many(:topic_tags).dependent(:delete_all) }
-  it { should have_many(:tags).through(:topic_tags).order('LOWER(name)') }
+  it { should have_many(:tags).through(:topic_tags).order(Tag.by_downcase_name) }
   it { should have_many(:comments).dependent(:delete_all) }
   it { should have_many(:topic_votes).dependent(:delete_all) }
   it { should have_many(:viewers).dependent(:delete_all) }
