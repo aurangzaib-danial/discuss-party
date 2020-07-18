@@ -39,6 +39,10 @@ module Topic::InstanceMethods
   end
 
   def reported_by?(user_id)
-    reports.exists?(user: user_id)
+    reported?(user_id: user_id)
+  end
+
+  def reported?(scope = {})
+    reports.exists?(scope)
   end
 end

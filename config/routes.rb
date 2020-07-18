@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :moderators, only: %i[index new create destroy]
     resources :users, only: %i[index new create destroy]
     get 'reports', to: 'topics#index'
+    resources :topics, only: :destroy
   end
 
   devise_for(:users, 

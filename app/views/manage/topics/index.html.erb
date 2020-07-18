@@ -27,7 +27,10 @@
           <td><%= topic.spam_count %></td>
           <td><%= topic.copyright_count %></td>
           <td><%= topic.reports_count %></td>
-          <td><button class="btn btn-danger">Remove topic</button></td>
+          <td>
+            <%= link_to('Remove topic', [:manage, topic], method: :delete, 
+              data: {confirm: "Are you sure you want to remove #{topic.title}?"}, class: 'btn btn-outline-danger')%>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :set_topic, except: %i[new create]
-  before_action :topic_reported?, only: %i[show vote]
+  before_action :reported_by_current_user?, only: %i[show vote]
   before_action :topic_is_private?, only: :sharing
   before_action :authorize_action, except: %i[new create]
 
@@ -64,7 +64,7 @@ class TopicsController < ApplicationController
   def authorize_action
     authorize @topic
   end
-  def topic_reported?
-    redirect_to root_path if @topic.reported_by?(current_user_id)
+  def reported_by_current_user?
+    redirect_to root_path if @topic.reported_by?(current_user_id) && !current_user.staff?
   end
 end
