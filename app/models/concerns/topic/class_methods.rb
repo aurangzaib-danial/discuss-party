@@ -50,7 +50,7 @@ module Topic::ClassMethods
   def self.extended(base)
     class << base
       private
-      Report.report_types.each do |type|
+      %i[rude harassment copyright spam].each do |type|
         define_method "count_#{type}" do
           case_for_reports(type)
         end
