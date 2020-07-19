@@ -21,6 +21,7 @@
       <%= content_for?(:semi_container) ? yield(:semi_container) : yield %>
 
       <%= render 'partials/bottom_pagination' if @topics.present? %>
+      <%= render 'partials/footer' %>
     </main>
   </body>
 </html>

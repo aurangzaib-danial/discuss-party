@@ -60,3 +60,18 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 .topic_information a.special-link {
   @extend .text-info;
 }
+
+footer {
+  margin: 2rem auto;
+  max-width: 300px;
+}
+
+footer a, footer span {
+  @extend .text-dark;
+  display: block;
+  margin-bottom: 5px;
+}
+
+footer span a {
+  display: inline;
+}
