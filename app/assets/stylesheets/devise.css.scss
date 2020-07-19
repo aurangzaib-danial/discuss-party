@@ -32,6 +32,7 @@
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .sign_in_form input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
@@ -72,3 +73,18 @@
   max-width: 300px;
 }
 
+.change_password_form {
+  margin-top: 2rem;
+}
+
+.change_password_form #user_password {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.change_password_form #user_password_confirmation {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

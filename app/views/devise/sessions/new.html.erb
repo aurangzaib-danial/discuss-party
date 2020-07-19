@@ -8,7 +8,7 @@
     <%= f.label :email, class: 'sr-only'%>
     <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email address', autocomplete: 'username'%>
 
-    <%= f.label :password, class: 'sr-only'%>
+    <%= f.label :password, class: 'sr-only' %>
     <%= f.password_field :password, autocomplete: true, class: 'form-control', placeholder: 'Password' %>
 
     <% if devise_mapping.rememberable? %>
