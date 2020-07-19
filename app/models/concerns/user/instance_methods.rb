@@ -30,4 +30,8 @@ module User::InstanceMethods
   def staff?
     moderator? || admin?
   end
+
+  def name_titlecase
+    name.titlecase
+  end
 end
