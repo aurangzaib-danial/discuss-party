@@ -52,7 +52,7 @@ function commentFormValidation() {
 }
 
 $(document).ready(function() {
-  $(".alert-success").fadeOut(3000)
+  $(".alert-success").fadeOut(6000)
   bsCustomFileInput.init()
   copyScript()
   commentFormValidation()

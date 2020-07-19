@@ -39,4 +39,11 @@ class User < ApplicationRecord
 
   attr_writer :test_attachment
 
+  def active_for_authentication?
+    super and self.active?
+  end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end
