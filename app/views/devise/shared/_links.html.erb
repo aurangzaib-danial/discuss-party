@@ -1,19 +1,25 @@
 <div class="shared_links">
+
+<div class="reset_links">
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'text-secondary' %><br />
+  <% end %>
+
+  <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'text-secondary' %><br />
+  <% end %>
+</div>
+
+
 <h2><span>OR</span></h2>
+
+
 <%- if controller_name != 'sessions' %>
   <%= custom_devise_link 'Sign in', new_user_session_path %>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <%= custom_devise_link 'Sign up', new_user_registration_path %>
-<% end %>
-
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
