@@ -1,10 +1,20 @@
-sunny = User.create!(email: 'aurangzaib.danial@gmail.com', password: 'khan1234', name: 'Aurangzaib Danial Liaqat Khan', role: :admin)
-avi = User.create!(email: 'avi@fs.com', password: 'avi1234', name: 'Avi Flombaum', role: :moderator)
-adam = User.create!(email: 'adam@comedy.com', password: 'adam1234', name: 'Adam Weissman')
+def skip_and_save(user)
+  user.skip_confirmation!
+  user.save!
+end
+
+sunny = User.new(email: 'aurangzaib.danial@gmail.com', password: 'khan1234', name: 'Aurangzaib Danial Liaqat Khan', role: :admin)
+avi = User.new(email: 'avi@fs.com', password: 'avi1234', name: 'Avi Flombaum', role: :moderator)
+adam = User.new(email: 'adam@comedy.com', password: 'adam1234', name: 'Adam Weissman')
 
 @users = [sunny, avi, adam]
 
-random_user = User.create!(email: Faker::Internet.unique.email, password: 'random1234', name: Faker::Name.unique.name)
+@users.each do |user|
+  skip_and_save(user)
+end
+
+random_user = User.new(email: Faker::Internet.unique.email, password: 'random1234', name: Faker::Name.unique.name)
+skip_and_save(random_user)
 
 tags = Tag.create!(
   [
