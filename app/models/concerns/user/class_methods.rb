@@ -18,6 +18,7 @@ module User::ClassMethods
   def create_with_job(info)
     user = self.new(email: info[:email], name: info[:name])
     user.password = Devise.friendly_token[0, 20]
+    user.skip_confirmation!
     user.save
     UserAttachmentJob.perform_later(user, info[:image])
     user
