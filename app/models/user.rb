@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   extend ClassMethods
   include InstanceMethods
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable, :recoverable and :omniauthable
-  devise :database_authenticatable, :registerable, :rememberable, :validatable
+
+  devise(:database_authenticatable, :registerable, :rememberable, :validatable,
+    :recoverable, :confirmable)
   devise :omniauthable, omniauth_providers: %i(github google_oauth2 facebook twitter)
 
   has_many :topics, foreign_key: :creator_id, dependent: :delete_all, inverse_of: :creator
