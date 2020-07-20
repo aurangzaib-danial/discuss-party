@@ -86,10 +86,10 @@ end
   second_to_last.comments.create!(content: Faker::Lorem.paragraph(sentence_count: 10), user: @users.sample)
 end
 
-images_path = Rails.root.join('tmp', 'images')
-image_names = ['sunny', 'avi', 'adam']
+# images_path = Rails.root.join('tmp', 'images')
+# image_names = ['sunny', 'avi', 'adam']
 
-@users.each.with_index do |user, index|
-  filename = image_names[index] + '.jpg'
-  user.display_picture.attach(io: File.open(images_path.join(filename)), filename: filename)
-end
+# @users.each.with_index do |user, index|
+#   filename = image_names[index] + '.jpg'
+#   user.display_picture.attach(io: File.open(images_path.join(filename)), filename: filename)
+# end
