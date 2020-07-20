@@ -27,6 +27,8 @@ After completing my [Flatiron school's](https://flatironschool.com/) Rails modul
 - [rspec-rails as the major test framework](https://github.com/rspec/rspec-rails)
 - [Capybara for integration tests](https://github.com/teamcapybara/capybara)
 - [Pundit matchers for testing authorization policies](https://github.com/chrisalley/pundit-matchers)
+- [FactoryBot](https://github.com/thoughtbot/factory_bot)
+- [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
 
 
 ## External API for production
@@ -91,16 +93,24 @@ Management system is available in application's menu-bar if a user has a **role*
 Reach out to me on twitter [@aurangzaib_dani](https://twitter.com/aurangzaib_dani)
 
 ## Contributing
-1. Make sure you have postgres setup locally.
-2. Personally, I have sandbox apps on all social login providers and for mail provider. 
-I use those sandbox API apps for testing social login in development mode.
+1. Make sure you have [postgres](https://www.postgresql.org/) setup locally.
+2. Install dependencies
+
+```shell
+$ bundle install
+$ yarn install --check-files # for webpacker
+```
+
+3. Personally, I have sandbox apps with all social login providers and mail provider.
+I use these sandbox API apps for testing in development mode.
 You have to provide API keys otherwise the app will break.
 
 ```shell
-$ rails credentials:edit 
+$ rm config/credentials.yml.enc # remove previous encrypted credentials for using yours
+$ rails credentials:edit #=> run again if it just generates master key for the first time
 ```
 Write keys and secrets in the following pattern. 
-Provide any dummy values if you will but do not leave these empty.
+Provide dummy values if you will but do not leave these empty.
 
 ```yaml
 default: &default
@@ -127,16 +137,21 @@ development:
 test:
   <<: *default
 ```
-
-3. Run following commands in sequence to get going
+4. Run following commands in sequence to get going
 
 ```shell
-$ rails db:create
-$ rails db:schema:load 
-$ rails db:seed #=> create some seed data to play around with
-$ rails server
+$ rails db:setup #=> create db, load schema and some seed data
+$ rails server #=> Hack away
 ```
+Check `db/seeds.rb` for signing in as admin in development mode.
 
+### Testing
+rspec-rails is used as the testing framework.
+
+```shell
+$ bundle exec rspec
+```
+Test data is created using **FactoryBot**. Check out `spec/factories`
 
 ## License
 
