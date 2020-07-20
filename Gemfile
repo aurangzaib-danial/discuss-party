@@ -52,6 +52,8 @@ group :development, :test do
   gem 'capybara', '~> 3.33'
   gem 'factory_bot_rails', '~> 6.1'
   gem 'pry', '~> 0.13.1'
+  gem 'travis'
+  gem 'travis-lint'
 end
 
 group :test do
