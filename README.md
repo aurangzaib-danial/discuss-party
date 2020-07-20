@@ -1,6 +1,7 @@
 # Discuss Party
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/aurangzaib-danial/discuss-party.svg?branch=master)](https://travis-ci.org/aurangzaib-danial/discuss-party)
 
 Discuss party is a [reddit](https://www.reddit.com) + [dev.to](https://dev.to) style app. 
 It allows people to have discussion on topics they love.
