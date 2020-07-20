@@ -22,3 +22,18 @@ Devise
     new
   sessions
     new
+
+Manage
+  tags
+    index
+    edit
+    new
+  users
+    index
+    new
+  moderators
+    index
+    new
+  topics
+    index
+
