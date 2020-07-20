@@ -29,6 +29,7 @@ After completing my [Flatiron school's](https://flatironschool.com/) Rails modul
 - [Pundit matchers for testing authorization policies](https://github.com/chrisalley/pundit-matchers)
 - [FactoryBot](https://github.com/thoughtbot/factory_bot)
 - [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
+- [Travis CI for contiuous integration](https://travis-ci.com)
 
 
 ## External API for production
@@ -86,8 +87,7 @@ Management system is available in application's menu-bar if a user has a **role*
 ## Useful Links
 - [Live app](https://discuss-party.herokuapp.com)
 - [Blog post](#)
-- [Video demo](#)
-- [Code review](#)
+- [Video demo + Code review](#)
 
 ## Support
 Reach out to me on twitter [@aurangzaib_dani](https://twitter.com/aurangzaib_dani)
