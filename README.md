@@ -84,11 +84,12 @@ Management system is available in application's menu-bar if a user has a **role*
 - Use ActiveJob or may be sidekiq for uploading user profile pictures in the background
 - Use infinite loading instead of pagination.
 - Advanced search bar
+- Save drafts as you type
 
 ## Useful Links
 - [Live app](https://discuss-party.herokuapp.com)
-- [Blog post](#)
-- [Video demo + Code review](#)
+- [Blog post](https://discuss-party.herokuapp.com/7/blog-on-discuss-party)
+- [Walkthrough + Code review'](https://youtu.be/AiHF9du42mo)
 
 ## Support
 Reach out to me on twitter [@aurangzaib_dani](https://twitter.com/aurangzaib_dani)
