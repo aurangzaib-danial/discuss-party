@@ -7,7 +7,10 @@ class Manage::TopicsController < Manage::ManagementController
 
   def destroy
     topic = Topic.find(params[:id])
-    if topic.reported?
+
+    if topic.creator.admin?
+      message = {alert: "You cannot delete an admin's topic"}
+    elsif topic.reported?
       topic.destroy
       message = {notice: 'Successfully deleted.'}
     else
