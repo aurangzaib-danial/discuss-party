@@ -88,7 +88,7 @@ Management system is available in application's menu-bar if a user has a **role*
 
 ## Useful Links
 - [Live app](https://discuss-party.herokuapp.com)
-- [Blog post](https://discuss-party.herokuapp.com/7/blog-on-discuss-party)
+- [Blog post](https://dev.to/aurangzaibdanial/discuss-party-1bg4)
 - [Walkthrough + Code review'](https://youtu.be/AiHF9du42mo)
 
 ## Support
